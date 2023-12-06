@@ -2,11 +2,19 @@ WHY NOT A GIF HERE? TO SET THE MOOD.
 
 # Island name
 
-Some text about your lovely island
+Lagoon Luster Cove
 
 # Hotel name
 
-Why not add some info about the hotel of your dreams?
+Hotel Avalon
+-Where Paradise Meets Perfection
+
+# features
+-minibar
+-swimmingpool
+-scubadiving?
+-poolbar
+-boule park
 
 # Instructions
 

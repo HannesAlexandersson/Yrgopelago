@@ -1,0 +1,35 @@
+:root{
+/* Colors*/
+--default-bg: #d03475ff;
+--primary-accent: #9658d3ff;
+--secondary-bg: #ea4c87ff;
+--secondary-accent: #e03957ff;
+--default-font-clr: #fe9460ff;
+
+/*fonts*/
+--default-font: 'Grandstander', cursive, sans-serif;
+--secondary-font: 'Bebas Neue', sans-serif;
+}
+.default-font{
+    font-family: var(--default-font);
+}
+.secondary-font{
+    font-family: var(--secondary-font);
+}
+
+
+body{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a{
+  text-decoration: none;
+}
+a:hover{
+  text-decoration: none;
+}
+a:visited{
+  text-decoration: none;
+}

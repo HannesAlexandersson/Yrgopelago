@@ -1,0 +1,65 @@
+main {
+  /* border: solid 20px var(--primary-accent); */
+  background-image: url(/assets/backgrounds/Group22.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100vw;
+  width: 100dvw;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.left-side-home {
+  width: 20%;
+}
+.right-side-home {
+  width: 80%;
+}
+.home-text {
+  text-shadow: -7px 2px 15px black;
+  bottom: 5rem;
+  position: relative;
+  color: gold;
+  color: var(--default-font-clr);
+  font-size: 1.3rem;
+  font-style: normal;
+  font-weight: 400;
+  text-align: center;
+}
+
+@media (min-width: 800px) {
+
+
+main {
+  /* border: solid 20px var(--primary-accent); */
+  background-image: url(/assets/backgrounds/Group22.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  width: 100vw;
+  width: 100dvw;
+  height: 100vh;
+  height: 100dvh;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.left-side-home {
+  width: 65%;
+}
+.right-side-home {
+  width: 30%;
+}
+.home-text {
+  color: var(--default-font-clr);
+  font-size: 1.3rem;
+  font-style: normal;
+  font-weight: 400;
+  text-align: center;
+}
+}

@@ -1,0 +1,18 @@
+<main>
+  <div class="left-side-home"></div>
+  <div class="right-side-home">
+    <span class="default-font home-text">
+      <p>
+        Welcome to Hotel Avalon, where paradise meets perfection on the sun-kissed shores of our
+        tropical haven. Nestled amidst lush palm trees and caressed by gentle ocean breezes,
+        Hotel Avalon beckons you to a world where luxury and relaxation intertwine. Indulge in
+        the embrace of our elegant accommodations, savor exquisite cuisine that tantalizes the
+        senses, and unwind in the embrace of our world-class amenities. At Hotel Avalon, every
+        moment is a brushstroke of serenity, painting a masterpiece of memories against the
+        backdrop of our island oasis. Escape to a realm where dreams come alive, and let Hotel Avalon
+        be the enchanting chapter in your tropical tale. Welcome to a haven where your journey becomes
+        an unforgettable story, and every stay is a celebration of life's grandest pleasures.
+      </p>
+    </span>
+  </div>
+</main>
