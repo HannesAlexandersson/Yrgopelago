@@ -10,12 +10,9 @@
     </div>
   </div>
   <div class="booking-right">
-    <div class="calender-container">
-      <?php require 'scripts/Calendar.php';
-      include 'Calendar.php';
-      $calendar = new Calendar('2024-01-12');
-      echo $calendar;
-      ?>
+    <div class="calender-container" id="calendar">
+
     </div>
   </div>
 </div>
+<script src="/scripts/calendar.js"></script>

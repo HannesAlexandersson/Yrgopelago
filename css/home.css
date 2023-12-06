@@ -62,8 +62,11 @@ main {
   width: 30%;
 }
 .home-text {
+  top: 3rem;
+  position: relative;
+  line-height: 1.25;
   color: var(--default-font-clr);
-  font-size: 1.3rem;
+  font-size: 2rem;
   font-style: normal;
   font-weight: 400;
   text-align: center;
