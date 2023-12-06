@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="css/hero.css">
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/booking.css">
+    <link rel="stylesheet" href="css/calendar.css">
     <link rel="stylesheet" href="css/footer.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

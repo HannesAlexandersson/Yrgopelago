@@ -11,6 +11,9 @@ main {
   display: flex;
   flex-direction: row;
   align-items: center;
+
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 .left-side-home {
   width: 20%;
@@ -48,6 +51,9 @@ main {
   display: flex;
   flex-direction: row;
   align-items: center;
+
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 .left-side-home {
   width: 65%;

@@ -9,6 +9,9 @@
   height: 100vh;
   border-top: ridge 3px var(--secondary-accent);
   flex-direction: column;
+
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 .hero-body {
   bottom: 5rem;
