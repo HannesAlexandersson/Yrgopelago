@@ -23,11 +23,9 @@ main {
 }
 .home-text {
   text-shadow: -7px 2px 15px black;
-  bottom: 5rem;
-  position: relative;
   color: gold;
   color: var(--default-font-clr);
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-style: normal;
   font-weight: 400;
   text-align: center;
@@ -62,13 +60,16 @@ main {
   width: 30%;
 }
 .home-text {
-  top: 3rem;
-  position: relative;
-  line-height: 1.25;
+  line-height: 1.125;
   color: var(--default-font-clr);
-  font-size: 2rem;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 400;
   text-align: center;
+}
+}
+@media (min-width: 1050px) {
+  .home-text {
+    font-size: 1.2rem;
 }
 }

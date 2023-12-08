@@ -14,9 +14,7 @@
   scroll-snap-stop: always;
 }
 .hero-body {
-  bottom: 5rem;
-  position: relative;
-  /* gap: 1rem; */
+
   display: flex;
   color: var(--default-font-clr);
   flex-direction: column;
@@ -26,12 +24,29 @@
   width: 20%;
 }
 .center {
-    margin: 0 2rem 0 2rem;
-    text-align: center;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  gap: 3rem;
+  margin: 0 2rem 0 2rem;
+  text-align: center;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.center > h1{
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 0;
+}
+.center > p{
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin: 0;
+}
+.cta-wrapper {
+  font-size: 1.25rem;
+}
+.cta-btn {
+  /*STYLA KNAPPEN !!!*/
 }
 .right-side {
   width: 20%;
@@ -61,7 +76,8 @@
   width: 30%;
 }
 .center {
-  gap: 8rem;
+  
+  gap: 2rem;
   margin: 0 6rem 0 6rem;
   text-align: center;
   width: 34%;
@@ -70,12 +86,12 @@
   align-items: center;
 }
 .center > h1 {
-  font-size: 5rem;
+  font-size: 4rem;
   font-weight: 700;
   margin: 0;
 }
 .center > p {
-  font-size: 2.5rem;
+  font-size: 1.2rem;
   font-weight: 400;
   margin: 0;
 }
