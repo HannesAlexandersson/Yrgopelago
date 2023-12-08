@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/rooms.css">
     <link rel="stylesheet" href="css/booking.css">
     <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Grandstander&display=swap" rel="stylesheet">

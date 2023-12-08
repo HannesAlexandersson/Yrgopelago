@@ -26,7 +26,7 @@
             amazing view. The room is also equipped with a 55" TV and a minibar.
           </p>
         </div>
-        <div class="room-inner-img-wrapper">
+        <div class="room-inner-img-wrapper secondary-font">
           <p>Price: From 5</p>
           <img class="room-inner-img" src="/assets/images/rooms/one-star/markus-spiske-g5ZIXjzRGds-unsplash.png" alt="room1">
         </div>
@@ -43,7 +43,7 @@
             or perhaps your goal is to keep your own noice in the room, then this is the room for you.
           </p>
         </div>
-        <div class="room-inner-img-wrapper">
+        <div class="room-inner-img-wrapper secondary-font">
           <p>Price: From 10</p>
           <img class="room-inner-img" src="/assets/images/rooms/two-star/dad-hotel-P6B7y6Gnyzw-unsplash.png" alt="room1">
         </div>
@@ -55,11 +55,11 @@
           <p>
             Specs: our presidential suite offers an fully stocked on suit bar, aswell as an kitchen with
             the top of the line equipment. A spacius living room with a 65" TV and a private balcony.
-            Plenty of space for the whole family. Two master bedrooms with king size beds and a guest room
+            Plenty of space with a master bedroom complete with a king size bed and a walk in closet.
             The room also includes a private bathroom with a bathtub and a shower.
           </p>
         </div>
-        <div class="room-inner-img-wrapper">
+        <div class="room-inner-img-wrapper secondary-font">
           <p>Price: From 25</p>
           <img class="room-inner-img" src="/assets/images/rooms/three-star/upgraded-points-c8UktkMDrbc-unsplash.png" alt="room1">
         </div>

@@ -48,6 +48,7 @@
 @media(min-width: 800px) {
 
   .room-container {
+    margin-bottom: 2rem;
     text-align: center;
     display: flex;
     flex-direction: row;
