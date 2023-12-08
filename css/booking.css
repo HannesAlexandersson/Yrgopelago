@@ -25,7 +25,8 @@
 .booking-form-wrapper{
 
 }
-.booking-form{
+booking-form {
+  gap: 1rem;
   display: flex;
   flex-direction: column;
 }
