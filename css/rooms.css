@@ -1,7 +1,7 @@
 .rooms-bg{
   background-color: var(--default-bg);
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
+ /*  scroll-snap-align: start;
+  scroll-snap-stop: always; */
 }
 .rooms-text-container {
   text-align: center;
@@ -35,8 +35,8 @@
 }
 .room {
   display: flex;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
+ /*  scroll-snap-align: start;
+  scroll-snap-stop: always; */
   flex-direction: column;
 }
 .room-inner-header{}
@@ -63,8 +63,8 @@
   border: 2px solid gold;
   width: 25%;
   display: flex;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
+  /* scroll-snap-align: start;
+  scroll-snap-stop: always; */
   flex-direction: column;
   justify-content: space-between;
 }

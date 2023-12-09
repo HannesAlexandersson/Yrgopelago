@@ -7,8 +7,8 @@ footer {
   align-content: center;
   align-items: center;
 
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
+  /* scroll-snap-align: start;
+  scroll-snap-stop: always; */
 }
 .logo-wrapper {
   display: flex;

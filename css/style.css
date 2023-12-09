@@ -17,7 +17,7 @@
     font-family: var(--secondary-font);
 }
 html{
-  scroll-snap-type: both mandatory;
+  /* scroll-snap-type: both mandatory; */
 }
 
 body{

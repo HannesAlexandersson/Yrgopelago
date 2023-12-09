@@ -9,8 +9,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
+  /* scroll-snap-align: start;
+  scroll-snap-stop: always; */
 }
 .booking-header > h1 {
   position: relative;

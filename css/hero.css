@@ -10,8 +10,8 @@
   border-top: ridge 3px var(--secondary-accent);
   flex-direction: column;
 
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
+  /* scroll-snap-align: start;
+  scroll-snap-stop: always; */
 }
 .hero-body {
 
@@ -76,7 +76,7 @@
   width: 30%;
 }
 .center {
-  
+
   gap: 2rem;
   margin: 0 6rem 0 6rem;
   text-align: center;
