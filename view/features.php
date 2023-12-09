@@ -1,10 +1,10 @@
 <div class="features-bg">
-  <div class="feat-text-wrapper secondary-font">
-    <div class="features-header default-font">
+  <div class="feat-text-wrapper default-font">
+    <div class="features-header">
       <h1>Features</h1>
       <h4>Choose from our sortiment of fantastic features</h4>
     </div>
-    <div class="feature-desc-text secondary-font">
+    <div class="feature-desc-text ">
       <p>
         Here on Avalon we offer a wide range of features to make your stay as comfortable as possible.
         For example we can offer you a personal bedtime-storyteller that makes your transition to sleep as smooth as possible.
@@ -30,15 +30,15 @@
 
         <?php if($feature['name'] == 'underground hotsprings'){ ?>
 
-        <img class="feature-img" src="/assets/images/features/UG-HS.jpg" alt="Hotsprings">
+        <img class="feature-img" src="/assets/images/features/UG-HS.png" alt="Hotsprings">
 
         <?php } else if($feature['name'] == 'massage therapy'){ ?>
 
-        <img class="feature-img" src="/assets/images/features/Massage-rygg.jpg" alt="Massage">
+        <img class="feature-img" src="/assets/images/features/Massage-rygg.png" alt="Massage">
 
         <?php } else if($feature['name'] == 'bedtime storyteller'){ ?>
 
-        <img class="feature-img" src="/assets/images/features/story.jpg" alt="storyteller bedtime">
+        <img class="feature-img" src="/assets/images/features/story.png" alt="storyteller bedtime">
 
         <?php } ?>
 

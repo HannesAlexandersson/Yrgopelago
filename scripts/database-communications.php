@@ -23,7 +23,7 @@ function connectToDatabase(string $dbName): object
 
 function insertBooking($user_id, $room_id, $arrival_date, $departure_date, $total_cost, $features)
 {
-    $db = connectToDatabase('avalon.db');
+    $db = connectToDatabase('/database/avalon.db');
 
     // Insert booking into bookings table
     $query = "INSERT INTO bookings (user_id, room_id, arrival_date, departure_date, total_cost)
@@ -111,7 +111,7 @@ function getBookingsForCalendar()
 {
     $db = connectToDatabase('avalon.db');
 
-    
+
     $query = "SELECT arrival_date, departure_date FROM bookings";
 
     $stmt = $db->prepare($query);

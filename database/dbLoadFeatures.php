@@ -21,4 +21,3 @@ function connect(string $dbName): array
 return $features; //returns the features table as an asc array for me to iterate
 }
 
-?>

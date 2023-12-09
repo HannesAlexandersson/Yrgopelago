@@ -1,9 +1,9 @@
 <div class="rooms-bg">
   <div class="rooms-text-container">
-    <div class="rooms-header secondary-font">
+    <div class="rooms-header default-font">
       <h1>Our rooms</h1>
     </div>
-    <div class="rooms-header-subtext secondary-font">
+    <div class="rooms-header-subtext default-font">
       <p>
         here on hotel Avalon we have 3 amazing rooms,each offers an extravaganza in luxury and comfort.
         One could of course argue that one is more beautiful than the other, but we leave that up to you to

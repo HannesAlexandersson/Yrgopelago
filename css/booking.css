@@ -1,5 +1,5 @@
 .booking-bg {
-  gap: 3rem;
+  gap: 1rem;
   background-image: url(/assets/backgrounds/Frame9.png);
   background-size: cover;
   background-position: center;
@@ -25,20 +25,27 @@
 .booking-form-wrapper{
 
 }
-booking-form {
-  gap: 1rem;
+.features-checkbox{
+  display: flex;
+  flex-direction: row;
+}
+.booking-form {
+  gap: 0.5rem;
   display: flex;
   flex-direction: column;
 }
 .booking-right {
+  margin-top: 4rem;
   margin-bottom: 2rem;
   color: var(--default-font-clr);
 }
 .calender-container{
-
+  background-color: antiquewhite;
 }
 @media (min-width: 800px) {
-
+  .booking-bg {
+    gap: 4rem;
+  }
   .booking-left {
     display: flex;
     height: 10rem;

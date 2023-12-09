@@ -26,16 +26,18 @@
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
+  margin-bottom: 5rem;
 }
 .feat-item {
   display: flex;
-  border: 2px ridge var(--secondary-bg);
+  border: 2px ridge var(--primary-accent);
   flex-direction: column;
   align-items: center;
   background-color: var(--secondary-bg);
 }
-.feature-text-header{
+.feature-text-header {
   color: var(--default-font-clr);
+  padding: 0.5rem;
 }
 .feature-price{
   color: var(--default-font-clr);
@@ -47,13 +49,16 @@
 .feature-btn{
   font-family: var(--secondary-font);
 }
-.feature-img-container{
-  max-width: 5rem;
-  max-height: 10rem;
+.feature-img-wrapper {
+  border: 1px solid var(--primary-accent);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .feature-img {
-  width: 16rem;
-  height: 10rem;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
- 
 }

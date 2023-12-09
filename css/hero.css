@@ -14,7 +14,6 @@
   scroll-snap-stop: always; */
 }
 .hero-body {
-
   display: flex;
   color: var(--default-font-clr);
   flex-direction: column;
@@ -32,15 +31,15 @@
   flex-direction: column;
   align-items: center;
 }
-.center > h1{
-    font-size: 3rem;
-    font-weight: 700;
-    margin: 0;
+.center > h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 0;
 }
-.center > p{
-    font-size: 1.5rem;
-    font-weight: 400;
-    margin: 0;
+.center > p {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin: 0;
 }
 .cta-wrapper {
   font-size: 1.25rem;
@@ -52,55 +51,51 @@
   width: 20%;
 }
 
-
 @media (min-width: 800px) {
+  .hero {
+    background-position: center;
+    display: flex;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url(/assets/backgrounds/Rectangle1.png);
+    align-items: center;
+    justify-content: center;
 
-
-.hero {
-  background-position: center;
-  display: flex;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-image: url(/assets/backgrounds/Rectangle1.png);
-  align-items: center;
-  justify-content: center;
-
-  height: 100vh;
-  border-top: ridge 3px var(--secondary-accent);
-}
-.hero-body {
-  display: flex;
-  color: var(--default-font-clr);
-}
-.left-side {
-  width: 30%;
-}
-.center {
-
-  gap: 2rem;
-  margin: 0 6rem 0 6rem;
-  text-align: center;
-  width: 34%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.center > h1 {
-  font-size: 4rem;
-  font-weight: 700;
-  margin: 0;
-}
-.center > p {
-  font-size: 1.2rem;
-  font-weight: 400;
-  margin: 0;
-}
-.right-side {
-  width: 30%;
-}
-.cta-wrapper {
-  font-size: 1.25rem;
-}
-.cta-btn {
-}
+    height: 100vh;
+    border-top: ridge 3px var(--secondary-accent);
+  }
+  .hero-body {
+    display: flex;
+    color: var(--default-font-clr);
+  }
+  .left-side {
+    width: 30%;
+  }
+  .center {
+    gap: 2rem;
+    margin: 0 6rem 0 6rem;
+    text-align: center;
+    width: 34%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .center > h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    margin: 0;
+  }
+  .center > p {
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin: 0;
+  }
+  .right-side {
+    width: 30%;
+  }
+  .cta-wrapper {
+    font-size: 1.25rem;
+  }
+  .cta-btn {
+  }
 }
