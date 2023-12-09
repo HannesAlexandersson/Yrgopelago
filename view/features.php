@@ -46,7 +46,6 @@
 
       <div class="feature-price secondary-font">
         <?='Price: ' .$feature['price']?>
-        <button class="feature-btn secondary-font" id="feature-btn">Add</button>
       </div>
     </div><?php }; ?>
 
