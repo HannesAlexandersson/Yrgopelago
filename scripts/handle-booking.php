@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $departureDate = $_POST["departureDate"];
 
     // Calculate cost (you can adjust this based on your pricing strategy)
-    $totalCost = calculateCost($room, $arrivalDate, $departureDate);
+    $totalCost = calculateCost($room, $arrivalDate, $departureDate, $costOffeatures);
 
     // Perform the booking and charge the user
     $bookingResult = bookRoom($room, $arrivalDate, $departureDate, $totalCost);
@@ -22,13 +22,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Booking failed. Please try again.";
     }
 }
+function calculateDays($arrivalDate, $departureDate) {
+    $arrivalDate = new DateTime($arrivalDate);
+    $departureDate = new DateTime($departureDate);
+    $interval = $arrivalDate->diff($departureDate);
+    return $interval->days;
+}
 
+function calculateCostOfFeatures($features) {
+    $cost = 0;
+    foreach ($features as $feature) {
+        $cost += $feature;
+    }
+    return $cost;
+}
 // Function to calculate the cost based on room type and duration
-function calculateCost($room, $arrivalDate, $departureDate) {
-    // Your pricing logic here (replace with your own calculations)
-    // For example, you can calculate based on room type, duration, etc.
-    // This is just a placeholder, replace it with your actual pricing strategy.
-    $cost = 100; // Replace with your own logic
+function calculateCost($room, $arrivalDate, $departureDate, $costOffeatures) {
+    $suits = [
+      'The Presidential' => 25,
+      'The Tranquility' => 10,
+      'The Gaze' => 5
+    ];
+    $cost = 0;
+    foreach ($suits as $suit => $value) {
+      if ($room == $suit){
+        $cost = $value;
+      }else{
+        echo 'ERROR - Room not found';
+      }
+    }
+    $days = calculateDays($arrivalDate, $departureDate);
+    $cost = $cost * $days;
+
     return $cost;
 }
 
