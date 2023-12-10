@@ -1,0 +1,2 @@
+table bookings holds user_id wich is eqvuvilent to the Uuid that the user will use to
+perfom actions like booking and payment

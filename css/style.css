@@ -36,3 +36,6 @@ a:hover{
 a:visited{
   text-decoration: none;
 }
+.hide{
+  display: none;
+}

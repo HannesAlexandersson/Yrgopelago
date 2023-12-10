@@ -8,9 +8,9 @@
         <a href="#"><p>about us</p></a>
       </div>
       <div class="social-media-wrapper secondary-font">
-        <a href="#" class="media-icon"><img src="assets/icons/socialmedia/Facebook logo.png" alt="facebook"/><p>@avalon</p></a>
-        <a href="#" class="media-icon"><img src="assets/icons/socialmedia/Instagram logo.png" alt="instagram"/><p>@avalonhotel</p></a>
-        <a href="#" class="media-icon"><img src="assets/icons/socialmedia/X logo.png" alt="twitter"/><p>#realavalonhotel</p></a>
+        <a href="#" class="media-icon"><img src="assets/icons/socialmedia/Facebook logo.png" alt="facebook"/></a>
+        <a href="#" class="media-icon"><img src="assets/icons/socialmedia/Instagram logo.png" alt="instagram"/></a>
+        <a href="#" class="media-icon"><img src="assets/icons/socialmedia/X logo.png" alt="twitter"/></a>
       </div>
     </footer>
   </body>

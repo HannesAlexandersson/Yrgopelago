@@ -46,8 +46,8 @@ color: var(--primary-accent);
   .social-media-wrapper {
     display: flex;
     flex-direction: row;
-    gap: 1rem;
-  }
+    gap: 2rem;
+}
   .media-icon {
     display: flex;
     align-items: center;
