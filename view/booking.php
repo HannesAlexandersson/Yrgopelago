@@ -7,7 +7,7 @@
       <form action="/scripts/handle-booking.php" method="post" id="bookingForm" class="booking-form">
         <!-- uncommeting transfercode when live -->
         <label for="user_id" placeholder-text="">Enter your transfer-code:</label>
-        <input type="text" id="user_id" name="user_id" required="required" />
+        <input type="text" id="transfercode" name="transfercode" required="required" />
 
         <label for="room">Choose a Room:</label>
         <select id="room" name="room">

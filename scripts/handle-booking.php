@@ -9,24 +9,47 @@ $dotenv->load();
 // Access the values
 $islandName = $_ENV['ISLAND_NAME'];
 $hotelName = $_ENV['HOTEL_NAME'];
+
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  // Retrieve form data
-  $room_id = isset($_POST["room"]) ? (int)$_POST["room"] : 0;
-  $arrivalDate = isset($_POST["arrivalDate"]) ? filter_var($_POST["arrivalDate"], FILTER_SANITIZE_STRING) : "";
-  $departureDate = isset($_POST["departureDate"]) ? filter_var($_POST["departureDate"], FILTER_SANITIZE_STRING) : "";
-  var_dump($room_id);
-  if($room_id == 1){
-    $room = 'The Gaze';
-  }else if($room_id == 2){
-    $room = 'The Tranquility';
-  }else if($room_id == 3){
-    $room = 'The Presidential';
-  };
+  // Parse JSON data
+  $postData = json_decode(file_get_contents("php://input"), true);
+
+
+// Check if the JSON data is valid
+if ($postData === null) {
+  // Respond with an error if the JSON data is invalid
+  header('Content-Type: application/json');
+  echo json_encode(['error' => 'Invalid JSON data']);
+  exit();
+}
+
+// Retrieve form data
+$room_id = isset($postData["room"]) ? (int) $postData["room"] : 0;
+$arrivalDate = isset($postData["arrivalDate"]) ? filter_var($postData["arrivalDate"], FILTER_SANITIZE_STRING) : "";
+$departureDate = isset($postData["departureDate"]) ? filter_var($postData["departureDate"], FILTER_SANITIZE_STRING) : "";
+
+
+ // Validate and sanitize user_id (uncomment when needed)
+ $user_id = isset($postData["user_id"]) ? htmlspecialchars($postData["user_id"]) : "";
+
+
+
+$room;
+// Validate room
+if($room_id == 1){
+  $room = 'The Gaze';
+}else if($room_id == 2){
+  $room = 'The Tranquility';
+}else if($room_id == 3){
+  $room = 'The Presidential';
+};
+
+
   $selectedFeaturesNames = [];
   $selectedFeatureIDs = [];
   // Check if features are selected
-  $selectedFeatureIDs = isset($_POST["features"]) && $_POST["features"] !== null ? array_map('intval', $_POST["features"]) : [];
+  $selectedFeatureIDs = isset($postData["features"]) && $postData["features"] !== null ? array_map('intval', $postData["features"]) : [];
   foreach($selectedFeatureIDs as $feature){
     if($feature == 1){
       $feature1 = 'Massage Therapy';
@@ -47,14 +70,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     ['name' => 'Underground Hotsprings',
     'cost' => 5]
   ];
-  // Validate and sanitize user_id (uncomment when needed)
-  $user_id = isset($_POST["user_id"]) ? htmlspecialchars($_POST["user_id"]) : "";
+
 
   // Check room availability
   $isAvailable = checkRoomAvailability($room_id, $arrivalDate, $departureDate);
 
-  // Respond with availability status
-  echo json_encode(['isAvailable' => $isAvailable]);
+
 
   // Calculate cost
   $totalCost = calculateCost($room_id, $arrivalDate, $departureDate, $selectedFeatureIDs);
@@ -67,6 +88,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   checkBooking($bookingResult, $arrivalDate, $departureDate, $numberOfDays, $totalCost, $selectedFeaturesNames);
 
+  // Debugging: Check the response
+ exit();
 }
 
 // Function to check the result of the booking
@@ -79,6 +102,7 @@ function checkBooking(bool $bookingResult, string $arrivalDate, string $departur
         $hotelName = $_ENV['HOTEL_NAME'];
 
         $response = [
+            'isAvailable' => true,
             'island' => $islandName,
             'hotel' => $hotelName,
             'arrival_date' => $arrivalDate,
@@ -93,7 +117,7 @@ function checkBooking(bool $bookingResult, string $arrivalDate, string $departur
             ]
         ];
         foreach($selectedFeaturesNames as $feature){
-          $jsonResponse['features'][] = [
+          $response['features'][] = [
             'name' => $feature['name'],
             'cost' => $feature['cost'],
           ];
@@ -127,7 +151,7 @@ function calculateCostOfFeatures(array $features) : int
 // Function to calculate the cost based on room type and duration
 function calculateCost(int $room_id, string $arrivalDate, string $departureDate, array $features): int
  {
-  var_dump($room_id);
+
   $suits = [
     3 => 25,
     2 => 10,
@@ -138,7 +162,6 @@ $cost = 0;
 $roomFound = false;
 
 foreach ($suits as $suit => $value) {
-  echo "Checking room $room_id against suit $suit<br>";
   if ($room_id == $suit) {
       $cost = $value;
       $roomFound = true;
@@ -252,8 +275,11 @@ function insertBooking($user_id, $room_id, $arrival_date, $departure_date, $tota
     $statement->bindParam(':total_cost', $total_cost);
 
     $statement->execute();
+
+
     // Get the booking_id of the booking we just inserted
     $booking_id = $db->lastInsertId();
+
     // Insert features into booking_features table if needed and connect the picked features to the booking
     if (!empty($features)) {
         foreach ($features as $feature_id) {

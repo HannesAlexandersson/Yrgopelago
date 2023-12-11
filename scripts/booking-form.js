@@ -5,7 +5,7 @@ let bookedDates = {
   'The Presidential': []
 };
 
-
+console.log(bookedDates);
 function toggleLockArrivalDate() {
   isArrivalDateLocked = !isArrivalDateLocked;
 
@@ -54,6 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
   bookingForm.addEventListener('submit', function (event) {
     event.preventDefault();
 
+    var user_id = document.getElementById('transfercode').value;
     var room_id = document.getElementById('room').value;
     var arrivalDate = document.getElementById('arrivalDate').value;
     var departureDate = document.getElementById('departureDate').value;
@@ -65,11 +66,11 @@ document.addEventListener('DOMContentLoaded', function () {
     }else if(room_id == 3){
       var room = 'The Presidential';
     }
-    console.log(room_id, arrivalDate, departureDate, room);
+    console.log(user_id, room_id, arrivalDate, departureDate, room);
     // Validate and process the form data
     if (room_id && arrivalDate && departureDate) {
       // Check room availability with a server request
-      checkRoomAvailability(room_id, arrivalDate, departureDate)
+      checkRoomAvailability(user_id, room_id, arrivalDate, departureDate)
         .then(function (isAvailable) {
           if (isAvailable) {
             // Room is available, proceed with the booking
@@ -81,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             // Update the booked dates list (you may also want to update the server-side database)
-            updateBookedDates(room, arrivalDate, departureDate);
+           /*  updateBookedDates(room, arrivalDate, departureDate); */
 
             // Clear the form and enable the "Lock Arrival Date" button
             bookingForm.reset();
@@ -102,13 +103,14 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // Function to check room availability with a server request
-  function checkRoomAvailability(room, arrivalDate, departureDate) {
+  function checkRoomAvailability(user_id, room, arrivalDate, departureDate) {
     return fetch('/scripts/handle-booking.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
+        user_id: user_id,
         room: room,
         arrivalDate: arrivalDate,
         departureDate: departureDate,
