@@ -14,7 +14,7 @@
 
 }
 .rooms-header > h1 {
- 
+
 }
 .rooms-header-subtext {
   display: flex;
@@ -38,8 +38,12 @@
  /*  scroll-snap-align: start;
   scroll-snap-stop: always; */
   flex-direction: column;
+  border-radius: 20px;
+  box-shadow: -1px 4px 13px 6px rgba(0,0,0,0.2);
 }
-.room-inner-header{}
+.room-inner-header > p{
+  padding: 0.5rem;
+}
 .room-inner-img-wrapper{}
 .room-inner-img {
   width: 100%;
