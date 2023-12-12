@@ -26,14 +26,14 @@
         <!-- Checkboxes for additional features -->
         <div class="features-checkbox">
 
-          <input type="checkbox" id="bedtimeStoryteller" name="features[]" value="2">
           <label for="bedtimeStoryteller">Bedtime Storyteller</label>
+          <input type="checkbox" class="feature-checkbox" id="bedtimeStoryteller" name="features[]" value="2">
 
-          <input type="checkbox" id="undergroundHotsprings" name="features[]" value="3">
           <label for="undergroundHotsprings">Underground Hotsprings</label>
+          <input type="checkbox" class="feature-checkbox" id="undergroundHotsprings" name="features[]" value="3">
 
-          <input type="checkbox" id="massageTherapy" name="features[]" value="1">
           <label for="massageTherapy">Massage Therapy</label>
+          <input type="checkbox" class="feature-checkbox" id="massageTherapy" name="features[]" value="1">
         </div>
 
         <button type="button" id="clearForm" onclick="clearBookingForm()">Clear Form</button>

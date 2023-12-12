@@ -1,2 +1,43 @@
-table bookings holds user_id wich is eqvuvilent to the Uuid that the user will use to
-perfom actions like booking and payment
+table rooms:
+  room_id / room_name / room_price
+
+table features:
+  feature_id / feature_name / feature_price
+
+table bookings:
+  booking_id / user_id(transfercode) / room_id(foreignKey => rooms(room_id)) / arrival_date / departure_date / total_cost
+
+table booking_features(junktion table)
+  booking_id (foreignKey => bookings(booking_id)) / feature_id (foreignKey => features(feature_id))
+
+
+On successful booking the prepared sqlite statement is used:
+
+```
+$query = "INSERT INTO bookings (user_id, room_id, arrival_date, departure_date, total_cost)
+              VALUES (:user_id, :room_id, :arrival_date, :departure_date, :total_cost)";
+
+    $statement = $db->prepare($query);
+    $statement->bindParam(':user_id', $user_id);
+    $statement->bindParam(':room_id', $room_id);
+    $statement->bindParam(':arrival_date', $arrival_date);
+    $statement->bindParam(':departure_date', $departure_date);
+    $statement->bindParam(':total_cost', $total_cost);
+
+    $statement->execute();
+
+
+    $booking_id = $db->lastInsertId();
+
+
+    if (!empty($features)) {
+        foreach ($features as $feature_id) {
+            $query = "INSERT INTO booking_features (booking_id, feature_id) VALUES (:booking_id, :feature_id)";
+            $stmt = $db->prepare($query);
+            $stmt->bindParam(':booking_id', $booking_id);
+            $stmt->bindParam(':feature_id', $feature_id);
+            $stmt->execute();
+        }
+    }
+
+```

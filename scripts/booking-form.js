@@ -53,12 +53,10 @@ document.addEventListener('DOMContentLoaded', function () {
   var bookingForm = document.getElementById('bookingForm');
   bookingForm.addEventListener('submit', function (event) {
     event.preventDefault();
-
+    //extract the form data
     var user_id = document.getElementById('transfercode').value;
     var room_id = document.getElementById('room').value;
-    var arrivalDate = document.getElementById('arrivalDate').value;
-    var departureDate = document.getElementById('departureDate').value;
-    var room;
+    var room;// I need a variable to hold the actual room name for the calendar and visual purposes
     if(room_id == 1){
       var room = 'The Gaze';
     }else if(room_id == 2){
@@ -66,11 +64,26 @@ document.addEventListener('DOMContentLoaded', function () {
     }else if(room_id == 3){
       var room = 'The Presidential';
     }
-    console.log(user_id, room_id, arrivalDate, departureDate, room);
+    var arrivalDate = document.getElementById('arrivalDate').value;
+    var departureDate = document.getElementById('departureDate').value;
+
+
+    // Extract selected features
+    var features = [];
+    var featureCheckboxes = document.querySelectorAll('.feature-checkbox:checked');
+    featureCheckboxes.forEach(function (checkbox) {
+        features.push(checkbox.value);
+    });
+
+
+    console.log(user_id, room_id, arrivalDate, departureDate, room, features);
+
+
     // Validate and process the form data
     if (room_id && arrivalDate && departureDate) {
+
       // Check room availability with a server request
-      checkRoomAvailability(user_id, room_id, arrivalDate, departureDate)
+      checkRoomAvailability(user_id, room_id, arrivalDate, departureDate, features)
         .then(function (isAvailable) {
           if (isAvailable) {
             // Room is available, proceed with the booking
@@ -81,8 +94,6 @@ document.addEventListener('DOMContentLoaded', function () {
               end: departureDate,
             });
 
-            // Update the booked dates list (you may also want to update the server-side database)
-           /*  updateBookedDates(room, arrivalDate, departureDate); */
 
             // Clear the form and enable the "Lock Arrival Date" button
             bookingForm.reset();
@@ -102,8 +113,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // Function to check room availability with a server request
-  function checkRoomAvailability(user_id, room, arrivalDate, departureDate) {
+  // Function to check room availability with a server request I:E send the data to the php file
+  function checkRoomAvailability(user_id, room, arrivalDate, departureDate, features) {
     return fetch('/scripts/handle-booking.php', {
       method: 'POST',
       headers: {
@@ -114,13 +125,14 @@ document.addEventListener('DOMContentLoaded', function () {
         room: room,
         arrivalDate: arrivalDate,
         departureDate: departureDate,
+        features: features,
       }),
     })
       .then(function (response) {
-        if (!response.ok) {
+        if (!response.ok) {//error handling
           throw new Error('Network response was not ok');
         }
-       return response.json(); // Change to response.text() to get the raw response text//return response.json();
+       return response.json();
       })
       /* .then(function (data) {
         return data.isAvailable;
@@ -134,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function () {
       })
       .catch(function (error) {
         console.error('Error checking room availability:', error.message); // Log the specific error message
-        throw error; // Re-throw the error to propagate it to the next catch block
+        throw error; // Re-throw the error to the next catch block
       });
   }
 });

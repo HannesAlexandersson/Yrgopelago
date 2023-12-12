@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/rooms.css">
     <link rel="stylesheet" href="css/features.css">
+    <link rel="stylesheet" href="css/discount.css">
     <link rel="stylesheet" href="css/booking.css">
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />

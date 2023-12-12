@@ -5,6 +5,7 @@ __DIR__. require 'view/hero.php';
 __DIR__. require 'view/home.php';
 __DIR__. require 'view/rooms.php';
 __DIR__. require 'view/features.php';
+__DIR__. require 'view/discount.php';
 __DIR__. require 'view/booking.php';
 __DIR__. require 'view/footer.php';
 ?>
