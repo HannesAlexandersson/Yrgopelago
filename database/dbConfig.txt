@@ -41,3 +41,5 @@ $query = "INSERT INTO bookings (user_id, room_id, arrival_date, departure_date, 
     }
 
 ```
+
+The DB provides the Calender with the booked dates for all of the rooms.

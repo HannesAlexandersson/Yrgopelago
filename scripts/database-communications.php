@@ -1,9 +1,6 @@
 <?php
 declare(strict_types=1);
-session_start();
-// get the bookings from the database as an associative array to be able to show in the calender when a room is already booked
 $bookings = getBookingsForCalendarRender();
-// Process the result into an array with FullCalendar event structure
 $events = [];
 foreach ($bookings as $booking) {
     $events[] = [
@@ -16,8 +13,10 @@ foreach ($bookings as $booking) {
 // Return the events as JSON
 header('Content-Type: application/json');
 echo json_encode($events);
+/* header('Content-Type: text/html');
+echo json_encode($events);  */
 
-function getBookingsForCalendarRender(): array
+/* function getBookingsForCalendarRender(): array
 {
   try {
       $db = connectToDatabase('../database/avalon.db');
@@ -31,7 +30,7 @@ function getBookingsForCalendarRender(): array
       error_log("Error fetching bookings: " . $e->getMessage());
       return [];
   }
-}
+} */
 //I need an function that connects to the database and I cant seem to get acces to the other one I have in the other file without breaking the program
 /* function databaseConnect(string $dbName): object
 {

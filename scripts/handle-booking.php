@@ -2,11 +2,11 @@
 declare(strict_types=1);
 require __DIR__ . '/../vendor/autoload.php';
 use Dotenv\Dotenv;
-
-$dotenv = Dotenv::createImmutable(__DIR__ . '/..'); // Adjust the path accordingly
+// Load the environment variables
+$dotenv = Dotenv::createImmutable(__DIR__ . '/..');
 $dotenv->load();
 
-// Access the values
+// Access the values from dotenv
 $islandName = $_ENV['ISLAND_NAME'];
 $hotelName = $_ENV['HOTEL_NAME'];
 
@@ -377,4 +377,52 @@ function getRoom($room_id)
     $room = $statement->fetch();
 
     return $room;
+}
+
+/* CALENDER LOGIC Populate the calender when page loads with existing bookings */
+function getBookingsForCalendarRender(): array
+{
+  try {
+      $db = connectToDatabase('../database/avalon.db');
+      $query = "SELECT room_id, arrival_date, departure_date FROM bookings";
+      $stmt = $db->prepare($query);
+      $stmt->execute();
+      $bookings = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      return $bookings;
+  } catch (PDOException $e) {
+      // Log or handle the error
+      error_log("Error fetching bookings: " . $e->getMessage());
+      return [];
+  }
+}
+
+if (isset($_GET['calendar']) && $_GET['calendar'] === 'true') {
+
+  $bookings = getBookingsForCalendarRender();
+  $events = [];
+  foreach ($bookings as $booking) {
+    if($booking['room_id'] == 1){
+      $events[] = [
+          'title' => 'The Gaze',
+          'start' => $booking['arrival_date'],
+          'end' => $booking['departure_date'],
+      ];
+    }else if($booking['room_id'] == 2){
+      $events[] = [
+          'title' => 'The Tranquility',
+          'start' => $booking['arrival_date'],
+          'end' => $booking['departure_date'],
+      ];
+    }else if($booking['room_id'] == 3){
+      $events[] = [
+          'title' => 'The Presidential',
+          'start' => $booking['arrival_date'],
+          'end' => $booking['departure_date'],
+      ];
+    }
+  }
+
+  // Return the events as JSON
+  header('Content-Type: application/json');
+  echo json_encode($events);
 }

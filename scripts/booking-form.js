@@ -5,22 +5,16 @@ let bookedDates = {
   'The Tranquility': [],
   'The Presidential': []
 };
-function fetchDataAndPopulateArray(eventsArray) {
-  // Make an asynchronous request to fetch data from the database
-  return fetch('/scripts/database-communications.php')
-    .then(response => response.json())
-    .then(data => {
-      // Process the fetched data and populate the array
-      data.forEach(roomData => {
-        roomData.forEach(eventData => {
-          eventsArray.push(eventData); // Push each event to the array
-        });
-      });
-    });
-}
-fetchDataAndPopulateArray(eventsArray);
-console.log(eventsArray);
 
+// fetch data from the database about the booked dates and populate the array, we use the array to populate the calendar
+async function fetchDataAndPopulateArray(eventsArray) {
+  const response = await fetch('/scripts/handle-booking.php?calendar=true');
+  const data = await response.json();
+  eventsArray.push(...data);
+}
+
+
+//this function doesnt work, the arrivaldate button isnot toggleable NEEDS ATTENTION!!!
 function toggleLockArrivalDate() {
   isArrivalDateLocked = !isArrivalDateLocked;
 
@@ -33,8 +27,8 @@ function toggleLockArrivalDate() {
   }
 }
 
+// Clear the form fields and reset the "Lock Arrival Date" button If user wanna change arrivaldate
 function clearBookingForm() {
-  // Clear the form fields and reset the "Lock Arrival Date" button
   document.getElementById('bookingForm').reset();
   isArrivalDateLocked = false;
   document.getElementById('lockArrivalDate').disabled = false;
@@ -59,25 +53,27 @@ document.addEventListener('DOMContentLoaded', function () {
     // uncomment this code (validRange) to disable dates before d day and put it here
 
   });
-  eventsArray.forEach(eventData => {
+  fetchDataAndPopulateArray(eventsArray)
+  .then(function () {
+    eventsArray.forEach(eventData => {
     calendar.addEvent(eventData);
   });
   //initialise the calendar
   calendar.render();
-  console.log(calendar.getEvents()); 
+})
 /* validRange: {
       start: '2024-01-01',
       end: '2024-02-01'
     } */
 
-  // Add a listener to the booking form to be able to submit bookings
+  // a listener for the booking form to be able to submit bookings to the php script
   var bookingForm = document.getElementById('bookingForm');
   bookingForm.addEventListener('submit', function (event) {
     event.preventDefault();
     //extract the form data
     var user_id = document.getElementById('transfercode').value;
     var room_id = document.getElementById('room').value;
-    var room;// I need a variable to hold the actual room name for the calendar and visual purposes
+    var room;// I need a variable to hold the actual room name for the calendar and for visual purposes
     if(room_id == 1){
       var room = 'The Gaze';
     }else if(room_id == 2){
@@ -89,14 +85,14 @@ document.addEventListener('DOMContentLoaded', function () {
     var departureDate = document.getElementById('departureDate').value;
 
 
-    // Extract selected features
+    // Extract selected features from the form checkboxes
     var features = [];
     var featureCheckboxes = document.querySelectorAll('.feature-checkbox:checked');
     featureCheckboxes.forEach(function (checkbox) {
         features.push(checkbox.value);
     });
 
-
+    //debugging
     console.log(user_id, room_id, arrivalDate, departureDate, room, features);
 
 
@@ -107,8 +103,7 @@ document.addEventListener('DOMContentLoaded', function () {
       checkRoomAvailability(user_id, room_id, arrivalDate, departureDate, features)
         .then(function (isAvailable) {
           if (isAvailable) {
-            // Room is available, proceed with the booking
-
+            // Room is available, proceed with adding the booking to the calendar
             calendar.addEvent({
               title: room + ' Booking',
               start: arrivalDate,
@@ -155,13 +150,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
        return response.json();
       })
-      /* .then(function (data) {
-        return data.isAvailable;
-      }) */
-      /* .then(function (responseText) {
-        console.log('Server Response:', responseText); // Log the entire response
-        return JSON.parse(responseText); // Parse the response text as JSON
-      }) */
       .then(function (jsonData) {
         return jsonData.isAvailable;
       })
