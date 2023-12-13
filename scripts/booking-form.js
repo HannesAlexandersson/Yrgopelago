@@ -1,11 +1,26 @@
 let isArrivalDateLocked = false;
+var eventsArray = [];
 let bookedDates = {
   'The Gaze': [],
   'The Tranquility': [],
   'The Presidential': []
 };
+function fetchDataAndPopulateArray(eventsArray) {
+  // Make an asynchronous request to fetch data from the database
+  return fetch('/scripts/database-communications.php')
+    .then(response => response.json())
+    .then(data => {
+      // Process the fetched data and populate the array
+      data.forEach(roomData => {
+        roomData.forEach(eventData => {
+          eventsArray.push(eventData); // Push each event to the array
+        });
+      });
+    });
+}
+fetchDataAndPopulateArray(eventsArray);
+console.log(eventsArray);
 
-console.log(bookedDates);
 function toggleLockArrivalDate() {
   isArrivalDateLocked = !isArrivalDateLocked;
 
@@ -26,6 +41,7 @@ function clearBookingForm() {
   document.getElementById('lockArrivalDate').innerText = 'Lock Arrival Date';
 }
 
+//populate and render the calendar with data from DB
 document.addEventListener('DOMContentLoaded', function () {
   var calendarEl = document.getElementById('calendar');
   var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -39,15 +55,20 @@ document.addEventListener('DOMContentLoaded', function () {
         // If arrival date is not locked, set the clicked date as the arrival date
         document.getElementById('arrivalDate').value = info.dateStr;
       }
-    },// uncomment this code to disable dates before d day
-    /* validRange: {
-      start: '2024-01-01',
-      end: '2024-02-01'
-    } */
+    },
+    // uncomment this code (validRange) to disable dates before d day and put it here
+
+  });
+  eventsArray.forEach(eventData => {
+    calendar.addEvent(eventData);
   });
   //initialise the calendar
   calendar.render();
-
+  console.log(calendar.getEvents()); 
+/* validRange: {
+      start: '2024-01-01',
+      end: '2024-02-01'
+    } */
 
   // Add a listener to the booking form to be able to submit bookings
   var bookingForm = document.getElementById('bookingForm');
