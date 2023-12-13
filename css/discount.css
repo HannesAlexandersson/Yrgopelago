@@ -4,17 +4,7 @@
   height: 100vh;
   height: 100dvh;
 }
-.parallax-layer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
+
 .discount-bg-clouds{
   background-image: url(/assets/images/paralax/clouds.svg);
   z-index: -1;

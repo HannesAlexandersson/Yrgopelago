@@ -159,3 +159,12 @@ document.addEventListener('DOMContentLoaded', function () {
       });
   }
 });
+
+
+  function scrollToBookingForm() {
+    // Get the element reference for the booking form
+    var bookingForm = document.querySelector('.booking-header');
+
+    // Scroll to the booking form
+    bookingForm.scrollIntoView({ behavior: 'smooth' });
+}

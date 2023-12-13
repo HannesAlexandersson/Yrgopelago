@@ -9,7 +9,7 @@
       </p>
       <div class="cta-wrapper">
         <p>Book your room now!</p>
-        <button class="cta-btn">Book Now</button>
+        <button class="cta-btn" onclick="scrollToBookingForm()">Book Now</button>
       </div>
     </div>
     <div class="right-side"></div>

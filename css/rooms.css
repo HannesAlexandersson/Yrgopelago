@@ -1,8 +1,38 @@
-.rooms-bg{
-  background-color: var(--default-bg);
- /*  scroll-snap-align: start;
-  scroll-snap-stop: always; */
+.rooms-bg {
+  position: relative;
+  overflow: hidden;
+  height: 172vh;
 }
+.parallax-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.rooms-bg-pool {
+  background-image: url('/assets/images/paralax/Background.svg');
+  z-index: 0;
+}
+.rooms-bg-dark {
+  background-image: url('/assets/images/paralax/back.jpg');
+  z-index: -1;
+}
+
+
+.rooms-content {
+  position: relative;
+  z-index: -1;
+  text-align: center;
+  padding: 50px;
+
+}
+/*content is used by discount css aswell! So dont make changes before checking result on discount section*/
+
 .rooms-text-container {
   text-align: center;
   display: flex;
@@ -35,8 +65,6 @@
 }
 .room {
   display: flex;
- /*  scroll-snap-align: start;
-  scroll-snap-stop: always; */
   flex-direction: column;
   border-radius: 20px;
   box-shadow: -1px 4px 13px 6px rgba(0,0,0,0.2);
@@ -51,15 +79,15 @@
 }
 @media(min-width: 800px) {
 
-  .room-container {
-    margin-bottom: 2rem;
-    text-align: center;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center;
+.room-container {
+  margin-bottom: 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
 }
 .room {
   overflow: hidden;
@@ -67,11 +95,18 @@
   border: 2px solid gold;
   width: 25%;
   display: flex;
-  /* scroll-snap-align: start;
-  scroll-snap-stop: always; */
   flex-direction: column;
   justify-content: space-between;
 }
+.room.expanded {
+  transform: scale(1.2);
+  transition: transform 0.3s ease-in-out;
+  background-color: var(--offset-dark);
+  z-index: 1;
+}
+
+
+
 .room-inner-img-wrapper{
   display: flex;
   flex-direction: column;

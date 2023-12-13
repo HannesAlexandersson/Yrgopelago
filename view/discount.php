@@ -22,5 +22,5 @@
     </div>
   </div>
 </div>
-<script src="/scripts/paralax.js"></script>
+<script src="/scripts/discount-paralax.js"></script>
 
