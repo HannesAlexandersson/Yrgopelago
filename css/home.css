@@ -25,7 +25,7 @@ main {
   text-shadow: -7px 2px 15px black;
   color: gold;
   color: var(--default-font-clr);
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-style: normal;
   font-weight: 400;
   text-align: center;

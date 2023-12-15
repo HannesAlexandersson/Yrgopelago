@@ -1,4 +1,5 @@
-@keyframes move-hero-bg {
+/*comment out for performance while devolpment*/
+/* @keyframes move-hero-bg {
   0% {
     transform: translateY(0);
   }
@@ -6,14 +7,19 @@
     transform: translateY(100%);
   }
 }
-/* @keyframes move-hero-h1 {
+
+
+@keyframes move-hero-h1 {
   0% {
-    transform: translatex(-100%);
+    transform: opacity(0);
   }
   100% {
-    transform: translateY(0);
+    transform: opacity(1);
   }
-} */
+}
+*/
+
+/*
 .hero {
   position: relative;
   overflow: hidden;
@@ -30,18 +36,22 @@
   background-position: center;
   background-size: cover;
   z-index: -1;
-}
 
-.header-wrapper{
+} */
+
+/* .hero-header-wrapper{
   align-self: center;
   color: var(--default-font-clr);
-  font-size: 5em;
-}
+  display: flex;
+  font-size: 2em;
+} */
 /* .hero-header{
   animation: move-hero-h1 4000ms linear 4s forwards;
 } */
-.sub-wrapper{
+/* .hero-sub-wrapper{
   color: var(--default-font-clr);
+  animation: move-hero-h1 5000ms linear 4s forwards;
+  text-align: center;
 }
 .hero-bg {
   bottom: -30rem;
@@ -53,4 +63,64 @@
 .hero-content{
   position: relative;
   text-align: center;
+}
+
+@media screen and (min-width: 800px) {
+  .hero-header-wrapper{
+    font-size: 4em;
+  }
+} */
+
+
+
+.bg-hero{
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+  height: 100dvh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.hero-parallax-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.pool{background-image: url(/assets/images/paralax/Background.png);
+  z-index: 0;
+  bottom: 0;}
+.nightsky{background-image: url(/assets/images/paralax/back.jpg);
+  z-index: -1;
+  bottom: 8rem;}
+  .hero-text {
+    text-shadow: 0px 0px 20px var(--spotlight-blur-clr);
+}
+.hero-header{
+  font-size: 4em;
+}
+.hero-content {
+  position: relative;
+  z-index: -1;
+  text-align: center;
+  padding: 50px;
+  top: 22rem;
+  color: var(--default-font-clr);
+}
+
+@media screen and (min-width: 800px) {
+  .hero-header{
+    font-size: 6em;
+  }
+  .hero-sub-header{
+    font-size: 2em;
+  }
 }

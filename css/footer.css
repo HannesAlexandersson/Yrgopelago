@@ -7,8 +7,6 @@ footer {
   align-content: center;
   align-items: center;
 
-  /* scroll-snap-align: start;
-  scroll-snap-stop: always; */
 }
 .logo-wrapper {
   display: flex;
@@ -20,12 +18,8 @@ footer {
 .logo-foter {
   width: 35%;
 }
-.social-media-wrapper {
-  display: none;
-}
-.footer-links {
-color: var(--primary-accent);
-}
+
+
 @media (min-width: 800px) {
   footer {
     flex-direction: row;
@@ -39,17 +33,4 @@ color: var(--primary-accent);
 .logo-wrapper > p{
   margin: 0 ;
 }
-  .footer-links {
-    display: flex;
-    flex-direction: column;
-  }
-  .social-media-wrapper {
-    display: flex;
-    flex-direction: row;
-    gap: 2rem;
-}
-  .media-icon {
-    display: flex;
-    align-items: center;
-  }
 }

@@ -29,8 +29,9 @@
   margin-bottom: 5rem;
 }
 .feat-item {
+  overflow: hidden;
   display: flex;
-  border: 2px ridge var(--primary-accent);
+  border-radius: 25px;
   flex-direction: column;
   align-items: center;
   background-color: var(--secondary-bg);

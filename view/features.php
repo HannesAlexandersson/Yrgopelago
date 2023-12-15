@@ -26,6 +26,11 @@
           <?= $feature['name']?>
         </h4>
       </div>
+      <div class="feature-price secondary-font">
+
+        <?='Price: ' .$feature['price']?>
+
+      </div>
       <div class="feature-img-container">
 
         <?php if($feature['name'] == 'underground hotsprings'){ ?>
@@ -43,11 +48,7 @@
         <?php } ?>
 
       </div>
-
-      <div class="feature-price secondary-font">
-        <?='Price: ' .$feature['price']?>
-      </div>
-    </div><?php }; ?>
-
+    </div>
+    <?php }; ?>
   </div>
 </div>

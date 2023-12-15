@@ -4,7 +4,8 @@
     <span class="default-font home-text">
       <p>
         Welcome to Hotel Avalon, where paradise meets perfection on the sun-kissed shores of our
-        tropical haven. Nestled amidst lush palm trees and caressed by gentle ocean breezes,
+        tropical haven. Nestled amidst lush palm trees and caressed by gentle ocean breezes, in the
+        heart of the Lagoon Luster Cove archipelago, Hotel Avalon is a haven of tranquility and
         Hotel Avalon beckons you to a world where luxury and relaxation intertwine. Indulge in
         the embrace of our elegant accommodations, savor exquisite cuisine that tantalizes the
         senses, and unwind in the embrace of our world-class amenities. At Hotel Avalon, every
