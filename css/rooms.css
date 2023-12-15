@@ -1,38 +1,9 @@
-.rooms-bg {
-  position: relative;
-  overflow: hidden;
-  height: 172vh;
-}
-.parallax-layer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-attachment: fixed;
+.center-rooms{
+  background-image: url('/assets/backgrounds/Rectangle1.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
-.rooms-bg-pool {
-  background-image: url('/assets/images/paralax/Background.svg');
-  z-index: 0;
-}
-.rooms-bg-dark {
-  background-image: url('/assets/images/paralax/back.jpg');
-  z-index: -1;
-}
-
-
-.rooms-content {
-  position: relative;
-  z-index: -1;
-  text-align: center;
-  padding: 50px;
-
-}
-/*content is used by discount css aswell! So dont make changes before checking result on discount section*/
-
 .rooms-text-container {
   text-align: center;
   display: flex;
@@ -40,21 +11,12 @@
   align-items: center;
   color: var(--default-font-clr);
 }
-.rooms-header{
-
-}
-.rooms-header > h1 {
-
-}
 .rooms-header-subtext {
+  padding: 0 2rem 0 2rem;
   display: flex;
   text-align: center;
   flex-direction: column;
   align-items: center;
-}
-.rooms-header-subtext > p {
-  text-align: center;
-  width: 90%;
 }
 
 .room-container {
@@ -64,21 +26,34 @@
   align-items: center;
 }
 .room {
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   border-radius: 20px;
   box-shadow: -1px 4px 13px 6px rgba(0,0,0,0.2);
+  background-color: var(--secondary-bg);
+  margin: 0 1rem 1rem 1rem;
+}
+.room:hover{
+  cursor: pointer;
 }
 .room-inner-header > p{
   padding: 0.5rem;
 }
-.room-inner-img-wrapper{}
 .room-inner-img {
   width: 100%;
   max-width: 400px;
 }
+.hidden{
+  display: none;
+}
 @media(min-width: 800px) {
-
+.rooms-header-subtext {
+  width: 75%;
+}
+.rooms-header-subtext > p {
+  width: 50%;
+}
 .room-container {
   margin-bottom: 2rem;
   text-align: center;
@@ -91,8 +66,8 @@
 }
 .room {
   overflow: hidden;
-  height: 38rem;
-  border: 2px solid gold;
+
+
   width: 25%;
   display: flex;
   flex-direction: column;
@@ -102,11 +77,8 @@
   transform: scale(1.2);
   transition: transform 0.3s ease-in-out;
   background-color: var(--offset-dark);
-  z-index: 1;
+ padding: 1rem;
 }
-
-
-
 .room-inner-img-wrapper{
   display: flex;
   flex-direction: column;

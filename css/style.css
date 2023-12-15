@@ -17,9 +17,6 @@
 .secondary-font{
     font-family: var(--secondary-font);
 }
-html{
-  /* scroll-snap-type: both mandatory; */
-}
 
 body{
   margin: 0;
