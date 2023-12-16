@@ -1,75 +1,3 @@
-/*comment out for performance while devolpment*/
-/* @keyframes move-hero-bg {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(100%);
-  }
-}
-
-
-@keyframes move-hero-h1 {
-  0% {
-    transform: opacity(0);
-  }
-  100% {
-    transform: opacity(1);
-  }
-}
-*/
-
-/*
-.hero {
-  position: relative;
-  overflow: hidden;
-  height: 100vh;
-  height: 100dvh;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 3rem;
-
-  background-image: url(/assets/images/paralax/back.jpg);
-  background-position: center;
-  background-size: cover;
-  z-index: -1;
-
-} */
-
-/* .hero-header-wrapper{
-  align-self: center;
-  color: var(--default-font-clr);
-  display: flex;
-  font-size: 2em;
-} */
-/* .hero-header{
-  animation: move-hero-h1 4000ms linear 4s forwards;
-} */
-/* .hero-sub-wrapper{
-  color: var(--default-font-clr);
-  animation: move-hero-h1 5000ms linear 4s forwards;
-  text-align: center;
-}
-.hero-bg {
-  bottom: -30rem;
-  position: absolute;
-  z-index: 99;
-  animation: move-hero-bg 5000ms linear 4s forwards;
-}
-
-.hero-content{
-  position: relative;
-  text-align: center;
-}
-
-@media screen and (min-width: 800px) {
-  .hero-header-wrapper{
-    font-size: 4em;
-  }
-} */
 
 
 
@@ -108,19 +36,24 @@
   font-size: 4em;
 }
 .hero-content {
+  display: flex;
   position: relative;
   z-index: -1;
   text-align: center;
   padding: 50px;
   top: 22rem;
   color: var(--default-font-clr);
+  flex-direction: column;
+  align-items: center;
 }
 
 @media screen and (min-width: 800px) {
-  .hero-header{
+  .hero-header {
+    margin-bottom: 0;
     font-size: 6em;
-  }
-  .hero-sub-header{
+}
+  .hero-sub-header {
+    max-width: 43%;
     font-size: 2em;
-  }
+}
 }

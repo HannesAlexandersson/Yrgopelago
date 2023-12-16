@@ -2,6 +2,7 @@
 declare(strict_types=1);
 require __DIR__ . '/../vendor/autoload.php';
 use Dotenv\Dotenv;
+use GuzzleHttp\Client;
 // Load the environment variables
 $dotenv = Dotenv::createImmutable(__DIR__ . '/..');
 $dotenv->load();
@@ -35,18 +36,12 @@ if($room_id == 1){
 }else if($room_id == 3){
   $room = 'The Presidential';
 };
-
+//validate the dates
 $arrivalDate = isset($postData["arrivalDate"]) ? filter_var($postData["arrivalDate"], FILTER_SANITIZE_STRING) : "";
 $departureDate = isset($postData["departureDate"]) ? filter_var($postData["departureDate"], FILTER_SANITIZE_STRING) : "";
+//sanitize the user_id
+$user_id = isset($postData["user_id"]) ? htmlspecialchars($postData["user_id"]) : "";
 
-
- // Validate and sanitize user_id NEED TO ADD VALIDATION OF TRANSFERCODE
- $user_id = isset($postData["user_id"]) ? htmlspecialchars($postData["user_id"]) : "";
-if (empty($user_id)) {
-  header('Content-Type: application/json');
-  echo json_encode(['error' => 'Invalid user_id']);
-  exit();
-}
 
 $selectedFeaturesNames = []; // I need the actual feature names for the response aswell for visual purposes
 $selectedFeatureIDs = []; // but for the bookinglogic i need the feature ids
@@ -55,18 +50,15 @@ $selectedFeatureIDs = isset($postData["features"]) && $postData["features"] !== 
 foreach($selectedFeatureIDs as $feature){
   if($feature == 1){
     $feature1['name'] = 'Massage Therapy';
-  /*   $feature1['cost'] = 5;
-    $feature1['id'] = 1;  OM INTE LOOPEN NEDANFÖR FUNKAR SÅ KÖR DENNA ISTÄLLET, MEN BEHÖVER LOOPEN FÖR ADMINSIDAN??*/
+
     array_push($selectedFeaturesNames, $feature1);
     }else if($feature == 2){
     $feature2['name'] = 'Bedtime Storyteller';
-   /*  $feature2['cost'] = 5;
-    $feature2['id'] = 2; */
+
     array_push($selectedFeaturesNames, $feature2);
     }else if($feature == 3){
     $feature3['name'] = 'Underground Hotsprings';
-    /* $feature3['cost'] = 5;
-    $feature3['id'] = 3; */
+
     array_push($selectedFeaturesNames, $feature3);
     }
   }
@@ -99,22 +91,39 @@ foreach($selectedFeatureIDs as $feature){
 
   // Check room availability
   $isAvailable = checkRoomAvailability($room_id, $arrivalDate, $departureDate);
+  if (!$isAvailable) {
+    // Room not available, send error response and exit
+    header('Content-Type: application/json');
+    echo json_encode(['error' => 'Room not available for the selected dates. Please try another date.']);
+    exit();
+}
 
 
-  // calculate toatal number fo days the user stays at the hotel
-  $numberOfDays = calculateDays($arrivalDate, $departureDate);
+// calculate toatal number fo days the user stays at the hotel
+$numberOfDays = calculateDays($arrivalDate, $departureDate);
 
-  // Calculate cost
-  $totalCost = calculateCost($room_id, $selectedFeatureIDs, $numberOfDays);
+// Calculate cost
+$totalCost = calculateCost($room_id, $selectedFeatureIDs, $numberOfDays);
 
+
+
+
+// Validate TRANSFERCODE check if code is unused and if the user has enough money on the code
+$baseUrl = 'https://www.yrgopelag.se/centralbank';
+if (empty($user_id)) {
+  header('Content-Type: application/json');
+  echo json_encode(['error' => 'Invalid transfercode']);
+  exit();
+}else{
+  $response = [];
+  $response = validateTransferCode($user_id, $totalCost, $baseUrl);
+}
 
   // Perform the booking and charge the user
   $bookingResult = bookRoom($user_id, $room_id, $arrivalDate, $departureDate, $totalCost, $selectedFeatureIDs);
 
   checkBooking($bookingResult, $arrivalDate, $departureDate, $numberOfDays, $totalCost, $selectedFeaturesNames);
-
-  // Debugging: Check the response
- exit();
+  exit();
 }
 
 // Function to check the result of the booking
@@ -240,7 +249,7 @@ function checkRoomAvailability(int $room_id, string $arrivalDate, string $depart
   return true; // Room is available
 }
 
-// a function to get the bookings that are booked to populate the calendar with
+// a function to get the bookings that are booked to populate the calendar with when a new booking are made
 function getBookingsForCalendar(int $room_id): array
 {
     $db = connectToDatabase('../database/avalon.db');
@@ -425,4 +434,41 @@ if (isset($_GET['calendar']) && $_GET['calendar'] === 'true') {
   // Return the events as JSON
   header('Content-Type: application/json');
   echo json_encode($events);
+}
+
+
+/*Validating transfercode */
+
+
+function validateTransferCode(string $transfercode, int $totalCost, string $baseUrl): array
+{
+  $transfercodeEndpoint = $baseUrl . '/transferCode';
+
+$client = new Client();
+
+try {
+    // Send a POST request to the central bank
+    $response = $client->post($transfercodeEndpoint, [
+        'form_params' => [
+            'transferCode' => $transfercode,
+            'totalcost' => $totalCost
+        ]
+    ]);
+
+    // Get the response body
+    $responseBody = $response->getBody()->getContents();
+
+    // Decode the JSON response
+    $decodedResponse = json_decode($responseBody, true);
+
+    // Write the response to a JSON file
+    file_put_contents('transfercodeResponse.json', json_encode($decodedResponse));
+    header('Content-Type: application/json');
+    echo json_encode($decodedResponse);
+    // Return the decoded response
+    return $decodedResponse;
+} catch (\Exception $e) {
+    // If an exception occurs, return an error message
+    return ['error' => $e->getMessage()];
+}
 }

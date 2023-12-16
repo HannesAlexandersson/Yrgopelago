@@ -55,6 +55,7 @@
   width: 50%;
 }
 .room-container {
+  width: calc(100% - 1rem);
   margin-bottom: 2rem;
   text-align: center;
   display: flex;
@@ -68,7 +69,7 @@
   overflow: hidden;
 
 
-  width: 25%;
+  width: calc(25% - 2rem);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -76,8 +77,6 @@
 .room.expanded {
   transform: scale(1.2);
   transition: transform 0.3s ease-in-out;
-  background-color: var(--offset-dark);
- padding: 1rem;
 }
 .room-inner-img-wrapper{
   display: flex;
