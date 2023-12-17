@@ -12,7 +12,7 @@ $dotenv = Dotenv::createImmutable(__DIR__ . '/..');
 $dotenv->load();
 
 // Access the values from dotenv
-$adminUserName = $_ENV['USER_NAME'];
+$adminUserName = $_ENV['API_KEY'];
 $adminPassword = $_ENV['ADMIN_PASSWORD'];
 
 if($username == $adminUserName && $password == $adminPassword){

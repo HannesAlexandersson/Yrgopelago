@@ -140,17 +140,15 @@ if (room_id && arrivalDate && departureDate) {
 
   // Function to check room availability with a server request I:E send the data to the php file
   function checkRoomAvailability(user_id, room, arrivalDate, departureDate, features) {
-    return fetch('/scripts/handle-booking.php', {
+    return fetch('/scripts/checkRoomAvailability.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        user_id: user_id,
         room: room,
         arrivalDate: arrivalDate,
-        departureDate: departureDate,
-        features: features,
+        departureDate: departureDate
       }),
     })
 
@@ -182,9 +180,15 @@ if (room_id && arrivalDate && departureDate) {
     // Scroll to the booking form
     bookingForm.scrollIntoView({ behavior: 'smooth' });
 }
-
-
-
+//------------------------------------------------//
+body: JSON.stringify({
+  user_id: user_id,
+  room: room,
+  arrivalDate: arrivalDate,
+  departureDate: departureDate,
+  features: features,
+}),
+//------------------------------------------------//
 // -------------------cost calculation---------------------//
 // Function to calculate the cost based on room type, duration, and discount
 function calculateCost(room_id, selectedFeatureIDs, numberOfDays) {
