@@ -15,9 +15,11 @@
       </p>
     </div>
     <div class="room-container">
+    <?php require __DIR__ . '/../database/dbLoadRooms.php'; ?>
+    <?php $features = connectToRooms('../database/avalon.db');?>
       <div class="room" id="room1">
         <div class="room-inner-header secondary-font">
-          <h2>The gaze</h2>
+          <h2><?= $features[0]['name']?></h2>
           <p>The room with unbeatable view</p>
           <p class="hidden expandable">
             Specs: Amazing view in 360 degrees wich includes the ocean aswell as historical monuments as
@@ -28,15 +30,14 @@
           </p>
         </div>
         <div class="room-inner-img-wrapper secondary-font">
-          <p>Price: From 5</p>
+          <p>Price: From <?= $features[0]['price']?></p>
           <img class="room-inner-img" src="/assets/images/rooms/one-star/markus-spiske-g5ZIXjzRGds-unsplash.png" alt="room1">
         </div>
       </div>
       <div class="room" id="room2">
         <div class="room-inner-header secondary-font">
-          <h2>The tranquility</h2>
+          <h2><?= $features[1]['name']?></h2>
           <p>The room for the veary</p>
-
           <p class="hidden expandable">
             Specs: The room is located on the 3rd floor and is the most quiet room in the hotel.
             The room includes a private bathroom with a shower.
@@ -46,13 +47,13 @@
           </p>
         </div>
         <div class="room-inner-img-wrapper secondary-font">
-          <p>Price: From 10</p>
+          <p>Price: From <?= $features[1]['price']?></p>
           <img class="room-inner-img" src="/assets/images/rooms/two-star/dad-hotel-P6B7y6Gnyzw-unsplash.png" alt="room1">
         </div>
       </div>
       <div class="room" id="room3">
         <div class="room-inner-header secondary-font">
-          <h2>The presidential</h2>
+          <h2><?= $features[2]['name']?></h2>
           <p>Only the best</p>
           <p class="hidden expandable">
             Specs: our presidential suite offers an fully stocked on suit bar, aswell as an kitchen with
@@ -62,7 +63,7 @@
           </p>
         </div>
         <div class="room-inner-img-wrapper secondary-font">
-          <p>Price: From 25</p>
+          <p>Price: From <?= $features[2]['price']?></p>
           <img class="room-inner-img" src="/assets/images/rooms/three-star/upgraded-points-c8UktkMDrbc-unsplash.png" alt="room1">
         </div>
       </div>

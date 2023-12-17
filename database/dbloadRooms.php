@@ -1,6 +1,6 @@
 <?php
-declare(strict_types=1); // function that lets me build the html flex-cards with the data from the database
-function connectToFeatures(string $dbName): array // this function connects to the database and returns the features table as an asc array for me to iterate
+declare(strict_types=1);
+function connectToRooms(string $dbName): array
 {
     $dbPath = __DIR__ . '/' .$dbName;
     $db = "sqlite:$dbPath";
@@ -14,10 +14,9 @@ function connectToFeatures(string $dbName): array // this function connects to t
         echo "Failed to connect to the database";
         throw $e;
     }
-    $features = $db->query("
+    $rooms = $db->query("
     SELECT *
-    FROM features
+    FROM rooms
 ")->fetchAll();
-return $features; //returns the features table as an asc array for me to iterate
+return $rooms; //returns the features table as an asc array for me to iterate
 }
-

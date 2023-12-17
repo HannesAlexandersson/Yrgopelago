@@ -17,7 +17,7 @@
     </div>
     <div class="disclaimer-text secondary-font">
       <p>
-        The discount is only available for a limited time so hurry up and book your room today.
+        The discount is not applied to the totalcost, but only for the room cost. the features are still subject for full pricing.
       </p>
     </div>
   </div>

@@ -17,7 +17,7 @@
   <div class="features-wrapper">
     <?php require __DIR__ . '/../database/dbLoadFeatures.php'; ?>
     <?php
-    $features = connect('../database/avalon.db');
+    $features = connectToFeatures('../database/avalon.db');
 
     foreach($features as $feature){ ?>
     <div class="feat-item">

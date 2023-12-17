@@ -22,6 +22,7 @@
 
         <label for="departureDate">Departure Date:</label>
         <input type="date" id="departureDate" name="departureDate" />
+        <button type="button" id="lockDepartureDate" onclick="toggleLockDepartureDate()">Lock Departure Date</button>
 
         <!-- Checkboxes for additional features -->
         <div class="features-checkbox">
@@ -39,6 +40,9 @@
         <button type="button" id="clearForm" onclick="clearBookingForm()">Clear Form</button>
         <button type="submit">Submit Booking</button>
       </form>
+    </div>
+    <div class="display-totalcost default-font">
+      <p><span id="totalCost"></span></p>
     </div>
   </div>
 

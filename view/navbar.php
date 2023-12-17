@@ -7,7 +7,7 @@
       <ul class="navmenu-links secondary-font">
         <li><a href="index.php">Home</a></li>
         <li><a href="index.php?page=about">About us</a></li>
-        <li><a href="index.php?page=contact">Contact</a></li>
+        <li><a href="/view/admin_login.php">ADMIN</a></li>
       </ul>
     </div>
     <div class="nav-icons">
@@ -27,8 +27,8 @@
       <img id="hamburgerMenu" class="hamburger" src="assets/icons/navbar-icons/hamburger.png" />
       <div id="dropdownMenu" class="drop-down-content">
           <a class="navbar-anchor" href="#"><p>HOME</p></a>
-          <a class="navbar-anchor" href="#"><p>ABOUT US</p></a>
           <a class="navbar-anchor" href="#"><p>CONTACT</p></a>
+          <a class="navbar-anchor" href="admin_login.php"><p>ADMIN</p></a>
           <a class="navbar-anchor" href="#"><p>Language</p></a>
       </div>
   </div>

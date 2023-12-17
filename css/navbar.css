@@ -11,6 +11,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 1;
 }
 .nav-bar-mobile.animate {
   top: -100px;
@@ -63,8 +64,8 @@
 }
 .nav-bar{
   position: fixed;
-  width: 100vw;
-  width: 100dvw;
+  width: 100%;
+  z-index: 1;
   height: 4rem;
   background-color: var(--default-bg);
   display: flex;

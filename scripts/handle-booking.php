@@ -1,6 +1,9 @@
 <?php
 declare(strict_types=1);
+session_start();
 require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/CentralBankService.php';
+require __DIR__ . '/database-communications.php';
 use Dotenv\Dotenv;
 use GuzzleHttp\Client;
 // Load the environment variables
@@ -50,15 +53,12 @@ $selectedFeatureIDs = isset($postData["features"]) && $postData["features"] !== 
 foreach($selectedFeatureIDs as $feature){
   if($feature == 1){
     $feature1['name'] = 'Massage Therapy';
-
     array_push($selectedFeaturesNames, $feature1);
     }else if($feature == 2){
     $feature2['name'] = 'Bedtime Storyteller';
-
     array_push($selectedFeaturesNames, $feature2);
     }else if($feature == 3){
     $feature3['name'] = 'Underground Hotsprings';
-
     array_push($selectedFeaturesNames, $feature3);
     }
   }
@@ -109,25 +109,20 @@ $totalCost = calculateCost($room_id, $selectedFeatureIDs, $numberOfDays);
 
 
 // Validate TRANSFERCODE check if code is unused and if the user has enough money on the code
-$baseUrl = 'https://www.yrgopelag.se/centralbank';
-if (empty($user_id)) {
-  header('Content-Type: application/json');
-  echo json_encode(['error' => 'Invalid transfercode']);
-  exit();
-}else{
   $response = [];
-  $response = validateTransferCode($user_id, $totalCost, $baseUrl);
-}
+  $centralBankService = new CentralBankService();
+  $response = $centralBankService->validateTransferCode($user_id, $totalCost);
+
 
   // Perform the booking and charge the user
   $bookingResult = bookRoom($user_id, $room_id, $arrivalDate, $departureDate, $totalCost, $selectedFeatureIDs);
-
+  // Check the result of the booking and send the response as json
   checkBooking($bookingResult, $arrivalDate, $departureDate, $numberOfDays, $totalCost, $selectedFeaturesNames);
   exit();
 }
 
 // Function to check the result of the booking
-function checkBooking(bool $bookingResult, string $arrivalDate, string $departureDate, int $numberOfDays, int $totalCost, array $selectedFeaturesNames): void
+function checkBooking(bool $bookingResult, string $arrivalDate, string $departureDate, int $numberOfDays, float $totalCost, array $selectedFeaturesNames): void
 {
 
     // Check the result of the booking
@@ -183,7 +178,7 @@ function calculateCostOfFeatures(array $selectedFeatureIDs) : int
   return $featureCost;
 }
 // Function to calculate the cost based on room type and duration
-function calculateCost(int $room_id, array $selectedFeatureIDs, int $numberOfDays): int
+function calculateCost(int $room_id, array $selectedFeatureIDs, int $numberOfDays): float
  {
    $cost = 0;
 
@@ -199,15 +194,39 @@ function calculateCost(int $room_id, array $selectedFeatureIDs, int $numberOfDay
 
 
   $cost = $cost * $numberOfDays;
-
+  $cost = calcCostAfterDiscount($cost, calcDiscount($numberOfDays));
   $featureCost = calculateCostOfFeatures($selectedFeatureIDs);
-  $cost += $featureCost;
+  $cost = $cost + $featureCost;
 
   return $cost;
 }
+//calculations for discounts
+function calcDiscount(int $days): float
+{
+    if ($days == 4) {
+        $discount = 0.1;
+    } else if ($days == 5) {
+        $discount = 0.2;
+    } else if ($days == 6) {
+        $discount = 0.3;
+    } else if ($days == 7) {
+        $discount = 0.4;
+    } else if ($days >= 8) {
+        $discount = 0.5;
+    } else {
+        $discount = 0.0; // No discount for less than 4 days
+    }
+
+    return 1.0 - $discount;
+}
+function calcCostAfterDiscount(int $totalCost, float $discount): float
+{
+  $costAfterDiscount = $totalCost * $discount;
+  return $costAfterDiscount;
+}
 
 // Function to handle the booking and charge the user
-function bookRoom(string $user_id, int $room_id, string $arrivalDate, string $departureDate, int $totalCost, array $selectedFeatureIDs): bool
+function bookRoom(string $user_id, int $room_id, string $arrivalDate, string $departureDate, float $totalCost, array $selectedFeatureIDs): bool
  {
   $room_id = $room_id;
   $arrival_date = $arrivalDate;
@@ -247,228 +266,4 @@ function checkRoomAvailability(int $room_id, string $arrivalDate, string $depart
     }
 
   return true; // Room is available
-}
-
-// a function to get the bookings that are booked to populate the calendar with when a new booking are made
-function getBookingsForCalendar(int $room_id): array
-{
-    $db = connectToDatabase('../database/avalon.db');
-
-
-    $query = "SELECT booking_id, arrival_date, departure_date FROM bookings WHERE room_id = :room_id";
-    try {
-    $stmt = $db->prepare($query);
-    $stmt->bindParam(':room_id', $room_id);
-    $stmt->execute();
-
-    $bookings = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    return $bookings;
-    } catch (PDOException $e) {
-      // Handle the error
-      echo "Error: " . $e->getMessage();
-  }
-}
-function connectToDatabase(string $dbName): object
-{
-    $dbPath = __DIR__ . '/' . $dbName;
-    $db = "sqlite:$dbPath";
-
-    // Open the database file and catch the exception if it fails.
-    try {
-        $db = new PDO($db);
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-    } catch (PDOException $e) {
-        echo "Failed to connect to the database". $e->getMessage();
-        throw $e;
-    }
-    return $db;
-}
-
-
-
-function insertBooking($user_id, $room_id, $arrival_date, $departure_date, $total_cost, $features)
-{
-    $db = connectToDatabase('../database/avalon.db');
-
-    // Insert booking into bookings table
-    $query = "INSERT INTO bookings (user_id, room_id, arrival_date, departure_date, total_cost)
-              VALUES (:user_id, :room_id, :arrival_date, :departure_date, :total_cost)";
-
-    $statement = $db->prepare($query);
-    $statement->bindParam(':user_id', $user_id);
-    $statement->bindParam(':room_id', $room_id);
-    $statement->bindParam(':arrival_date', $arrival_date);
-    $statement->bindParam(':departure_date', $departure_date);
-    $statement->bindParam(':total_cost', $total_cost);
-
-    $statement->execute();
-
-    // Get the booking_id of the booking we just inserted to be able to insert the features in the feature table
-    $booking_id = $db->lastInsertId();
-
-    // Insert features into booking_features table if needed and connect the picked features to the booking
-    if (!empty($features)) {
-        foreach ($features as $feature_id) {
-            $query = "INSERT INTO booking_features (booking_id, feature_id) VALUES (:booking_id, :feature_id)";
-            $stmt = $db->prepare($query);
-            $stmt->bindParam(':booking_id', $booking_id);
-            $stmt->bindParam(':feature_id', $feature_id);
-            $stmt->execute();
-        }
-    }
-}
-
-
-
-// a function to get the bookings for a specefic user if the same user has multiple bookings
-function getBookings($user_id)
-{
-    $db = connectToDatabase('avalon.db');
-
-    $query = "SELECT * FROM bookings WHERE user_id = :user_id";
-    $statement = $db->prepare($query);
-    $statement->bindParam(':user_id', $user_id);
-    $statement->execute();
-
-    $bookings = $statement->fetchAll();
-
-    return $bookings;
-}
-
-
-
-// a function to get the booking of a specific user if the user has only one booking
-function getBooking($booking_id)
-{
-    $db = connectToDatabase('avalon.db');
-
-    $query = "SELECT * FROM bookings WHERE id = :booking_id";
-    $statement = $db->prepare($query);
-    $statement->bindParam(':booking_id', $booking_id);
-    $statement->execute();
-
-    $booking = $statement->fetch();
-
-    return $booking;
-}
-
-
-
-// a function to get the  picked features of a specific booking
-function getBookingFeatures($booking_id)
-{
-    $db = connectToDatabase('avalon.db');
-
-    $query = "SELECT * FROM booking_features WHERE booking_id = :booking_id";
-    $statement = $db->prepare($query);
-    $statement->bindParam(':booking_id', $booking_id);
-    $statement->execute();
-
-    $booking_features = $statement->fetchAll();
-
-    return $booking_features;
-}
-
-
-
-// a function to get the rooms that are available for booking
-function getRoom($room_id)
-{
-    $db = connectToDatabase('avalon.db');
-
-    $query = "SELECT * FROM rooms WHERE id = :room_id";
-    $statement = $db->prepare($query);
-    $statement->bindParam(':room_id', $room_id);
-    $statement->execute();
-
-    $room = $statement->fetch();
-
-    return $room;
-}
-
-/* CALENDER LOGIC Populate the calender when page loads with existing bookings */
-function getBookingsForCalendarRender(): array
-{
-  try {
-      $db = connectToDatabase('../database/avalon.db');
-      $query = "SELECT room_id, arrival_date, departure_date FROM bookings";
-      $stmt = $db->prepare($query);
-      $stmt->execute();
-      $bookings = $stmt->fetchAll(PDO::FETCH_ASSOC);
-      return $bookings;
-  } catch (PDOException $e) {
-      // Log or handle the error
-      error_log("Error fetching bookings: " . $e->getMessage());
-      return [];
-  }
-}
-
-if (isset($_GET['calendar']) && $_GET['calendar'] === 'true') {
-
-  $bookings = getBookingsForCalendarRender();
-  $events = [];
-  foreach ($bookings as $booking) {
-    if($booking['room_id'] == 1){
-      $events[] = [
-          'title' => 'The Gaze',
-          'start' => $booking['arrival_date'],
-          'end' => $booking['departure_date'],
-      ];
-    }else if($booking['room_id'] == 2){
-      $events[] = [
-          'title' => 'The Tranquility',
-          'start' => $booking['arrival_date'],
-          'end' => $booking['departure_date'],
-      ];
-    }else if($booking['room_id'] == 3){
-      $events[] = [
-          'title' => 'The Presidential',
-          'start' => $booking['arrival_date'],
-          'end' => $booking['departure_date'],
-      ];
-    }
-  }
-
-  // Return the events as JSON
-  header('Content-Type: application/json');
-  echo json_encode($events);
-}
-
-
-/*Validating transfercode */
-
-
-function validateTransferCode(string $transfercode, int $totalCost, string $baseUrl): array
-{
-  $transfercodeEndpoint = $baseUrl . '/transferCode';
-
-$client = new Client();
-
-try {
-    // Send a POST request to the central bank
-    $response = $client->post($transfercodeEndpoint, [
-        'form_params' => [
-            'transferCode' => $transfercode,
-            'totalcost' => $totalCost
-        ]
-    ]);
-
-    // Get the response body
-    $responseBody = $response->getBody()->getContents();
-
-    // Decode the JSON response
-    $decodedResponse = json_decode($responseBody, true);
-
-    // Write the response to a JSON file
-    file_put_contents('transfercodeResponse.json', json_encode($decodedResponse));
-    header('Content-Type: application/json');
-    echo json_encode($decodedResponse);
-    // Return the decoded response
-    return $decodedResponse;
-} catch (\Exception $e) {
-    // If an exception occurs, return an error message
-    return ['error' => $e->getMessage()];
-}
 }
