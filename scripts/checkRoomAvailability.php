@@ -4,12 +4,20 @@ session_start();
 require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/CentralBankService.php';
 require __DIR__ . '/database-communications.php';
-use Dotenv\Dotenv;
-use GuzzleHttp\Client;
-if(isset($_POST['room'], $_POST['arrivalDate'], $_POST['departureDate'])){
-  $room = intVal(json_decode(htmlspecialchars($_POST['room'])));
-  $arrivalDate = json_decode(filter_var($_POST['arrivalDate'], FILTER_SANITIZE_STRING));
-  $departureDate = json_decode(filter_var($_POST['departureDate'], FILTER_SANITIZE_STRING));
+if ($_SERVER["REQUEST_METHOD"] == "POST"){
+  $postData = json_decode(file_get_contents("php://input"), true);
+
+  $room_id = filter_var($postData["room"], FILTER_VALIDATE_INT);
+  // Validate and sanitize arrivalDate and departureDate
+  $arrivalDate = filter_var($postData['arrivalDate'], FILTER_SANITIZE_STRING);
+  $departureDate = filter_var($postData['departureDate'], FILTER_SANITIZE_STRING);
+  
+  // Check if the conversion and filtering were successful
+  if ($room_id === false || $arrivalDate === false || $departureDate === false) {
+    header('Content-Type: application/json');
+    echo json_encode(['error' => 'Invalid data received.']);
+    exit();
+  }
 
 
   // Check room availability
@@ -19,8 +27,14 @@ if(isset($_POST['room'], $_POST['arrivalDate'], $_POST['departureDate'])){
     header('Content-Type: application/json');
     echo json_encode(['error' => 'Room not available for the selected dates. Please try another date.']);
     exit();
+  }else {
+    header('Content-Type: application/json');
+      echo json_encode(['isAvailable' => true]);
+  }
+
 }
-}
+
+
 // Function to check room availability
 function checkRoomAvailability(int $room_id, string $arrivalDate, string $departureDate): bool
 {
@@ -30,7 +44,8 @@ function checkRoomAvailability(int $room_id, string $arrivalDate, string $depart
     if (empty($bookings)) {
         return true;
     }
-
+    else
+  {
 
     // Check if the room is available for the selected dates
     foreach ($bookings as $booking) {
@@ -48,6 +63,6 @@ function checkRoomAvailability(int $room_id, string $arrivalDate, string $depart
             return false; // Room is not available
         }
     }
-
+  }
   return true; // Room is available
 }

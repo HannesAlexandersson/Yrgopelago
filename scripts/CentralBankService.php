@@ -47,14 +47,9 @@ class CentralBankService
               ]
           ]);
           if ($response->getStatusCode() === 200) {
-            $responseBody = json_decode($response->getBody(), true);
-            header('Content-Type: application/json');
-            echo json_encode($responseBody);
-            file_put_contents('transfercode.json', json_encode($responseBody));
-            return $responseBody;
+            return json_decode($response->getBody(), true);
           } else {
             return ['error' => 'Could not validate transfer code'];
-            exit();
           }
       } catch (\Exception $e) {
           return ['error' => $e->getMessage()];

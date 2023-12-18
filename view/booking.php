@@ -4,8 +4,8 @@
   </div>
   <div class="booking-left secondary-font">
     <div class="booking-form-wrapper">
-      <form action="/scripts/handle-booking.php" method="post" id="bookingForm" class="booking-form">
-        <!-- uncommeting transfercode when live -->
+      <form id="bookingForm" class="booking-form">
+
         <label for="user_id" placeholder-text="">Enter your transfer-code:</label>
         <input type="text" id="transfercode" name="transfercode" required="required" />
 
@@ -24,7 +24,6 @@
         <input type="date" id="departureDate" name="departureDate" />
         <button type="button" id="lockDepartureDate" onclick="toggleLockDepartureDate()">Lock Departure Date</button>
 
-        <!-- Checkboxes for additional features -->
         <div class="features-checkbox">
 
           <label for="bedtimeStoryteller">Bedtime Storyteller</label>
@@ -53,6 +52,7 @@
   </div>
 
 
+<!-- <script src="/scripts/calender-function.js"></script> -->
 <script src="/scripts/booking-form.js"></script>
 </div>
 
