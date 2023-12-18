@@ -106,7 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // calculate toatal number fo days the user stays at the hotel
     $numberOfDays = calculateDays($arrivalDate, $departureDate);
-
+    error_log((string)$numberOfDays);
     // Calculate cost
     $totalCost = calculateCost($room_id, $selectedFeatureIDs, $numberOfDays);
 
@@ -202,7 +202,7 @@ function calculateDays(string $arrivalDate, string $departureDate): int
     $arrivalDate = new DateTime($arrivalDate);
     $departureDate = new DateTime($departureDate);
     $interval = $arrivalDate->diff($departureDate);
-    return $interval->days;
+    return $interval->days +1;// need to add 1 day becouse the interval is calculated from midnight to midnight,so ex 1 of dec to 3 of dec would count as 2 days otherwise
 }
 
 function calculateCostOfFeatures(array $selectedFeatureIDs) : int

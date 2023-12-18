@@ -293,10 +293,10 @@ function calculateDays(arrivalDate, departureDate) {
 
   // Set hours, minutes, seconds, and milliseconds to zero for accurate day calculation, Same reasoning here as above
   arrivalDateObj.setUTCHours(0, 0, 0, 0);
-  departureDateObj.setUTCHours(0, 0, 0, 0);
+  departureDateObj.setUTCHours(24, 0, 0, 0);
 
   var timeDiff = departureDateObj - arrivalDateObj;
-  var daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24)) + 1; // and in the end I need to add 1 day to the total to get the correct amount of days anyway
+  var daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
   return daysDiff;
 }
 
