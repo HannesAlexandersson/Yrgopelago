@@ -10,13 +10,67 @@ class CentralBankService
     private $transferCodeUrl = 'https://www.yrgopelag.se/centralbank/transferCode';
     private $depositUrl = 'https://www.yrgopelag.se/centralbank/deposit';
     private $client;
+    private $url = 'https://www.yrgopelag.se/centralbank/transferCode';
+    private $islandUrl = 'https://www.yrgopelag.se/centralbank/islands';
 
     public function __construct()
     {
         $this->client = new Client();
     }
+    /*Validating transfercode */
+    public function validateTransferCode(string $transferCode, float $totalCost): array
+    {
 
-    public function getApiKey($startcode)
+      $totalCost = (int)$totalCost;
+      try {
+          // Send a POST request to the central bank API
+            $response = $this->client->post($this->transferCodeUrl, [
+              'form_params' => [
+                'transferCode' => $transferCode,
+                'totalCost' => $totalCost
+              ]
+          ]);
+          $body = json_decode($response->getBody(), true);
+      return $body;
+      } catch (\Exception $e) {
+          return ['error' => $e->getMessage()];
+      }
+    }
+
+    // Deposit transfer code function
+    public function depositTransferCode(string $transfercode): array
+    {
+
+      $user = 'Hannes';
+      $response = $this->client->post($this->depositUrl, [
+          'form_params' => [
+            'user' => $user,
+            'transferCode' => $transfercode
+          ]
+      ]);
+
+      if ($response->getStatusCode() === 200) {
+        $body = json_decode($response->getBody(), true);
+        return $body;
+      } else {
+          return null;
+      }
+
+    }
+
+    public function getIslands(): array
+    {
+      $response = $this->client->post($this->islandUrl, [
+          'form_params' => [
+            'island' => 'island'
+          ]
+      ]);
+      $islandBody = json_decode($response->getBody(), true);
+      return $islandBody;
+    }
+}
+/*
+public function getApiKey($startcode)
     {
         $response = $this->client->post($this->startCodeUrl, [
             'form_params' => [
@@ -31,51 +85,4 @@ class CentralBankService
             // Handle the error or provide feedback
             return null;
         }
-    }
-
-    /*Validating transfercode */
-    public function validateTransferCode(string $transfercode, float $totalCost): array
-    {
-    /*   $transfercodeEndpoint = $baseUrl . '/transferCode'; */
-     /*  $this->client = new Client(); */
-      try {
-          // Send a POST request to the central bank
-          $response = $this->client->post($this->transferCodeUrl, [
-              'form_params' => [
-                'transferCode' => $transfercode,
-                'totalCost' => $totalCost
-              ]
-          ]);
-          if ($response->getStatusCode() === 200) {
-            return json_decode($response->getBody(), true);
-          } else {
-            return ['error' => 'Could not validate transfer code'];
-          }
-      } catch (\Exception $e) {
-          return ['error' => $e->getMessage()];
-      }
-    }
-
-    // Deposit transfer code function
-    public function depositTransferCode(string $transfercode): array
-    {
-      $user = 'Hannes';
-      $response = $this->client->post($this->depositUrl, [
-          'form_params' => [
-            'user' => $user,
-            'transferCode' => $transfercode
-          ]
-      ]);
-
-      if ($response->getStatusCode() === 200) {
-        $body = json_decode($response->getBody(), true);
-        echo 'Transfer code deposited successfully';
-        return $body;
-      } else {
-          echo 'Could not deposit transfer code';
-          return null;
-      }
-
-    }
-}
-
+    } */

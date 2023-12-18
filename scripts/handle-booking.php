@@ -34,28 +34,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Retrieve form data
     $room_id = isset($postData["room_id"]) ? (int) $postData["room_id"] : 0;
-
-    error_log("Room ID after decoding: " . $postData['room_id']);
+    // if validation fails, send error message and exit the script to abort the booking
     if ($room_id === 0) {
       header('Content-Type: application/json');
       echo json_encode(['error' => 'Invalid room ID']);
-      exit();
-  }
+      exit();  }
 
-  // Debug: Output the room ID after processing
-  error_log("Room ID after processing: " . $room_id);
+    //validate the features
     $selectedFeatureIDs = isset($postData["features"]) && $postData["features"] !== null ? array_map('intval', $postData["features"]) : [];
     //validate the dates
     $arrivalDate = isset($postData["arrivalDate"]) ? filter_var($postData["arrivalDate"], FILTER_SANITIZE_STRING) : "";
     $departureDate = isset($postData["departureDate"]) ? filter_var($postData["departureDate"], FILTER_SANITIZE_STRING) : "";
+
     //sanitize the user_id
     $user_id = isset($postData["user_id"]) ? htmlspecialchars($postData["user_id"]) : "";
-
-
+    // if validation fails, send error message and exit the script to abort the booking
     if (!isValidUuid($user_id) && $room_id && $arrivalDate && $departureDate) {
       exit();
     }else{
-
       $room;
       // Validate room, I need the actual room name for the response aswell for visual purposes
       if($room_id == 1){
@@ -118,8 +114,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $bankResponse = [];
     $centralBankService = new CentralBankService();
     try {
+
       $bankResponse = $centralBankService->validateTransferCode($user_id, $totalCost);
-      file_put_contents('bank_response.json', json_encode($bankResponse));
+      error_log(json_encode($bankResponse));
+      file_put_contents('bank_response.json', json_encode($bankResponse), FILE_APPEND);
+      if (isset($bankResponse['error'])) {
+        echo json_encode(["error" => "Transfer code validation failed. Please try again."]);
+        exit();
+      }
     } catch (\Exception $e) {
         echo json_encode(["error" => "Transfer code validation failed. Please try again."]);
         exit();

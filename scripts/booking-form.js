@@ -116,6 +116,8 @@ if (user_id && room_id && arrivalDate && departureDate) {
       if (bookingResponse['additional_info']['booking-result']) {
         console.log('Booking successful!');
         console.log(bookingResponse);
+      }else if(booking-result['error']){
+        alert(booking-result['error']);
       } else {
         alert('Booking failed. Please try again.');
       }
@@ -124,7 +126,7 @@ if (user_id && room_id && arrivalDate && departureDate) {
       // Add logic to reset the form here!!!!!!!!!!!!!!
     }
   } catch (error) {
-    console.error('Error processing booking:', error.message);
+    console.log('error in validation of transfercode, pls make sure you have enought money on your account');
     alert('An error occurred while processing the booking. Please try again.');
   }
 } else {
