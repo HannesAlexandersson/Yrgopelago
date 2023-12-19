@@ -1,10 +1,10 @@
 <?php
 
 require __DIR__ . '/../vendor/autoload.php';
-
-
 use GuzzleHttp\Client;
 
+
+// validate the transfer code and the amount on the transfer code
 function validateTransferCode(string $transferCode, float $totalCost): array
 {
   try{
@@ -21,7 +21,7 @@ function validateTransferCode(string $transferCode, float $totalCost): array
       return ['error' => $e->getMessage()];
   }
 }
-
+// Deposit the transfer code into my account
 function depositTransferCode(string $transferCode, string $hotelManager ): array
 {
   try{

@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
-
+// here are all the functions that are used to communicate with the database
 
 // a function to get the bookings that are booked to populate the calendar with when a new booking are made
 function getBookingsForCalendar(int $room_id): array
 {
     $db = connectToDatabase('../database/avalon.db');
 
-
+    //prepare the query where we select the bookings that are booked for the room that is selected
     $query = "SELECT booking_id, arrival_date, departure_date FROM bookings WHERE room_id = :room_id";
     try {
     $stmt = $db->prepare($query);
@@ -22,6 +22,7 @@ function getBookingsForCalendar(int $room_id): array
       echo "Error: " . $e->getMessage();
   }
 }
+// afunction that creates a connection to the database
 function connectToDatabase(string $dbName): object
 {
     $dbPath = __DIR__ . '/' . $dbName;
@@ -40,7 +41,7 @@ function connectToDatabase(string $dbName): object
 }
 
 
-
+// a function that inserts a booking into the database
 function insertBooking(string $user_id, int $room_id, string $arrival_date, string $departure_date, float $total_cost, array $features): void
 {
     $db = connectToDatabase('../database/avalon.db');

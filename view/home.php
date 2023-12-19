@@ -1,7 +1,8 @@
 <main>
   <div class="left-side-home"></div>
   <div class="right-side-home">
-    <span class="default-font home-text">
+    <span class="default-font home-text" id="about">
+      <h1 class="default-font remove">Our Hotel</h1>
       <p>
         Welcome to Hotel Avalon, where paradise meets perfection on the sun-kissed shores of our
         tropical haven. Nestled amidst lush palm trees and caressed by gentle ocean breezes, in the
@@ -12,7 +13,7 @@
         moment is a brushstroke of serenity, painting a masterpiece of memories against the
         backdrop of our island oasis. Escape to a realm where dreams come alive, and let Hotel Avalon
         be the enchanting chapter in your tropical tale. Welcome to a haven where your journey becomes
-        an unforgettable story.
+        an unforgettable story. The Only four star hotel in the Lagoon Luster Cove archipelago!
       </p>
     </span>
   </div>

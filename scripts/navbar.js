@@ -1,11 +1,11 @@
 const search = document.getElementById('search');
 const dropdownContent = document.getElementById('dropdownContent');
-
+//dropdown menu logic
 search.addEventListener('click', () =>{
     dropdownContent.style.display = dropdownContent.style.display == 'block' ? 'none' : 'block';
 });
 
-// Scrolling navbar animation logic
+// Scrolling navbar animation logic , makes it go away when user scrolls down and appear when user scrolls up
 $(function(){
   var lastScrollTop = 0;
   var navHeight = $('.nav-bar').outerHeight();

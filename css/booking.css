@@ -7,7 +7,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  
+
 }
 .booking-header > h1 {
   position: relative;
@@ -33,6 +33,9 @@
   gap: 0.5rem;
   display: flex;
   flex-direction: column;
+
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }
 .booking-right {
   margin-top: 4rem;
@@ -49,10 +52,22 @@
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
-
 .calender-container{
   background-color: antiquewhite;
 }
+.btn{
+  color: var(--default-font-clr);
+  background-color: var(--offset-dark);
+  font-family: var(--secondary-font);
+  border: 2px solid var(--spotlight-blur-clr);
+  border-radius: 4px;
+}
+.btn:hover{
+  background-color: var(--spotlight-blur-clr);
+  color: var(--offset-dark);
+  cursor: pointer;
+}
+
 @media (min-width: 800px) {
   .booking-bg {
     gap: 4rem;

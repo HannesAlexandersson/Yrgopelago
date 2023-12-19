@@ -18,11 +18,11 @@
 
         <label for="arrivalDate">Arrival Date:</label>
         <input type="date" id="arrivalDate" name="arrivalDate" />
-        <button type="button" id="lockArrivalDate" onclick="toggleLockArrivalDate()">Lock Arrival Date</button>
+        <button class="date-btn btn" type="button" id="lockArrivalDate" onclick="toggleLockArrivalDate()">Lock Arrival Date</button>
 
         <label for="departureDate">Departure Date:</label>
         <input type="date" id="departureDate" name="departureDate" />
-        <button type="button" id="lockDepartureDate" onclick="toggleLockDepartureDate()">Lock Departure Date</button>
+        <button class="date-btn btn" type="button" id="lockDepartureDate" onclick="toggleLockDepartureDate()">Lock Departure Date</button>
 
         <div class="features-checkbox">
 
@@ -36,8 +36,9 @@
           <input type="checkbox" class="feature-checkbox" id="massageTherapy" name="features[]" value="1">
         </div>
 
-        <button type="button" id="clearForm" onclick="clearBookingForm()">Clear Form</button>
-        <button type="submit">Submit Booking</button>
+        <button class="clr-btn btn" type="button" id="clearForm" onclick="clearBookingForm()">Clear Form</button>
+        <button class="submit-btn btn" type="submit">Submit Booking</button>
+        <button class="btn reload-btn" type="button" id="reloadButton">Show booking</button>
       </form>
     </div>
     <div class="display-totalcost default-font">
@@ -52,7 +53,7 @@
   </div>
 
 
-<!-- <script src="/scripts/calender-function.js"></script> -->
+
 <script src="/scripts/booking-form.js"></script>
 </div>
 

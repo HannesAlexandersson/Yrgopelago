@@ -114,36 +114,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Validate TRANSFERCODE check if code is unused and if the user has enough money on the code
     $bankResponseValidation = validateTransferCode($user_id, $totalCost);
-/*
-    $validateClient = new GuzzleHttp\Client();
-    $validateResponse = $validateClient->request('POST', 'https://www.yrgopelag.se/centralbank/transferCode', ['form_params' => [
-         'transferCode' => $user_id,
-         'totalcost' => $totalCost
-    ]]);
-    $bankResponseValidation = json_decode($validateResponse->getBody()->getContents(), true);
-    file_put_contents('validation_response.json', json_encode($bankResponseValidation), FILE_APPEND);
-     */
-    if($bankResponseValidation['error']){
+
+    if($bankResponseValidation['error']){ // if validation of transfercode fails, abort the booking and alert the user via json to javascript clientside and then the js alerts the user
       echo json_encode(["error" => "Transfer code validation failed. Please try again."]);
       exit();
-    } else if ($bankResponseValidation["amount"] > $totalCost) {
+    } else if ($bankResponseValidation["amount"] > $totalCost) { //if the user tryes to use a transfercode with not enough money on it we abort the booking
       echo json_encode(["error" => "Transfer code validation failed. Please try again."]);
       exit();
-    } else {
+    } else { // if all goes well we deposit the transfercode and then we perform the booking
         // Deposit the transfer code
         $bankResponseDeposit = depositTransferCode($user_id, $hotelManager);
-       /*  $depositClient = new GuzzleHttp\Client();
-        $depositResponse = $depositClient->request('POST', 'https://www.yrgopelag.se/centralbank/deposit', ['form_params' => [
-            'user' => $hotelManager,
-            'transferCode' => $user_id
-        ]]);
-        $bankResponseDeposit = json_decode($depositResponse->getBody()->getContents(), true);
-        file_put_contents('deposit_response.json', json_encode($bankResponseDeposit), FILE_APPEND); */
     }
 
 
 
-    // Perform the booking and charge the user
+    // Perform the booking and check the result
     $bookingResult = bookRoom($user_id, $room_id, $arrivalDate, $departureDate, $totalCost, $selectedFeatureIDs);
     if ($bookingResult) {
       // Check the result of the booking and send the response as json
@@ -163,7 +148,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 function checkBooking(string $room, bool $bookingResult, string $arrivalDate, string $departureDate, int $numberOfDays, float $totalCost, array $selectedFeaturesNames): void
 {
 
-    // Check the result of the booking
+    // if booking is successful, send the response as json back to the client
     if ($bookingResult) {
         $islandName = $_ENV['ISLAND_NAME'];
         $hotelName = $_ENV['HOTEL_NAME'];
@@ -184,7 +169,7 @@ function checkBooking(string $room, bool $bookingResult, string $arrivalDate, st
                                   We await your arrival with much anticipation.'
             ]
         ];
-        foreach($selectedFeaturesNames as $feature){
+        foreach($selectedFeaturesNames as $feature){ //the selected features are added to the response here
           $response['features'][] = [
             'name' => $feature['name'],
             'cost' => $feature['cost'],
@@ -194,7 +179,7 @@ function checkBooking(string $room, bool $bookingResult, string $arrivalDate, st
         header('Content-Type: application/json');
         echo json_encode($response);
     } else {
-        // If booking fails, handle accordingly
+        // If booking fails send error message and exit the script
         echo json_encode(["error" => "Booking failed. Please try again."]);
     }
 }
@@ -207,7 +192,7 @@ function calculateDays(string $arrivalDate, string $departureDate): int
     $interval = $arrivalDate->diff($departureDate);
     return $interval->days +1;// need to add 1 day becouse the interval is calculated from midnight to midnight,so ex 1 of dec to 3 of dec would count as 2 days otherwise
 }
-
+// Function to calculate the cost of the features, for simplicity we just add 5 for each feature
 function calculateCostOfFeatures(array $selectedFeatureIDs) : int
 {
   $featureCost = 0;
@@ -231,33 +216,36 @@ function calculateCost(int $room_id, array $selectedFeatureIDs, int $numberOfDay
     echo 'ERROR - Room not found';
   }
 
-
+  // simple calculation, cost is based on room type times the number of days
   $cost = $cost * $numberOfDays;
+  // calculate discount, the discount is based on the number of days (see function calcDiscount)
   $cost = calcCostAfterDiscount($cost, calcDiscount($numberOfDays));
+  // calculate the cost of the features, the feautures cost is not subject to discount. So it is added after the discount is calculated
   $featureCost = calculateCostOfFeatures($selectedFeatureIDs);
   $cost = $cost + $featureCost;
 
   return $cost;
 }
-//calculations for discounts
+//calculations for discounts. The longer the user stays at the hotel the bigger the discount
 function calcDiscount(int $days): float
 {
     if ($days == 4) {
-        $discount = 0.1;
+        $discount = 0.1; // 10% discount
     } else if ($days == 5) {
-        $discount = 0.2;
+        $discount = 0.2; // 20% discount
     } else if ($days == 6) {
-        $discount = 0.3;
+        $discount = 0.3; // 30% discount
     } else if ($days == 7) {
-        $discount = 0.4;
+        $discount = 0.4; // 40% discount
     } else if ($days >= 8) {
-        $discount = 0.5;
+        $discount = 0.5; // 50% discount
     } else {
         $discount = 0.0; // No discount for less than 4 days
     }
 
     return 1.0 - $discount;
 }
+// Function to calculate the cost after discount
 function calcCostAfterDiscount(int $totalCost, float $discount): float
 {
   $costAfterDiscount = $totalCost * $discount;
@@ -273,12 +261,12 @@ function bookRoom(string $user_id, int $room_id, string $arrivalDate, string $de
       $departure_date = $departureDate;
       $total_cost = $totalCost;
       $features = array_slice($selectedFeatureIDs, 0);
-      insertBooking($user_id, $room_id, $arrival_date, $departure_date, $total_cost, $features);
-      return true;
+      insertBooking($user_id, $room_id, $arrival_date, $departure_date, $total_cost, $features); // insert the booking into the database
+      return true; // return true if the booking was successful
   } catch (PDOException $e) {
       error_log('Failed to connect to the database: ' . $e->getMessage());
       throw $e;
-      return false;
+      return false; // return false if the booking failed
   }
 }
 

@@ -1,5 +1,5 @@
 main {
-  /* border: solid 20px var(--primary-accent); */
+
   background-image: url(/assets/backgrounds/Group22.png);
   background-position: center;
   background-repeat: no-repeat;
@@ -8,12 +8,12 @@ main {
 
   height: 100vh;
   height: 100dvh;
+  height: 100svh;
   display: flex;
   flex-direction: row;
   align-items: center;
 
-  /* scroll-snap-align: start;
-  scroll-snap-stop: always; */
+
 }
 .left-side-home {
   width: 20%;
@@ -30,29 +30,16 @@ main {
   font-weight: 400;
   text-align: center;
 }
-
-@media (min-width: 800px) {
-
-
-main {
-  /* border: solid 20px var(--primary-accent); */
-  background-image: url(/assets/backgrounds/Group22.png);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-
-  width: 100%;
-
-  height: 100vh;
-  height: 100dvh;
-
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-
-  /* scroll-snap-align: start;
-  scroll-snap-stop: always; */
+.remove{
+  display: none;
 }
+
+@media (min-width: 330px) {
+  .remove{
+    display: block;
+  }
+}
+@media (min-width: 800px) {
 .left-side-home {
   width: 65%;
 }
@@ -63,13 +50,11 @@ main {
   line-height: 1.125;
   color: var(--default-font-clr);
   font-size: 1rem;
-  font-style: normal;
-  font-weight: 400;
-  text-align: center;
 }
+
 }
 @media (min-width: 1050px) {
   .home-text {
-    font-size: 1.2rem;
+    font-size: 1.1em;
 }
 }

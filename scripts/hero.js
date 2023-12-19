@@ -13,7 +13,7 @@ document.addEventListener('scroll', function() {
 function parallax() {
 	var s = document.getElementById("floater");
   var yPos = 0 - window.scrollY/2;
-  s.style.top = 50 + yPos + "%";
+  s.style.top = 55 + yPos + "%";
 }
 // eventlistener for the scroll event on the window object IE the whole page
 window.addEventListener("scroll", function(){

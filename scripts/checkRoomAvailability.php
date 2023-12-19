@@ -5,9 +5,11 @@ session_start();
 require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/CentralBankService.php';
 require __DIR__ . '/database-communications.php';
+// check if the request is made
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
+  // Get the posted data.
   $postData = json_decode(file_get_contents("php://input"), true);
-
+  // Validate and sanitize the data
   $room_id = filter_var($postData["room"], FILTER_VALIDATE_INT);
   // Validate and sanitize arrivalDate and departureDate
   $arrivalDate = filter_var($postData['arrivalDate'], FILTER_SANITIZE_STRING);
@@ -28,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     header('Content-Type: application/json');
     echo json_encode(['error' => 'Room not available for the selected dates. Please try another date.']);
     exit();
-  }else {
+  }else { // Room is available, send success response and json encode the data for the clientside script to use
     header('Content-Type: application/json');
       echo json_encode(['isAvailable' => true]);
   }

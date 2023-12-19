@@ -19,7 +19,7 @@ async function fetchDataAndPopulateArray(eventsArray) {
 }
 
 
-//this function doesnt work, the arrivaldate button isnot toggleable NEEDS ATTENTION!!!
+//toogle the lock arrival date button, this is the main trigger for the calendar
 function toggleLockArrivalDate() {
   isArrivalDateLocked = !isArrivalDateLocked;
 
@@ -116,18 +116,23 @@ if (user_id && room_id && arrivalDate && departureDate) {
       if (bookingResponse['additional_info']['booking-result']) {
         console.log('Booking successful!');
         console.log(bookingResponse);
+        // Display the booking result to the user
+      alert(bookingResponse['additional_info']['greeting']);
       }else if(booking-result['error']){
         alert(booking-result['error']);
+        clearBookingForm()
       } else {
         alert('Booking failed. Please try again.');
+        clearBookingForm()
       }
     } else {
       alert('This room is already booked for the selected dates. Please choose different dates.');
-      // Add logic to reset the form here!!!!!!!!!!!!!!
+      clearBookingForm();
     }
   } catch (error) {
     console.log('error in validation of transfercode, pls make sure you have enought money on your account');
     alert('An error occurred while processing the booking. Please try again.');
+    clearBookingForm()
   }
 } else {
   alert('Please fill in all fields.');
@@ -296,8 +301,14 @@ function calculateDays(arrivalDate, departureDate) {
   departureDateObj.setUTCHours(24, 0, 0, 0);
 
   var timeDiff = departureDateObj - arrivalDateObj;
-  var daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+  var daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
   return daysDiff;
 }
 
 // -------------------cost calculation---------------------//
+document.getElementById('reloadButton').addEventListener('click', function() {
+  // Add a delay of 2000 milliseconds (2 seconds) before reloading the page, to give time for the booking to be processed
+  setTimeout(function() {
+      location.reload();
+  }, 2000);
+});
