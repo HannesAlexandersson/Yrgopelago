@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 session_start();
+
 require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/CentralBankService.php';
 require __DIR__ . '/database-communications.php';
@@ -11,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
   // Validate and sanitize arrivalDate and departureDate
   $arrivalDate = filter_var($postData['arrivalDate'], FILTER_SANITIZE_STRING);
   $departureDate = filter_var($postData['departureDate'], FILTER_SANITIZE_STRING);
-  
+
   // Check if the conversion and filtering were successful
   if ($room_id === false || $arrivalDate === false || $departureDate === false) {
     header('Content-Type: application/json');

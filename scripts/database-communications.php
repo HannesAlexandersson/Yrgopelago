@@ -167,19 +167,19 @@ if (isset($_GET['calendar']) && $_GET['calendar'] === 'true') {
       $events[] = [
           'title' => 'The Gaze',
           'start' => $booking['arrival_date'],
-          'end' => $booking['departure_date'],
+          'end' => date('Y-m-d', strtotime($booking['departure_date']. ' + 1 day')), //need to format the departure dates this way, or else the calender will show the booking as one day to short
       ];
     }else if($booking['room_id'] == 2){
       $events[] = [
           'title' => 'The Tranquility',
           'start' => $booking['arrival_date'],
-          'end' => $booking['departure_date'],
+          'end' => date('Y-m-d', strtotime($booking['departure_date']. ' + 1 day')),
       ];
     }else if($booking['room_id'] == 3){
       $events[] = [
           'title' => 'The Presidential',
           'start' => $booking['arrival_date'],
-          'end' => $booking['departure_date'],
+          'end' => date('Y-m-d', strtotime($booking['departure_date']. ' + 1 day')),
       ];
     }
   }

@@ -2,6 +2,7 @@
 declare(strict_types=1);
 session_start();
 require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/bankfunction.php';
 require __DIR__ . '/CentralBankService.php';
 require __DIR__ . '/database-communications.php';
 require __DIR__ . '/hotelFunctions.php';
@@ -15,6 +16,7 @@ $dotenv->load();
 $islandName = $_ENV['ISLAND_NAME'];
 $hotelName = $_ENV['HOTEL_NAME'];
 $hotelstars = $_ENV['STARS'];
+$hotelManager = $_ENV['USER_NAME'];
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // Parse JSON data from the JavaScript request
@@ -106,38 +108,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // calculate toatal number fo days the user stays at the hotel
     $numberOfDays = calculateDays($arrivalDate, $departureDate);
-    error_log((string)$numberOfDays);
+
     // Calculate cost
     $totalCost = calculateCost($room_id, $selectedFeatureIDs, $numberOfDays);
 
     // Validate TRANSFERCODE check if code is unused and if the user has enough money on the code
-    $bankResponse = [];
-    $centralBankService = new CentralBankService();
-    try {
-
-      $bankResponse = $centralBankService->validateTransferCode($user_id, $totalCost);
-      error_log(json_encode($bankResponse));
-      file_put_contents('bank_response.json', json_encode($bankResponse), FILE_APPEND);
-      if (isset($bankResponse['error'])) {
-        echo json_encode(["error" => "Transfer code validation failed. Please try again."]);
-        exit();
-      }
-    } catch (\Exception $e) {
-        echo json_encode(["error" => "Transfer code validation failed. Please try again."]);
-        exit();
+    $bankResponseValidation = validateTransferCode($user_id, $totalCost);
+/*
+    $validateClient = new GuzzleHttp\Client();
+    $validateResponse = $validateClient->request('POST', 'https://www.yrgopelag.se/centralbank/transferCode', ['form_params' => [
+         'transferCode' => $user_id,
+         'totalcost' => $totalCost
+    ]]);
+    $bankResponseValidation = json_decode($validateResponse->getBody()->getContents(), true);
+    file_put_contents('validation_response.json', json_encode($bankResponseValidation), FILE_APPEND);
+     */
+    if($bankResponseValidation['error']){
+      echo json_encode(["error" => "Transfer code validation failed. Please try again."]);
+      exit();
+    } else if ($bankResponseValidation["amount"] > $totalCost) {
+      echo json_encode(["error" => "Transfer code validation failed. Please try again."]);
+      exit();
+    } else {
+        // Deposit the transfer code
+        $bankResponseDeposit = depositTransferCode($user_id, $hotelManager);
+       /*  $depositClient = new GuzzleHttp\Client();
+        $depositResponse = $depositClient->request('POST', 'https://www.yrgopelag.se/centralbank/deposit', ['form_params' => [
+            'user' => $hotelManager,
+            'transferCode' => $user_id
+        ]]);
+        $bankResponseDeposit = json_decode($depositResponse->getBody()->getContents(), true);
+        file_put_contents('deposit_response.json', json_encode($bankResponseDeposit), FILE_APPEND); */
     }
 
-    // uncomment when we go live
-      /* if (isset($bankResponse['error'])) {
-        echo json_encode(["error" => "Transfer code validation failed. Please try again."]);
-        exit();
-      } else {
-        // Deposit the transfer code
-        $depositResponse = $centralBankService->depositTransferCode($user_id);
-        if (isset($depositResponse['error'])) {
-          echo json_encode(["error" => "Transfer code deposit failed. Please try again."]);
-          exit();
-        } else { */
 
 
     // Perform the booking and charge the user
