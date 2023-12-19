@@ -192,26 +192,42 @@ function calculateDays(string $arrivalDate, string $departureDate): int
     $interval = $arrivalDate->diff($departureDate);
     return $interval->days +1;// need to add 1 day becouse the interval is calculated from midnight to midnight,so ex 1 of dec to 3 of dec would count as 2 days otherwise
 }
-// Function to calculate the cost of the features, for simplicity we just add 5 for each feature
-function calculateCostOfFeatures(array $selectedFeatureIDs) : int
+// Function to calculate the cost of the features, for simplicity we just add 5 for each feature, BUT the manager have the ability to change the price in the admin page. So for that reason I fetch the price from the db to ensure that the calculation is correct no matter the price
+function calculateCostOfFeatures(array $selectedFeatureIDs): int
 {
-  $featureCost = 0;
-  foreach ($selectedFeatureIDs as $feature) {
-    $featureCost += 5;
-  }
-  return $featureCost;
+    $selectedFeaturecost = 0;
+    $featureCostMassage = getFeaturePrice(1);
+    $featureCostBedtime = getFeaturePrice(2);
+    $featureCostHotsprings = getFeaturePrice(3);
+
+    foreach ($selectedFeatureIDs as $feature) {
+        if ($feature == 1) {
+            $featureCost = $featureCostMassage;
+            $selectedFeaturecost += $featureCost;
+        } elseif ($feature == 2) {
+            $featureCost = $featureCostBedtime;
+            $selectedFeaturecost += $featureCost;
+        } elseif ($feature == 3) {
+            $featureCost = $featureCostHotsprings;
+            $selectedFeaturecost += $featureCost;
+        }
+    }
+
+    return $selectedFeaturecost;
 }
 // Function to calculate the cost based on room type and duration
 function calculateCost(int $room_id, array $selectedFeatureIDs, int $numberOfDays): float
  {
-   $cost = 0;
-
+    $cost = 0;
+    $roomCostGaze = getRoomPrice(1); // for same reasons as the features price, I fetch the price from the db to ensure that the calculation is correct no matter the price
+    $roomCostTranquility = getRoomPrice(2);
+    $roomCostPresidential = getRoomPrice(3);
   if ($room_id == 1){
-    $cost += 5;
+    $cost += $roomCostGaze;
   } else if($room_id == 2){
-    $cost += 10;
+    $cost += $roomCostTranquility;
   } else if($room_id == 3){
-    $cost += 25;
+    $cost += $roomCostPresidential;
   } else {
     echo 'ERROR - Room not found';
   }

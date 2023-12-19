@@ -1,21 +1,25 @@
 <?php
+declare(strict_types=1);
 session_start();
 require __DIR__ . '/../scripts/database-communications.php';
-// Check if the I am logged in
+
+
+// Check if I am logged in
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
   // If not logged in, redirect to the login page
   header("Location: /index.php");
   exit();
+
+  // else the hotel manager is logged in
 } else {
-  // Handle form submission to update room price
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {// if the form is submitted
+    if (isset($_POST["roomId"]) && isset($_POST["newPrice"])) {// and the room price form is submitted
       $roomId = intval($_POST["roomId"]);
       $newPrice = floatval($_POST["newPrice"]);
 
-
-
-      // Function to update room price
-      function updateRoomPrice($roomId, $newPrice) {
+      // Function to update room price in the db
+      function updateRoomPrice(int $roomId, float $newPrice): void
+       {
           $db = connectToDatabase('../database/avalon.db');
           $query = "UPDATE rooms SET price = :newPrice WHERE room_id = :roomId";
           try {
@@ -27,28 +31,30 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
               die("Error updating room price: " . $e->getMessage());
           }
       }
-      updateRoomPrice($roomId, $newPrice);
-  }
+      updateRoomPrice($roomId, $newPrice);// call the function to update the room price
+/*-----------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------*/
+    } elseif (isset($_POST["featureId"]) && isset($_POST["newPriceFeature"])) { // Handle form submission to update feature price if the feature price form is submitted
+      $featureId = intval($_POST["featureId"]);
+      $newPriceFeature = floatval($_POST["newPriceFeature"]);
 
-  else if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $featureId = intval($_POST["featureId"]);
-    $newPriceFeature = floatval($_POST["newPriceFeature"]);
+      // Function to update feature price in the db
+      function updateFeaturePrice(int $featureId, float $newPriceFeature): void
+      {
+        $db = connectToDatabase('../database/avalon.db');
+        $query = "UPDATE features SET price = :newPrice WHERE feature_id = :featureId";
+        try {
+            $stmnt = $db->prepare($query);
+            $stmnt->bindParam(':newPrice', $newPriceFeature);
+            $stmnt->bindParam(':featureId', $featureId);
+            $stmnt->execute();
+        } catch (PDOException $e) {
+            die("Error updating feature price: " . $e->getMessage());
+        }
+    }
+    updateFeaturePrice($featureId, $newPriceFeature);// call the function to update the feature price
 
-
-    function updateFeaturePrice($featureId, $newPriceFeature) {
-      $db = connectToDatabase('../database/avalon.db');
-      $query = "UPDATE features SET price = :newPrice WHERE feature_id = :featureId";
-      try {
-          $stmnt = $db->prepare($query);
-          $stmnt->bindParam(':newPrice', $newPriceFeature);
-          $stmnt->bindParam(':roomId', $featureId);
-          $stmnt->execute();
-      } catch (PDOException $e) {
-          die("Error updating feature price: " . $e->getMessage());
-      }
-  }
-  updateFeaturePrice($featureId, $newPriceFeature);
-
+    }
   }
 }
 ?>

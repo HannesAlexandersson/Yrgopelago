@@ -203,11 +203,11 @@ function calculateCost(room_id, selectedFeatureIDs, numberOfDays) {
   var roomPricePerNight;
   // Set room price per night based on room_id
   if (room_id == 1) {
-    roomPricePerNight = 5;
+    roomPricePerNight = parseFloat(document.getElementById('gaze').innerText); // we get the value from the html element, wich in its turn gets the value from the DB. So if the hotelmanager changes the price from the admin page the calculations will still be correct
   } else if (room_id == 2) {
-    roomPricePerNight = 10;
+    roomPricePerNight = parseFloat(document.getElementById('tranq').innerText);
   } else if (room_id == 3) {
-    roomPricePerNight = 25;
+    roomPricePerNight = parseFloat(document.getElementById('president').innerText);
   } else {
     console.error('ERROR - Room not found');
     return 0; // Return 0 if room not found
@@ -242,9 +242,13 @@ function calculateCost(room_id, selectedFeatureIDs, numberOfDays) {
 // Function to calculate the cost of selected features
 function calculateCostOfFeatures(selectedFeatureIDs) {
   var featureCost = 0;
+
   selectedFeatureIDs.forEach(function (feature) {
-    featureCost += 5; // Each feature costs $5
+    if (feature == 1) featureCost += parseInt(document.getElementById('massage').innerText);
+    if (feature == 2) featureCost += parseInt(document.getElementById('storyteller').innerText);
+    if (feature == 3) featureCost += parseInt(document.getElementById('hotsprings').innerText);
   });
+
   return featureCost;
 }
 
@@ -305,7 +309,10 @@ function calculateDays(arrivalDate, departureDate) {
   return daysDiff;
 }
 
-// -------------------cost calculation---------------------//
+// -------------------cost calculation ends---------------------//
+
+
+
 document.getElementById('reloadButton').addEventListener('click', function() {
   // Add a delay of 2000 milliseconds (2 seconds) before reloading the page, to give time for the booking to be processed
   setTimeout(function() {

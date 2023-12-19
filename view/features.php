@@ -28,8 +28,19 @@
       </div>
       <div class="feature-price secondary-font">
 
-        <?='Price: ' .$feature['price']?>
+        <?php if($feature['name'] == 'underground hotsprings'){ ?>
 
+          <p>Price: <span id="hotsprings"><?=$feature['price']?></span></p>
+
+        <?php } else if($feature['name'] == 'massage therapy'){ ?>
+
+        <p>Price: <span id="massage"><?=$feature['price']?></span></p>
+
+        <?php } else if($feature['name'] == 'bedtime storyteller'){ ?>
+
+          <p>Price: <span id="storyteller"><?=$feature['price']?></span></p>
+        <?php } ?>
+        
       </div>
       <div class="feature-img-container">
 

@@ -189,3 +189,32 @@ if (isset($_GET['calendar']) && $_GET['calendar'] === 'true') {
   header('Content-Type: application/json');
   echo json_encode($events);
 }
+// function to fetch the cost of the features from the db
+function getFeaturePrice(int $feature_id): int
+{
+    $db = connectToDatabase('avalon.db');
+
+    $query = "SELECT price FROM features WHERE id = :feature_id";
+    $statement = $db->prepare($query);
+    $statement->bindParam(':feature_id', $feature_id);
+    $statement->execute();
+
+    $feature_cost = $statement->fetchColumn();
+
+    return (int)$feature_cost; // Convert to int before returning
+}
+
+// function to fetch the cost of the room from the db
+function getRoomPrice(int $room_id): int
+{
+    $db = connectToDatabase('avalon.db');
+
+    $query = "SELECT price FROM rooms WHERE id = :room_id";
+    $statement = $db->prepare($query);
+    $statement->bindParam(':room_id', $room_id);
+    $statement->execute();
+
+    $room_cost = $statement->fetchColumn();
+
+    return (int)$room_cost; // Convert to int before returning
+}
