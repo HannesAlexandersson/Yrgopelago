@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 
 __DIR__. require 'header.php';
 __DIR__. require 'view/navbar.php';
