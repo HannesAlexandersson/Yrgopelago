@@ -20,7 +20,7 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
-.pool{background-image: url(/assets/images/paralax/Background.png);
+.pool{background-image: url(../assets/images/paralax/Background.png);
   z-index: 0;
   bottom: 0;
 }
