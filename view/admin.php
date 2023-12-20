@@ -55,6 +55,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     updateFeaturePrice($featureId, $newPriceFeature);// call the function to update the feature price
 
     }
+
   }
 }
 ?>
@@ -92,8 +93,80 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 
     <button type="submit">Update Price</button>
 </form>
+<div class="transfercode-wrapper">
+  <button id="get-transfercodes">Show guests</button>
+  <div class="content-box">
 
+  </div>
+</div>
+<script>
+document.getElementById('get-transfercodes').addEventListener('click', function() {
+  // Fetch the entire JSON file
+  fetch('../scripts/validation_response.json')
+    .then(response => response.json())
+    .then(data => {
+      // Update the content-box with the fetched data
+      updateContentBox(data);
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
+    });
+});
 
+function updateContentBox(data) {
+  // Get the content-box element
+  var contentBox = document.querySelector('.content-box');
+
+  // Clear existing content
+  contentBox.innerHTML = '';
+
+  // Create a table to display the data
+  var table = document.createElement('table');
+  table.border = '1';
+
+  // Create table header
+  var thead = document.createElement('thead');
+  var headerRow = document.createElement('tr');
+  var headers = ['Transfer Code', 'From Account', 'Amount'];
+
+  headers.forEach(headerText => {
+    var th = document.createElement('th');
+    th.textContent = headerText;
+    headerRow.appendChild(th);
+  });
+
+  thead.appendChild(headerRow);
+  table.appendChild(thead);
+
+  // Create table body
+  var tbody = document.createElement('tbody');
+
+  // Loop through the data and create table rows
+  data.guests.forEach(guest => {
+    var row = document.createElement('tr');
+
+    // Create table cells for each property
+    var transferCodeCell = document.createElement('td');
+    transferCodeCell.textContent = guest.transferCode;
+    row.appendChild(transferCodeCell);
+
+    var fromAccountCell = document.createElement('td');
+    fromAccountCell.textContent = guest.fromAccount;
+    row.appendChild(fromAccountCell);
+
+    var amountCell = document.createElement('td');
+    amountCell.textContent = guest.amount;
+    row.appendChild(amountCell);
+
+    tbody.appendChild(row);
+  });
+
+  table.appendChild(tbody);
+
+  // Append the table to the content-box
+  contentBox.appendChild(table);
+}
+</script>
 
 </body>
 </html>
