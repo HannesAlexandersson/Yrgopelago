@@ -2,13 +2,13 @@
 declare(strict_types=1);
 
 
-__DIR__. require 'header.php';
-__DIR__. require 'view/navbar.php';
-__DIR__. require 'view/hero.php';
-__DIR__. require 'view/home.php';
-__DIR__. require 'view/rooms.php';
-__DIR__. require 'view/features.php';
-__DIR__. require 'view/discount.php';
-__DIR__. require 'view/booking.php';
-__DIR__. require 'view/footer.php';
+require __DIR__ . '/header.php';
+require __DIR__ . '/view/navbar.php';
+require __DIR__ . '/view/hero.php';
+require __DIR__ . '/view/home.php';
+require __DIR__ . '/view/rooms.php';
+require __DIR__ . '/view/features.php';
+require __DIR__ . '/view/discount.php';
+require __DIR__ . '/view/booking.php';
+require __DIR__ . '/view/footer.php';
 
