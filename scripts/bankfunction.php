@@ -14,7 +14,7 @@ function validateTransferCode(string $transferCode, float $totalCost): array
         'totalcost' => $totalCost
     ]]);
     $bankResponseValidation = json_decode($validateResponse->getBody()->getContents(), true);
-    file_put_contents('validation_response.json', json_encode($bankResponseValidation), FILE_APPEND);
+    file_put_contents('validation_response.json', json_encode($bankResponseValidation), FILE_APPEND);//save the response as json in a separate file for debugging reasons
     return $bankResponseValidation;
   }
   catch (\Exception $e) {
@@ -32,7 +32,7 @@ function depositTransferCode(string $transferCode, string $hotelManager ): array
         'transferCode' => $transferCode
     ]]);
     $bankResponseDeposit = json_decode($depositResponse->getBody()->getContents(), true);
-    file_put_contents('deposit_response.json', json_encode($bankResponseDeposit), FILE_APPEND);
+    file_put_contents('deposit_response.json', json_encode($bankResponseDeposit), FILE_APPEND);//save the response as json in a separate file for debugging reasons
     return $bankResponseDeposit;
   } catch (\Exception $e) {
       return ['error' => $e->getMessage()];

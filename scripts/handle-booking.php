@@ -165,8 +165,8 @@ function checkBooking(string $room, bool $bookingResult, string $arrivalDate, st
             'additional_info' => [
               'booking-result' => $bookingResult,
               'greeting' => 'Booking successful! You are expected to arrive on the '.$arrivalDate. 'and departure on the '.$departureDate.'
-                                  for a total stay of '.$numberOfDays. 'days! You´ll be staying in the room '.$room.'. Total cost estimated at: '.$totalCost.'. Thank you for choosing us!
-                                  We await your arrival with much anticipation.'
+                            for a total stay of '.$numberOfDays. 'days! You´ll be staying in the room '.$room.'. Total cost estimated at: '.$totalCost.'. Thank you for choosing us!
+                            We await your arrival with much anticipation.'
             ]
         ];
         foreach($selectedFeaturesNames as $feature){ //the selected features are added to the response here
