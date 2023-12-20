@@ -79,7 +79,7 @@ function insertBooking(string $user_id, int $room_id, string $arrival_date, stri
 // a function to get the bookings for a specefic user if the same user has multiple bookings
 function getBookings(string $user_id): array
 {
-    $db = connectToDatabase('avalon.db');
+    $db = connectToDatabase('../database/avalon.db');
 
     $query = "SELECT * FROM bookings WHERE user_id = :user_id";
     $statement = $db->prepare($query);
@@ -96,7 +96,7 @@ function getBookings(string $user_id): array
 // a function to get the booking of a specific user if the user has only one booking
 function getBooking(string $booking_id): array
 {
-    $db = connectToDatabase('avalon.db');
+    $db = connectToDatabase('../database/avalon.db');
 
     $query = "SELECT * FROM bookings WHERE id = :booking_id";
     $statement = $db->prepare($query);
@@ -113,7 +113,7 @@ function getBooking(string $booking_id): array
 // a function to get the  picked features of a specific booking
 function getBookingFeatures(string $booking_id): array
 {
-    $db = connectToDatabase('avalon.db');
+    $db = connectToDatabase('../database/avalon.db');
 
     $query = "SELECT * FROM booking_features WHERE booking_id = :booking_id";
     $statement = $db->prepare($query);
@@ -130,7 +130,7 @@ function getBookingFeatures(string $booking_id): array
 // a function to get the rooms that are available for booking
 function getRoom(string $room_id): array
 {
-    $db = connectToDatabase('avalon.db');
+    $db = connectToDatabase('../database/avalon.db');
 
     $query = "SELECT * FROM rooms WHERE id = :room_id";
     $statement = $db->prepare($query);
@@ -192,9 +192,9 @@ if (isset($_GET['calendar']) && $_GET['calendar'] === 'true') {
 // function to fetch the cost of the features from the db
 function getFeaturePrice(int $feature_id): int
 {
-    $db = connectToDatabase('avalon.db');
+    $db = connectToDatabase('../database/avalon.db');
 
-    $query = "SELECT price FROM features WHERE id = :feature_id";
+    $query = "SELECT price FROM features WHERE feature_id = :feature_id";
     $statement = $db->prepare($query);
     $statement->bindParam(':feature_id', $feature_id);
     $statement->execute();
@@ -207,9 +207,9 @@ function getFeaturePrice(int $feature_id): int
 // function to fetch the cost of the room from the db
 function getRoomPrice(int $room_id): int
 {
-    $db = connectToDatabase('avalon.db');
+    $db = connectToDatabase('../database/avalon.db');
 
-    $query = "SELECT price FROM rooms WHERE id = :room_id";
+    $query = "SELECT price FROM rooms WHERE room_id = :room_id";
     $statement = $db->prepare($query);
     $statement->bindParam(':room_id', $room_id);
     $statement->execute();

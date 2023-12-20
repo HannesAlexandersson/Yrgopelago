@@ -15,7 +15,7 @@
     </div>
   </div>
   <div class="features-wrapper">
-    <?php require __DIR__ . '/../database/dbLoadFeatures.php'; ?>
+  <?php require __DIR__ . '/../database/dbLoadFeatures.php'; ?>
     <?php
     $features = connectToFeatures('../database/avalon.db');
 
@@ -40,7 +40,7 @@
 
           <p>Price: <span id="storyteller"><?=$feature['price']?></span></p>
         <?php } ?>
-        
+
       </div>
       <div class="feature-img-container">
 

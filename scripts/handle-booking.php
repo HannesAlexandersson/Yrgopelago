@@ -3,7 +3,7 @@ declare(strict_types=1);
 session_start();
 require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/bankfunction.php';
-require __DIR__ . '/CentralBankService.php';
+
 require __DIR__ . '/database-communications.php';
 require __DIR__ . '/hotelFunctions.php';
 use Dotenv\Dotenv;
@@ -165,7 +165,7 @@ function checkBooking(string $room, bool $bookingResult, string $arrivalDate, st
             'additional_info' => [
               'booking-result' => $bookingResult,
               'greeting' => 'Booking successful! You are expected to arrive on the '.$arrivalDate. 'and departure on the '.$departureDate.'
-                                  for a total stay of '.$numberOfDays. '! You´ll be staying in the room '.$room.'. Total cost estimated at: '.$totalCost.'. Thank you for choosing us!
+                                  for a total stay of '.$numberOfDays. 'days! You´ll be staying in the room '.$room.'. Total cost estimated at: '.$totalCost.'. Thank you for choosing us!
                                   We await your arrival with much anticipation.'
             ]
         ];
@@ -218,22 +218,11 @@ function calculateCostOfFeatures(array $selectedFeatureIDs): int
 // Function to calculate the cost based on room type and duration
 function calculateCost(int $room_id, array $selectedFeatureIDs, int $numberOfDays): float
  {
-    $cost = 0;
-    $roomCostGaze = getRoomPrice(1); // for same reasons as the features price, I fetch the price from the db to ensure that the calculation is correct no matter the price
-    $roomCostTranquility = getRoomPrice(2);
-    $roomCostPresidential = getRoomPrice(3);
-  if ($room_id == 1){
-    $cost += $roomCostGaze;
-  } else if($room_id == 2){
-    $cost += $roomCostTranquility;
-  } else if($room_id == 3){
-    $cost += $roomCostPresidential;
-  } else {
-    echo 'ERROR - Room not found';
-  }
+
+   $roomCostPerNight = getRoomPrice($room_id);
 
   // simple calculation, cost is based on room type times the number of days
-  $cost = $cost * $numberOfDays;
+  $cost = $roomCostPerNight * $numberOfDays;
   // calculate discount, the discount is based on the number of days (see function calcDiscount)
   $cost = calcCostAfterDiscount($cost, calcDiscount($numberOfDays));
   // calculate the cost of the features, the feautures cost is not subject to discount. So it is added after the discount is calculated

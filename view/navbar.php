@@ -1,6 +1,6 @@
 <nav class="nav-bar">
     <div class="logo-nav-wrapper secondary-font">
-      <img src="assets/icons/logo/logotype-footer.png" alt="logo" class="logo-navbar"/>
+      <img src="/assets/icons/logo/logotype-footer.png" alt="logo" class="logo-navbar"/>
 
     </div>
     <div class="navmenu-links-wrapper">
@@ -12,19 +12,19 @@
     </div>
     <div class="nav-icons">
       <a href="#">
-        <img class="icons" id="search" src="assets/icons/navbar-icons/Search icon.png" />
+        <img class="icons" id="search" src="/assets/icons/navbar-icons/Search icon.png" />
       </a>
       <a href="#">
-      <img class="icons" src="assets/icons/navbar-icons/Language icon.png" />
+      <img class="icons" src="/assets/icons/navbar-icons/Language icon.png" />
       </a>
     </div>
 </nav>
 <nav class="nav-bar-mobile">
   <div class="logo-nav-wrapper">
-    <img src="assets/icons/logo/logotype-footer.png" alt="logo" class="logo-navbar-mobile"/>
+    <img src="/assets/icons/logo/logotype-footer.png" alt="logo" class="logo-navbar-mobile"/>
   </div>
   <div class="bars-mobile">
-      <img id="hamburgerMenu" class="hamburger" src="assets/icons/navbar-icons/hamburger.png" />
+      <img id="hamburgerMenu" class="hamburger" src="/assets/icons/navbar-icons/hamburger.png" />
       <div id="dropdownMenu" class="drop-down-content">
           <a class="navbar-anchor" href="#"><p>HOME</p></a>
           <a class="navbar-anchor" href="#about"><p>ABOUT US</p></a>
