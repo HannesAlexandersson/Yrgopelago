@@ -57,10 +57,10 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('arrivalDate').value = info.dateStr;
       }
     },
-     validRange: {
+    /*  validRange: {
       start: '2024-01-01',
       end: '2024-02-01'
-    } 
+    }  */
   });
   fetchDataAndPopulateArray(eventsArray)
   .then(function () {

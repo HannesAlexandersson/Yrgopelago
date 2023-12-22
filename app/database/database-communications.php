@@ -190,7 +190,7 @@ if (isset($_GET['calendar']) && $_GET['calendar'] === 'true') {
   echo json_encode($events);
 }
 // function to fetch the cost of the features from the db
-function getFeaturePrice(int $feature_id): int
+function getFeaturePrice(int $feature_id): float
 {
     $db = connectToDatabase('../database/avalon.db');
 
@@ -201,11 +201,11 @@ function getFeaturePrice(int $feature_id): int
 
     $feature_cost = $statement->fetchColumn();
 
-    return (int)$feature_cost; // Convert to int before returning
+    return (float)$feature_cost; // Convert to int before returning
 }
 
 // function to fetch the cost of the room from the db
-function getRoomPrice(int $room_id): int
+function getRoomPrice(int $room_id): float
 {
     $db = connectToDatabase('../database/avalon.db');
 
@@ -216,7 +216,7 @@ function getRoomPrice(int $room_id): int
 
     $room_cost = $statement->fetchColumn();
 
-    return (int)$room_cost; // Convert to int before returning
+    return (float)$room_cost; // Convert to int before returning
 }
 
 

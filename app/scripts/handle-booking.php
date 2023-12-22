@@ -4,12 +4,12 @@ session_start();
 require __DIR__ . '/../../vendor/autoload.php';
 require __DIR__ . '/bankfunction.php';
 
-require __DIR__ . '/app/database/database-communications.php';
+require __DIR__ . '/../database/database-communications.php';
 require __DIR__ . '/hotelFunctions.php';
 use Dotenv\Dotenv;
 use GuzzleHttp\Client;
 // Load the environment variables
-$dotenv = Dotenv::createImmutable(__DIR__ . '/..');
+$dotenv = Dotenv::createImmutable(__DIR__ . '/../../');
 $dotenv->load();
 
 // Access the values from dotenv
@@ -108,17 +108,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // calculate toatal number fo days the user stays at the hotel
     $numberOfDays = calculateDays($arrivalDate, $departureDate);
-
+error_log('days'.(string)$numberOfDays);
     // Calculate cost
     $totalCost = calculateCost($room_id, $selectedFeatureIDs, $numberOfDays);
-
+        error_log((string)$totalCost);
     // Validate TRANSFERCODE check if code is unused and if the user has enough money on the code
     $bankResponseValidation = validateTransferCode($user_id, $totalCost);
 
     if($bankResponseValidation['error']){ // if validation of transfercode fails, abort the booking and alert the user via json to javascript clientside and then the js alerts the user
       echo json_encode(["error" => "Transfer code validation failed. Please try again."]);
       exit();
-    } else if ($bankResponseValidation["amount"] > $totalCost) { //if the user tryes to use a transfercode with not enough money on it we abort the booking
+    } else if ($bankResponseValidation["amount"] < $totalCost) { //if the user tryes to use a transfercode with not enough money on it we abort the booking
       echo json_encode(["error" => "Transfer code validation failed. Please try again."]);
       exit();
     } else { // if all goes well we deposit the transfercode and then we perform the booking
@@ -193,7 +193,7 @@ function calculateDays(string $arrivalDate, string $departureDate): int
     return $interval->days +1;// need to add 1 day becouse the interval is calculated from midnight to midnight,so ex 1 of dec to 3 of dec would count as 2 days otherwise
 }
 // Function to calculate the cost of the features, for simplicity we just add 5 for each feature, BUT the manager have the ability to change the price in the admin page. So for that reason I fetch the price from the db to ensure that the calculation is correct no matter the price
-function calculateCostOfFeatures(array $selectedFeatureIDs): int
+function calculateCostOfFeatures(array $selectedFeatureIDs): float
 {
     $selectedFeaturecost = 0;
     $featureCostMassage = getFeaturePrice(1);
@@ -220,11 +220,13 @@ function calculateCost(int $room_id, array $selectedFeatureIDs, int $numberOfDay
  {
 
    $roomCostPerNight = getRoomPrice($room_id);
-
+error_log('roomcost'.(string)$roomCostPerNight);
   // simple calculation, cost is based on room type times the number of days
   $cost = $roomCostPerNight * $numberOfDays;
+  error_log('cost*days'.(string)$cost);
   // calculate discount, the discount is based on the number of days (see function calcDiscount)
   $cost = calcCostAfterDiscount($cost, calcDiscount($numberOfDays));
+  error_log('cost afted disc'.(string)$cost);
   // calculate the cost of the features, the feautures cost is not subject to discount. So it is added after the discount is calculated
   $featureCost = calculateCostOfFeatures($selectedFeatureIDs);
   $cost = $cost + $featureCost;
@@ -251,7 +253,7 @@ function calcDiscount(int $days): float
     return 1.0 - $discount;
 }
 // Function to calculate the cost after discount
-function calcCostAfterDiscount(int $totalCost, float $discount): float
+function calcCostAfterDiscount(float $totalCost, float $discount): float
 {
   $costAfterDiscount = $totalCost * $discount;
   return $costAfterDiscount;
