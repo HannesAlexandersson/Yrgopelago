@@ -2,9 +2,9 @@
 declare(strict_types=1);
 session_start();
 
-require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../../vendor/autoload.php';
+require __DIR__ . '/app/database/database-communications.php';
 
-require __DIR__ . '/database-communications.php';
 // check if the request is made
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
   // Get the posted data.

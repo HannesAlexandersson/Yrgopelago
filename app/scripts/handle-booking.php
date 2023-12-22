@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 session_start();
-require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../../vendor/autoload.php';
 require __DIR__ . '/bankfunction.php';
 
-require __DIR__ . '/database-communications.php';
+require __DIR__ . '/app/database/database-communications.php';
 require __DIR__ . '/hotelFunctions.php';
 use Dotenv\Dotenv;
 use GuzzleHttp\Client;

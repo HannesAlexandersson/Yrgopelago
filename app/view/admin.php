@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 session_start();
-require __DIR__ . '/../scripts/database-communications.php';
+require __DIR__ . '/../../app/database/database-communications.php';
 
 
 // Check if I am logged in
@@ -20,7 +20,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
       // Function to update room price in the db
       function updateRoomPrice(int $roomId, float $newPrice): void
        {
-          $db = connectToDatabase('../database/avalon.db');
+          $db = connectToDatabase('avalon.db');
           $query = "UPDATE rooms SET price = :newPrice WHERE room_id = :roomId";
           try {
               $stmnt = $db->prepare($query);
@@ -41,7 +41,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
       // Function to update feature price in the db
       function updateFeaturePrice(int $featureId, float $newPriceFeature): void
       {
-        $db = connectToDatabase('../database/avalon.db');
+        $db = connectToDatabase('avalon.db');
         $query = "UPDATE features SET price = :newPrice WHERE feature_id = :featureId";
         try {
             $stmnt = $db->prepare($query);
@@ -55,7 +55,6 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     updateFeaturePrice($featureId, $newPriceFeature);// call the function to update the feature price
 
     }
-
   }
 }
 ?>
@@ -102,7 +101,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 <script>
 document.getElementById('get-transfercodes').addEventListener('click', function() {
   // Fetch the entire JSON file
-  fetch('../scripts/validation_response.json')
+  fetch('/../app/scripts/validation_response.json')
     .then(response => response.json())
     .then(data => {
       // Update the content-box with the fetched data
@@ -167,6 +166,8 @@ function updateContentBox(data) {
   contentBox.appendChild(table);
 }
 </script>
+
+
 
 </body>
 </html>

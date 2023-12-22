@@ -7,7 +7,7 @@
       <ul class="navmenu-links secondary-font">
         <li><a href="index.php">Home</a></li>
         <li><a href="#about">About us</a></li>
-        <li><a href="/view/admin_login.php">ADMIN</a></li>
+        <li><a href="app/view/admin_login.php">ADMIN</a></li>
       </ul>
     </div>
     <div class="nav-icons">
@@ -28,8 +28,8 @@
       <div id="dropdownMenu" class="drop-down-content">
           <a class="navbar-anchor" href="#"><p>HOME</p></a>
           <a class="navbar-anchor" href="#about"><p>ABOUT US</p></a>
-          <a class="navbar-anchor" href="admin_login.php"><p>ADMIN</p></a>
+          <a class="navbar-anchor" href="app/view/admin_login.php"><p>ADMIN</p></a>
       </div>
   </div>
 </nav>
-<script src="scripts/navbar.js"></script>
+<script src="app/scripts/navbar.js"></script>

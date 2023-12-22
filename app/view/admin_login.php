@@ -1,6 +1,6 @@
 <?php
 session_start();
-require __DIR__ . '/../vendor/autoload.php';
+require __DIR__. '/../../vendor/autoload.php';
 use Dotenv\Dotenv;
 if(isset($_POST['username']) && isset($_POST['password'])){
     $username = htmlspecialchars($_POST['username']);
@@ -8,7 +8,7 @@ if(isset($_POST['username']) && isset($_POST['password'])){
 
 
    // Load the environment variables
-$dotenv = Dotenv::createImmutable(__DIR__ . '/..');
+$dotenv = Dotenv::createImmutable(__DIR__ . '/../../');
 $dotenv->load();
 
 // Access the values from dotenv

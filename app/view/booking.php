@@ -52,8 +52,8 @@
     </div>
   </div>
 
-
-
-<script src="/scripts/booking-form.js"></script>
+  <script src="/app/scripts/calculations.js"></script>
+  <script src="/app/scripts/calendar.js"></script>
+  <script src="/app/scripts/booking-form.js"></script>
 </div>
 

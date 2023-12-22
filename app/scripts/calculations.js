@@ -1,87 +1,15 @@
-let isArrivalDateLocked = false;
-let roomPrice = 0;
-let roomPricePerNight = 0;
-let featuresPrice = 0;
-let discount = 0;
-let totalPrice = 0;
-var eventsArray = [];
-let bookedDates = {
-  'The Gaze': [],
-  'The Tranquility': [],
-  'The Presidential': []
-};
 
-// fetch data from the database about the booked dates and populate the array, we use the array to populate the calendar
-async function fetchDataAndPopulateArray(eventsArray) {
-  const response = await fetch('/scripts/database-communications.php?calendar=true');
-  const data = await response.json();
-  eventsArray.push(...data);
-}
-
-
-//this function doesnt work, the arrivaldate button isnot toggleable NEEDS ATTENTION!!!
-function toggleLockArrivalDate() {
-  isArrivalDateLocked = !isArrivalDateLocked;
-
-  var lockArrivalDateButton = document.getElementById('lockArrivalDate');
-  lockArrivalDateButton.innerText = isArrivalDateLocked ? 'Unlock Arrival Date' : 'Lock Arrival Date';
-
-  if (isArrivalDateLocked) {
-    // Disable the "Lock Arrival Date" button once the arrival date is confirmed
-    document.getElementById('lockArrivalDate').disabled = true;
-  }
-}
-
-// Clear the form fields and reset the "Lock Arrival Date" button If user wanna change arrivaldate
-function clearBookingForm() {
-  document.getElementById('bookingForm').reset();
-  isArrivalDateLocked = false;
-  document.getElementById('lockArrivalDate').disabled = false;
-  document.getElementById('lockArrivalDate').innerText = 'Lock Arrival Date';
-}
-
-//populate and render the calendar with data from DB
-document.addEventListener('DOMContentLoaded', function () {
-  var calendarEl = document.getElementById('calendar');
-  var calendar = new FullCalendar.Calendar(calendarEl, {
-    initialView: 'dayGridMonth',
-    events: [],
-    dateClick: function (info) {
-      if (isArrivalDateLocked) {
-        // If arrival date is locked, set the clicked date as the departure date
-        document.getElementById('departureDate').value = info.dateStr;
-      } else {
-        // If arrival date is not locked, set the clicked date as the arrival date
-        document.getElementById('arrivalDate').value = info.dateStr;
-      }
-    },
-    // uncomment this code (validRange) to disable dates before d day and put it here
-    /* validRange: {
-      start: '2024-01-01',
-      end: '2024-02-01'
-    } */
-  });
-  fetchDataAndPopulateArray(eventsArray)
-  .then(function () {
-    eventsArray.forEach(eventData => {
-    calendar.addEvent(eventData);
-  });
-  });
-  //initialise the calendar
-  calendar.render();
-});
-
-// -------------------cost calculation---------------------//
+// -------------------cost calculations---------------------//
 // Function to calculate the cost based on room type, duration, and discount
 function calculateCost(room_id, selectedFeatureIDs, numberOfDays) {
   var roomPricePerNight;
   // Set room price per night based on room_id
   if (room_id == 1) {
-    roomPricePerNight = 5;
+    roomPricePerNight = parseFloat(document.getElementById('gaze').innerText); // we get the value from the html element, wich in its turn gets the value from the DB. So if the hotelmanager changes the price from the admin page the calculations will still be correct
   } else if (room_id == 2) {
-    roomPricePerNight = 10;
+    roomPricePerNight = parseFloat(document.getElementById('tranq').innerText);
   } else if (room_id == 3) {
-    roomPricePerNight = 25;
+    roomPricePerNight = parseFloat(document.getElementById('president').innerText);
   } else {
     console.error('ERROR - Room not found');
     return 0; // Return 0 if room not found
@@ -116,9 +44,13 @@ function calculateCost(room_id, selectedFeatureIDs, numberOfDays) {
 // Function to calculate the cost of selected features
 function calculateCostOfFeatures(selectedFeatureIDs) {
   var featureCost = 0;
+
   selectedFeatureIDs.forEach(function (feature) {
-    featureCost += 5; // Each feature costs $5
+    if (feature == 1) featureCost += parseInt(document.getElementById('massage').innerText);
+    if (feature == 2) featureCost += parseInt(document.getElementById('storyteller').innerText);
+    if (feature == 3) featureCost += parseInt(document.getElementById('hotsprings').innerText);
   });
+
   return featureCost;
 }
 
@@ -172,11 +104,11 @@ function calculateDays(arrivalDate, departureDate) {
 
   // Set hours, minutes, seconds, and milliseconds to zero for accurate day calculation, Same reasoning here as above
   arrivalDateObj.setUTCHours(0, 0, 0, 0);
-  departureDateObj.setUTCHours(0, 0, 0, 0);
+  departureDateObj.setUTCHours(24, 0, 0, 0);
 
   var timeDiff = departureDateObj - arrivalDateObj;
-  var daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24)) + 1; // and in the end I need to add 1 day to the total to get the correct amount of days anyway
+  var daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
   return daysDiff;
 }
 
-// -------------------cost calculation---------------------//
+// -------------------cost calculation ends---------------------//

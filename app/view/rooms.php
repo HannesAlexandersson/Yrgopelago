@@ -15,8 +15,8 @@
       </p>
     </div>
     <div class="room-container">
-    <?php require __DIR__ . '/../database/dbLoadRooms.php'; ?>
-    <?php $rooms = connectToRooms('../database/avalon.db');?>
+    <?php require __DIR__ . '/../database/database-communications.php'; ?>
+    <?php $rooms = connectToRooms('avalon.db');?>
       <div class="room" id="room1">
         <div class="room-inner-header secondary-font">
           <h2><?= $rooms[0]['name']?></h2>
@@ -71,4 +71,4 @@
   </div>
   <div class="right-rooms"></div>
 </div>
-<script src="/scripts/rooms-paralax.js"></script>
+<script src="app/scripts/rooms-paralax.js"></script>

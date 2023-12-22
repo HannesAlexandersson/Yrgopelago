@@ -1,0 +1,6 @@
+{
+  "guests": [
+      {"transferCode":"9977a835-fa03-48f2-a988-9521b068fe05","fromAccount":30,"amount":20},
+      {"transferCode":"fc927e5e-f2e8-4867-9889-495237e9c02f","fromAccount":30,"amount":21.6}
+  ]
+}

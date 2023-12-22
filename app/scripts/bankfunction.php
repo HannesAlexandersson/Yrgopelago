@@ -13,7 +13,7 @@ function validateTransferCode(string $transferCode, float $totalCost): array
         'transferCode' => $transferCode,
         'totalcost' => $totalCost
     ]]);
-    $bankResponseValidation = json_decode($validateResponse->getBody()->getContents(), true);
+   $bankResponseValidation = json_decode($validateResponse->getBody()->getContents(), true);
     $fileContent = file_get_contents('validation_response.json');
     $data = json_decode($fileContent, true);
     // If the "guests" key doesn't exist or is not an array, initialize it as an empty array

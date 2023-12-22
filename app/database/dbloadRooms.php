@@ -11,7 +11,7 @@ function connectToRooms(string $dbName): array
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
-        echo "Failed to connect to the database";
+        echo "Failed to connect to the database". $e->getMessage();
         throw $e;
     }
     $rooms = $db->query("
