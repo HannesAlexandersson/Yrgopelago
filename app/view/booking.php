@@ -2,6 +2,28 @@
   <div class="booking-header secondary-font">
     <h1>Booking</h1>
   </div>
+
+  <label for="popup-toggle" class="btn help-btn">HOW TO BOOK</label>
+
+  <input type="checkbox" id="popup-toggle" class="hidden-checkbox">
+  <div class="overlay"></div>
+
+  <div class="pop-up">
+    <label for="popup-toggle" class="close-btn">Close</label>
+    <p>
+      1. Choose an arrival date from the calendar, then click the lock button to lock the date.<br>
+      2. Choose a departure date from the calendar, then click the lock button to lock the date.<br>
+      3. IMPORTANT! If you want to change dates, you MUST press the lock buttons again or else an incorrect cost will display!<br>
+      4. Choose a room from the dropdown menu.<br>
+      5. Choose the features you want to add to your room.<br>
+      6. The total cost will display under the buttons.<br>
+      7. Enter a transfercode with the same amount as the totalcost<br>
+      8. Press the submit button to book your room.<br>
+      9. Press the show booking button to see your booking in the calender.<br>
+    </p>
+  </div>
+
+
   <div class="booking-left secondary-font">
     <div class="booking-form-wrapper">
       <form id="bookingForm" class="booking-form">
