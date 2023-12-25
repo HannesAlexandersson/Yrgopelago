@@ -52,7 +52,7 @@
   width: 75%;
 }
 .rooms-header-subtext > p {
-  width: 50%;
+  width:  48%;
 }
 .room-container {
   width: calc(100% - 1rem);

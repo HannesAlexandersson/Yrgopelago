@@ -23,12 +23,12 @@ main {
 }
 .home-text {
   text-shadow: -7px 2px 15px black;
-  color: gold;
   color: var(--default-font-clr);
   font-size: 1.1rem;
   font-style: normal;
   font-weight: 400;
   text-align: center;
+  line-height: 1rem;
 }
 .remove{
   display: none;
@@ -37,6 +37,9 @@ main {
 @media (min-width: 330px) {
   .remove{
     display: block;
+  }
+  .home-text {
+    line-height: 1.125rem;
   }
 }
 @media (min-width: 800px) {
@@ -47,7 +50,7 @@ main {
   width: 30%;
 }
 .home-text {
-  line-height: 1.125;
+  line-height: 1.2rem;
   color: var(--default-font-clr);
   font-size: 1rem;
 }
@@ -56,5 +59,6 @@ main {
 @media (min-width: 1050px) {
   .home-text {
     font-size: 1.1em;
+    line-height: 1.5rem;
 }
 }
