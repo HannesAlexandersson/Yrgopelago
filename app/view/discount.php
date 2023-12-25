@@ -3,10 +3,10 @@
   <div class="discount-bg-beach parallax-layer"></div>
   <div class="discount-bg-palms parallax-layer"></div>
   <div class="big-header-wrapper-discount content">
-    <div class="big-header-discount default-font">
+    <div class="big-header-discount detail-font">
       <h1>SPECIAL HOLIDAY OFFER!!!</h1>
     </div>
-    <div class="discount-text  default-font">
+    <div class="discount-text detail-font">
       <p>
         This year we are happy to announce that we are offering a special holiday discount for all our rooms.
         The longer you stay the bigger the discount! Each day you stay you get 10% off the original price, starting

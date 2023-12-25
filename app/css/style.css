@@ -9,7 +9,8 @@
 --spotlight-blur-clr: #ece255;
 
 /*fonts*/
---default-font: 'Grandstander', cursive, sans-serif;
+--default-font: 'IBM Plex Sans', sans-serif;
+--detail-font: 'Grandstander', cursive, sans-serif;
 --secondary-font: 'Bebas Neue', sans-serif;
 }
 .default-font{
@@ -18,7 +19,9 @@
 .secondary-font{
     font-family: var(--secondary-font);
 }
-
+.detail-font{
+    font-family: var(--detail-font);
+}
 body{
   margin: 0;
   padding: 0;

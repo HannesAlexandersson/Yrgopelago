@@ -1,6 +1,10 @@
 .features-bg{
   display: flex;
   flex-direction: column;
+  background-image: url(/assets/backgrounds/Frame9.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 .feat-text-wrapper{
   display: flex;
