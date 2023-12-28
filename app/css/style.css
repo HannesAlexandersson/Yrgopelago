@@ -1,10 +1,12 @@
 :root{
 /* Colors*/
 --default-bg: #d03475ff;
+--softDark-bg: #190009;
 --primary-accent: #9658d3ff;
 --secondary-bg: #ea4c87ff;
 --secondary-accent: #e03957ff;
 --default-font-clr: #fe9460ff;
+
 --offset-dark: #222022;
 --spotlight-blur-clr: #ece255;
 
