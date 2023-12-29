@@ -1,6 +1,7 @@
 .booking-bg {
   gap: 1rem;
-  background-image: url(/assets/backgrounds/Frame9.png);
+  background-image: url(/assets/backgrounds/bg-palms-dark.png);
+  
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

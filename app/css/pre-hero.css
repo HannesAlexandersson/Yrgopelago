@@ -1,24 +1,19 @@
 .bg-pre {
-  background-color: var(--softDark-bg);
+  background-color: var(--default-bg);
   height: 100vh;
   display: flex;
   overflow-y: hidden;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 
 .left-side-pre {
   text-align: center;
-  display: flex;
   width: 35%;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
 }
-.pre-header-wrapper {
-  color: var(--default-font-clr);
-}
+
 .pre-header-wrapper > h1 {
   font-size: 2rem;
   font-weight: 700;
@@ -74,18 +69,14 @@
 }
 
 .scroll-reveal h1 span {
-  animation-range-start: cover 7vh;
-  animation-range-end: cover 34vh;
+  animation-range-start: cover 15vh;
+  animation-range-end: cover 45vh;
 }
 .scroll-reveal p span {
-  animation-range-start: cover 32.5vh;
-  animation-range-end: cover 48vh;
+  animation-range-start: cover 31vh;
+  animation-range-end: cover 47vh;
 }
-@keyframes scroll-reveal {
-  to {
-    background-size: 100% 100%;
-  }
-}
+
 
 @media(min-width: 650px) {
 .bg-pre {

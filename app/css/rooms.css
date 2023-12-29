@@ -1,5 +1,6 @@
 .center-rooms{
-  background-image: url('/assets/backgrounds/Rectangle1.png');
+  background-image: url(/assets/backgrounds/double-nobg.png);
+
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -31,7 +32,7 @@
   flex-direction: column;
   border-radius: 20px;
   box-shadow: -1px 4px 13px 6px rgba(0,0,0,0.2);
-  background-color: var(--secondary-bg);
+  background-color: var(--room-cards-bg);
   margin: 0 1rem 1rem 1rem;
 }
 .room:hover{

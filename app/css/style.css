@@ -1,19 +1,24 @@
 :root{
 /* Colors*/
---default-bg: #d03475ff;
---softDark-bg: #190009;
+--default-bg: #190009;
 --primary-accent: #9658d3ff;
 --secondary-bg: #ea4c87ff;
 --secondary-accent: #e03957ff;
---default-font-clr: #fe9460ff;
-
+--default-font-clr: #FF5722;;
+--room-cards-bg: #f7ad6b;
 --offset-dark: #222022;
 --spotlight-blur-clr: #ece255;
+--extra-font-clr: #fe9460ff;
 
 /*fonts*/
 --default-font: 'IBM Plex Sans', sans-serif;
 --detail-font: 'Grandstander', cursive, sans-serif;
 --secondary-font: 'Bebas Neue', sans-serif;
+}
+@keyframes scroll-reveal {
+  to {
+    background-size: 100% 100%;
+  }
 }
 .default-font{
     font-family: var(--default-font);

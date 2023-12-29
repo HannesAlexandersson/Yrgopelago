@@ -2,15 +2,16 @@
 <div class="bg-pre">
   <div class="left-side-pre">
 
-    <section class="scroll-reveal pre-header-wrapper default-font">
+    <span class="scroll-reveal pre-header-wrapper default-font">
       <h1><span>Hotel Avalon</span></h1>
       <p>
         <span>
           Where dreams are born, and time is never planned.
           Come in, explore our hotel and let us make yours a reality.
+          Unwind in Luxury, Embrace Serenity, and Make Every Moment a Masterpiece
         </span>
       </p>
-    </section>
+    </span>
 
   </div>
 

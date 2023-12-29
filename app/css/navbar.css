@@ -27,7 +27,7 @@
 }
 .bars-mobile{
   margin-right: 1rem;
-  color: var(--primary-accent)
+  color: var(--primary-accent);
 }
 .drop-down-content {
   display: none;

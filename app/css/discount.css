@@ -37,7 +37,7 @@ background-image: url(/assets/images/paralax/Palm\ Tree\ Image\ 2.svg);
   top:10px;
 }
 .big-header-wrapper-discount{
-  color: var(--default-font-clr);
+  color: var(--extra-font-clr);
 }
 .big-header-discount {
   text-shadow: -2px 2px 5px #f60442;
@@ -49,6 +49,6 @@ background-image: url(/assets/images/paralax/Palm\ Tree\ Image\ 2.svg);
 }
 .disclaimer-text{
   font-size: 0.25em;
-  color: var(--default-font-clr);
+  color: var(--extra-font-clr);
   text-shadow: -2px 1px 0px black;
 }
