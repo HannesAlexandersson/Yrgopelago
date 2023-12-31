@@ -3,11 +3,27 @@
     <div class="scroll-reveal-container">
       <span class="scroll-reveal pre-header-wrapper default-font">
         <h1>
-          <span>Hotel Avalon</span>
+          <span>Embark on a Journey of Elegance</span>
         </h1>
-        <p>
-          <span>Where dreams are born, and time is never planned. Come in, explore our hotel and let us make yours a reality. Unwind in Luxury, Embrace Serenity, and Make Every Moment a Masterpiece</span>
-        </p>
+        <p><span>At Hotel Avalon, elegance meets luxury, and every stay becomes a timeless adventure. Discover a world where sophistication knows no bounds.</span></p>
+        <h1>
+          <span>Luxury Redefined, Memories Refashioned</span>
+        </h1>
+          <p><span>Elevate your experience at Hotel Avalon, where luxury is not just a stay; it's an art form. Redefine your idea of opulence and let us craft unforgettable moments.</span></p>
+          <h1>
+          <span>Serenity Beckons, Luxury Awaits</span>
+        </h1>
+          <p><span>Step into a haven of tranquility at Hotel Avalon. Serenity beckons, and luxury awaits at every turn. Your escape to peace and indulgence begins here.</span></p>
+          <h1>
+          <span>Crafting Dreams, One Stay at a Time</span>
+        </h1>
+          <p><span>Hotel Avalon is not just a destination; it's a canvas for your dreams. Let us craft each moment into a masterpiece, making your stay a gallery of unforgettable memories.</span></p>
+          <h1>
+          <span>Discover Opulence, Define Memories</span>
+        </h1>
+          <p><span>Hotel Avalon is not just a hotel; it's the beginning of your extraordinary journey. Let the story of your stay unfold in a tapestry of luxury, comfort, and unparalleled hospitality.</span></p>
+
+
       </span>
     </div>
   </div>

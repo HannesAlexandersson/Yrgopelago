@@ -1,6 +1,6 @@
 .bg-pre {
   background-color: var(--default-bg);
-  height: 100vh;
+  /* height: 100vh; dont need?*/
   display: flex;
   overflow-y: hidden;
   flex-direction: column;
@@ -22,12 +22,12 @@
 }
 
 .scroll-reveal h1 span {
-  animation-range-start: cover 15vh;
-  animation-range-end: cover 45vh;
+  animation-range-start: cover 2vh;
+  animation-range-end: cover 22vh;
 }
 .scroll-reveal p span {
-  animation-range-start: cover 31vh;
-  animation-range-end: cover 47vh;
+  animation-range-start: cover 0vh;
+  animation-range-end: cover 8vh;
 }
 
 .left-side-pre {
@@ -82,11 +82,11 @@
     justify-content: center;
   }
   .pre-header-wrapper > h1 {
-    font-size: 3rem;
-  }
-  .pre-header-wrapper > p {
     font-size: 1.5rem;
-  }
+}
+  .pre-header-wrapper > p {
+    font-size: 1rem;
+}
   .left-side-pre {
     margin-top: 1rem;
     width: 35%;

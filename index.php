@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 require __DIR__ . '/header.php';
 require __DIR__ . '/app/view/navbar.php';
+require __DIR__ . '/app/view/post-hero.php';
 require __DIR__ . '/app/view/hero.php';
 require __DIR__ . '/app/view/pre-hero.php';
 require __DIR__ . '/app/view/home.php';

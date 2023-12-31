@@ -7,6 +7,7 @@
 
     <link rel="stylesheet" href="app/css/style.css">
     <link rel="stylesheet" href="app/css/navbar.css">
+    <link rel="stylesheet" href="app/css/post-hero.css">
     <link rel="stylesheet" href="app/css/pre-hero.css">
     <link rel="stylesheet" href="app/css/hero.css">
     <link rel="stylesheet" href="app/css/home.css">
