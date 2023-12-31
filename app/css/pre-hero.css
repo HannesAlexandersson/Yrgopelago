@@ -5,21 +5,41 @@
   overflow-y: hidden;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 }
 
+/*scroll reveal*/
+.scroll-reveal span {
+  color: hsl(0 0% 100% / 0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-background-repeat: no-repeat;
+  background-repeat: no-repeat;
+  -webkit-background-size: 0% 100%;
+  background-size: 0% 100%;
+  background-image: linear-gradient(90deg, red, blue);
+  animation: scroll-reveal linear forwards;
+  animation-timeline: view();
+}
+
+.scroll-reveal h1 span {
+  animation-range-start: cover 15vh;
+  animation-range-end: cover 45vh;
+}
+.scroll-reveal p span {
+  animation-range-start: cover 31vh;
+  animation-range-end: cover 47vh;
+}
 
 .left-side-pre {
   text-align: center;
-  width: 35%;
+  width: 90%;
 }
-
 .pre-header-wrapper > h1 {
   font-size: 2rem;
   font-weight: 700;
 }
 .pre-header-wrapper > p {
-  font-size: 0.75rem;
+  font-size: 1rem;
   font-weight: 400;
 }
 .right-side-pre {
@@ -53,44 +73,25 @@
   display: block;
 }
 
-
-/*scroll reveal*/
-.scroll-reveal span {
-  color: hsl(0 0% 100% / 0);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-background-repeat: no-repeat;
-  background-repeat: no-repeat;
-  -webkit-background-size: 0% 100%;
-  background-size: 0% 100%;
-  background-image: linear-gradient(90deg, red, blue);
-  animation: scroll-reveal linear forwards;
-  animation-timeline: view();
+@media (min-width: 650px) {
+  .bg-pre {
+    gap: 2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .pre-header-wrapper > h1 {
+    font-size: 3rem;
+  }
+  .pre-header-wrapper > p {
+    font-size: 1.5rem;
+  }
+  .left-side-pre {
+    margin-top: 1rem;
+    width: 35%;
 }
-
-.scroll-reveal h1 span {
-  animation-range-start: cover 15vh;
-  animation-range-end: cover 45vh;
-}
-.scroll-reveal p span {
-  animation-range-start: cover 31vh;
-  animation-range-end: cover 47vh;
-}
-
-
-@media(min-width: 650px) {
-.bg-pre {
-  flex-direction: row;
-  align-items: center;
-}
-.pre-header-wrapper > h1 {
-  font-size: 3rem;
-}
-.pre-header-wrapper > p {
-  font-size: 1.5rem;
-}
-
-.right-side-pre {
-  width: 55%;
-}
+  .right-side-pre {
+    width: 55%;
+  }
 }
