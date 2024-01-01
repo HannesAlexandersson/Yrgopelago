@@ -29,7 +29,8 @@
 .detail-font{
     font-family: var(--detail-font);
 }
-body{
+
+body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
