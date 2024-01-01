@@ -17,6 +17,7 @@ $islandName = $_ENV['ISLAND_NAME'];
 $hotelName = $_ENV['HOTEL_NAME'];
 $hotelstars = $_ENV['STARS'];
 $hotelManager = $_ENV['USER_NAME'];
+$giphyKey = $_ENV['GIPHY_KEY'];
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // Parse JSON data from the JavaScript request
@@ -108,7 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // calculate toatal number fo days the user stays at the hotel
     $numberOfDays = calculateDays($arrivalDate, $departureDate);
-error_log('days'.(string)$numberOfDays);
+    error_log('days'.(string)$numberOfDays);
     // Calculate cost
     $totalCost = calculateCost($room_id, $selectedFeatureIDs, $numberOfDays);
         error_log((string)$totalCost);
@@ -126,13 +127,14 @@ error_log('days'.(string)$numberOfDays);
         $bankResponseDeposit = depositTransferCode($user_id, $hotelManager);
     }
 
-
+    //get a random gif from giphy to attach to the response
+    $gifs = getGif($giphyKey);
 
     // Perform the booking and check the result
     $bookingResult = bookRoom($user_id, $room_id, $arrivalDate, $departureDate, $totalCost, $selectedFeatureIDs);
     if ($bookingResult) {
       // Check the result of the booking and send the response as json
-      checkBooking($room, $bookingResult, $arrivalDate, $departureDate, $numberOfDays, $totalCost, $selectedFeaturesNames);
+      checkBooking($room, $bookingResult, $arrivalDate, $departureDate, $numberOfDays, $totalCost, $selectedFeaturesNames, $gifs);
     } else {
       // If booking fails send error message and exit the script
       echo json_encode(["error" => "Booking failed. Please try again."]);
@@ -144,8 +146,35 @@ error_log('days'.(string)$numberOfDays);
   }
 }
 
+//get giphy gifs
+function getGif(string $giphyKey): array
+{
+  $client = new Client([
+    'base_uri' => 'https://api.giphy.com/v1/gifs/',
+    'timeout' => 2.0,
+    'headers' => [
+        'Content-Type' => 'application/json',
+        'Accept' => 'application/json',
+    ],
+  ]);
+
+  $search = 'hotel';
+  $response = $client->request('GET', 'search', [
+      'query' => [
+          'api_key' => $giphyKey,
+          'q' => $search,
+          'limit' => 1,
+      ],
+  ]);
+  $body = $response->getBody()->getContents();
+  $data = json_decode($body, true);
+  $gifs = $data['data'];
+
+  return $gifs;
+}
+
 // Function to check the result of the booking
-function checkBooking(string $room, bool $bookingResult, string $arrivalDate, string $departureDate, int $numberOfDays, float $totalCost, array $selectedFeaturesNames): void
+function checkBooking(string $room, bool $bookingResult, string $arrivalDate, string $departureDate, int $numberOfDays, float $totalCost, array $selectedFeaturesNames, array $gifs): void
 {
 
     // if booking is successful, send the response as json back to the client
@@ -166,7 +195,8 @@ function checkBooking(string $room, bool $bookingResult, string $arrivalDate, st
               'booking-result' => $bookingResult,
               'greeting' => 'Booking successful! You are expected to arrive on the '.$arrivalDate. 'and departure on the '.$departureDate.'
                             for a total stay of '.$numberOfDays. 'days! You´ll be staying in the room '.$room.'. Total cost estimated at: '.$totalCost.'. Thank you for choosing us!
-                            We await your arrival with much anticipation.'
+                            We await your arrival with much anticipation.',
+              'giphy' => $gifs[0]['embed_url']
             ]
         ];
         foreach($selectedFeaturesNames as $feature){ //the selected features are added to the response here

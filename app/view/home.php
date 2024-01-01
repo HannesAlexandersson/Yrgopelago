@@ -14,7 +14,7 @@
         moment is a brushstroke of serenity, painting a masterpiece of memories against the
         backdrop of our island oasis. Escape to a realm where dreams come alive, and let Hotel Avalon
         be the enchanting chapter in your tropical tale. Welcome to a haven where your journey becomes
-        an unforgettable story. The Only four star hotel in the Lagoon Luster Cove archipelago!
+        an unforgettable story. The Only five star hotel in the Lagoon Luster Cove archipelago!
         </span>
       </p>
     </span>
