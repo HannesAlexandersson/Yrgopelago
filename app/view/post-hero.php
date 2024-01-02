@@ -11,7 +11,7 @@
         <img class="image" id="page8" src="assets/vertical/Swing-pacific-beach-GettyImages-522806432.jpg" alt="" draggable="false"/>
         <img class="image" id="page9" src="assets/vertical/tahiti-drone-99497-ws.jpg" alt="" draggable="false"/>
         <img class="image" id="page10" src="assets/vertical/yuliya-pankevich-oyxsG2Lh_uA-unsplash.jpg" alt="" draggable="false"/>
-        <img class="image" id="page11" src="assets/vertical/collage.png" alt="" draggable="false"/>
+        <img class="image" id="page11" src="assets/vertical/Welcome.png" alt="collage of island pictures and welcome to hotel avalon" draggable="false"/>
     </div>
     <script src="app/scripts/post-hero.js"></script>
   </div>
