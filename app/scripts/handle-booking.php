@@ -120,7 +120,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       echo json_encode(["error" => "Transfer code validation failed. Please try again."]);
       exit();
     } else if ($bankResponseValidation["amount"] < $totalCost) { //if the user tryes to use a transfercode with not enough money on it we abort the booking
-      echo json_encode(["error" => "Transfer code validation failed. Please try again."]);
+      echo json_encode(["error" => "Transfer code validation failed. Not enough money on transfercode! Please try again."]);
       exit();
     } else { // if all goes well we deposit the transfercode and then we perform the booking
         // Deposit the transfer code
@@ -146,7 +146,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 }
 
-//get giphy gifs
+//get giphy gifs function
 function getGif(string $giphyKey): array
 {
   $client = new Client([
@@ -303,7 +303,7 @@ function bookRoom(string $user_id, int $room_id, string $arrivalDate, string $de
   } catch (PDOException $e) {
       error_log('Failed to connect to the database: ' . $e->getMessage());
       throw $e;
-      return false; // return false if the booking failed
+      return false; // return false if the booking failed, this will cause the booking to abort from the client side
   }
 }
 

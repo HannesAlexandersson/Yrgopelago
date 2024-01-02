@@ -2,7 +2,9 @@
 session_start();
 require __DIR__. '/../../vendor/autoload.php';
 use Dotenv\Dotenv;
+// get the data from the login form
 if(isset($_POST['username']) && isset($_POST['password'])){
+  // store the data in variables and sanitize
     $username = htmlspecialchars($_POST['username']);
     $password = htmlspecialchars($_POST['password']);
 
@@ -14,13 +16,14 @@ $dotenv->load();
 // Access the values from dotenv
 $adminUserName = $_ENV['API_KEY'];
 $adminPassword = $_ENV['ADMIN_PASSWORD'];
-
+// check if the username and password are correct
 if($username == $adminUserName && $password == $adminPassword){
+  // if they are correct, set the session variable to true and redirect to the admin page
   $_SESSION['logged_in'] = true;
     header('Location: admin.php');
     exit;
 }
-else{
+else{// if they are not correct, echo an error message and let the user try again
     echo 'Wrong username or password';
 }
 

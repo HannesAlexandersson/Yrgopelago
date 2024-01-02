@@ -4,7 +4,7 @@
 //to scroll at a different speed than the background images
 document.addEventListener('scroll', function() {
   let scrollPosition = window.scrollY;
- /*  document.querySelector('.hero-content').style.backgroundPositionY = scrollPosition * 1.5 + 'px'; */
+ 
   document.querySelector('.pool').style.backgroundPositionY = scrollPosition * 0.1 + 'px';
   document.querySelector('.nightsky').style.backgroundPositionY = -scrollPosition * 0.1 + 'px';
 });

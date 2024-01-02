@@ -1,6 +1,10 @@
 .collage-cointainer {
   height: 100vh;
+  height: 100dvh;/* Dynamical values for mobile units that might use virtual scrollbars and top menues*/
+  height: 100svh;/* Dynamical values for mobile units that might use virtual scrollbars and top menues*/
   width: 100vw;
+  width: 100dvw;/* Dynamical values for mobile units that might use virtual scrollbars and top menues*/
+  width: 100svw;/* Dynamical values for mobile units that might use virtual scrollbars and top menues*/
   background-color: var(--default-bg);
   margin: 0rem;
   overflow: hidden;
@@ -25,6 +29,3 @@
   object-fit: cover;
   object-position: 100% center;
 }
-
-
-

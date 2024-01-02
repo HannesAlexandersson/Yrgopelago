@@ -1,10 +1,4 @@
-/* document.addEventListener('DOMContentLoaded', function() {
-  var calendarEl = document.getElementById('calendar');
-  var calendar = new FullCalendar.Calendar(calendarEl, {
-    initialView: 'dayGridMonth'
-  });
-  calendar.render();
-}); */
+
 let isArrivalDateLocked = false;
 var eventsArray = [];
 let bookedDates = {
@@ -57,10 +51,10 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('arrivalDate').value = info.dateStr;
       }
     },
-    /*  validRange: {
+    validRange: {
       start: '2024-01-01',
       end: '2024-02-01'
-    }  */
+    } //this is the range of the calendar, required by Hans to be from jan 1 to jan 31
   });
   fetchDataAndPopulateArray(eventsArray)
   .then(function () {
@@ -75,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-
+// to be able to show the booking to the user in the calender tha page needs to reload, so when user press the btn "show booking" the page reloads
 document.getElementById('reloadButton').addEventListener('click', function() {
   // Add a delay of 2000 milliseconds (2 seconds) before reloading the page, to give time for the booking to be processed
   setTimeout(function() {

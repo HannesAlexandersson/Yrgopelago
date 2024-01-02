@@ -1,18 +1,8 @@
 
-
-
-
-
-
-
-
-
-
-
 // a listener for the booking form to be able to submit bookings to the php script
 document.getElementById('bookingForm').addEventListener('submit', async function (event) {
   event.preventDefault();
-//extract the form data
+//extract the form data from the html form
 var user_id = document.getElementById('transfercode').value;
 var room_id = document.getElementById('room').value;
 var room;// I need a variable to hold the actual room name for the calendar and for visual purposes
@@ -44,7 +34,7 @@ if (user_id && room_id && arrivalDate && departureDate) {
     // Check room availability
     const isAvailable = await checkRoomAvailability(room_id, arrivalDate, departureDate);
     if (isAvailable) {
-      // Room is available, proceed with booking
+      // Room is available, proceed with booking (send the data to the php file that handles the booking and inserts it into the database)
       const bookingResponse = await bookRoom(user_id, room_id, arrivalDate, departureDate, features);
       if (bookingResponse['additional_info']['booking-result']) {
         console.log('Booking successful!');
@@ -53,16 +43,16 @@ if (user_id && room_id && arrivalDate && departureDate) {
       alert(bookingResponse['additional_info']['greeting']);
       }else if(booking-result['error']){
         alert(booking-result['error']);
-        clearBookingForm()
+        clearBookingForm();
       } else {
         alert('Booking failed. Please try again.');
-        clearBookingForm()
+        clearBookingForm();
       }
     } else {
       alert('This room is already booked for the selected dates. Please choose different dates.');
       clearBookingForm();
     }
-  } catch (error) {
+  } catch (error) {// after testing I found out that this error is thrown when the user has not enough money on his account or if the amounts didnt match, so I added an alert to tell the user to make sure he has enough money on his account
     console.log('error in validation of transfercode, pls make sure you have enought money on your account');
     alert('An error occurred while processing the booking. Please try again.');
     clearBookingForm()

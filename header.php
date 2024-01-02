@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotel Avalon</title>
-
+    <!-- all your Hotel stylingsheets are belong to me-->
     <link rel="stylesheet" href="app/css/style.css">
     <link rel="stylesheet" href="app/css/navbar.css">
     <link rel="stylesheet" href="app/css/post-hero.css">

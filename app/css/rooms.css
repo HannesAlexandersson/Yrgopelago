@@ -1,6 +1,5 @@
 .center-rooms{
   background-image: url(/assets/backgrounds/double-nobg.png);
-
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -68,8 +67,6 @@
 }
 .room {
   overflow: hidden;
-
-
   width: calc(25% - 2rem);
   display: flex;
   flex-direction: column;

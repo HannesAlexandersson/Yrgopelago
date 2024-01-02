@@ -22,7 +22,7 @@ function getBookingsForCalendar(int $room_id): array
       echo "Error: " . $e->getMessage();
   }
 }
-// afunction that creates a connection to the database
+// afunction that creates a connection to the database, used by alot of functions both here and on other scripts
 function connectToDatabase(string $dbName): object
 {
     $dbPath = __DIR__ . '/' . $dbName;

@@ -6,4 +6,4 @@ document.addEventListener('scroll', function() {
 
 
 });
-// parallax logic
+// parallax logic for the discount page

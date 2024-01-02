@@ -4,14 +4,15 @@ session_start();
 require __DIR__ . '/../../app/database/database-communications.php';
 
 
-// Check if I am logged in
+// Check if I(the hotel manager) am logged in
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
   // If not logged in, redirect to the login page
   header("Location: /index.php");
   exit();
 
-  // else the hotel manager is logged in
+  // else the hotel manager(me) is logged in
 } else {
+  /* -----------------------------CHANGE ROOM PRICE-------------------------------------------------------------*/
   if ($_SERVER["REQUEST_METHOD"] == "POST") {// if the form is submitted
     if (isset($_POST["roomId"]) && isset($_POST["newPrice"])) {// and the room price form is submitted
       $roomId = intval($_POST["roomId"]);
@@ -33,7 +34,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
       }
       updateRoomPrice($roomId, $newPrice);// call the function to update the room price
 /*-----------------------------------------------------------------------------------------------------*/
-/*-----------------------------------------------------------------------------------------------------*/
+/*--------------------------CHANGE FEATURE PRICE-------------------------------------------------------*/
     } elseif (isset($_POST["featureId"]) && isset($_POST["newPriceFeature"])) { // Handle form submission to update feature price if the feature price form is submitted
       $featureId = intval($_POST["featureId"]);
       $newPriceFeature = floatval($_POST["newPriceFeature"]);
@@ -57,6 +58,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     }
   }
 }
+/*----------------------------------------------------------------------------------------------------------- */
 ?>
 
 <!DOCTYPE html>
@@ -98,7 +100,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 
   </div>
 </div>
-<script>
+<script>// gets the transfer codes from the json file and displays them in a table
 document.getElementById('get-transfercodes').addEventListener('click', function() {
   // Fetch the entire JSON file
   fetch('/../app/scripts/validation_response.json')
@@ -107,7 +109,7 @@ document.getElementById('get-transfercodes').addEventListener('click', function(
       // Update the content-box with the fetched data
       updateContentBox(data);
     })
-    .catch(error => {
+    .catch(error => { // If there is an error fetching the data, log it to the console
       console.error('Error fetching data:', error);
     });
 });

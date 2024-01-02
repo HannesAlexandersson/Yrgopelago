@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-
+// functions given to us with the template, the only one I end up using is the validation function
 
 function connect(string $dbName): object
 {

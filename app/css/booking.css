@@ -1,14 +1,12 @@
 .booking-bg {
   gap: 1rem;
   background-image: url(/assets/backgrounds/bg-palms-dark.png);
-  
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
   align-items: center;
-
 }
 .booking-header > h1 {
   position: relative;
@@ -23,10 +21,7 @@
   flex-direction: column;
   align-items: center;
 }
-.booking-form-wrapper{
-
-}
-.features-checkbox{
+.features-checkbox {
   display: flex;
   flex-direction: row;
 }
@@ -34,7 +29,6 @@
   gap: 0.5rem;
   display: flex;
   flex-direction: column;
-
   margin-left: 0.5rem;
   margin-right: 0.5rem;
 }
@@ -43,9 +37,7 @@
   margin-bottom: 2rem;
   color: var(--default-font-clr);
 }
-
-
-.booking-presented{
+.booking-presented {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -53,17 +45,17 @@
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
-.calender-container{
+.calender-container {
   background-color: antiquewhite;
 }
-.btn{
+.btn {
   color: var(--default-font-clr);
   background-color: var(--offset-dark);
   font-family: var(--secondary-font);
   border: 2px solid var(--spotlight-blur-clr);
   border-radius: 4px;
 }
-.btn:hover{
+.btn:hover {
   background-color: var(--spotlight-blur-clr);
   color: var(--offset-dark);
   cursor: pointer;
@@ -118,9 +110,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
 }
-}
-
 
 .hide {
   display: none;

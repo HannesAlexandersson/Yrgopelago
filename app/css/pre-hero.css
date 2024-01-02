@@ -1,6 +1,5 @@
 .bg-pre {
   background-color: var(--default-bg);
-  /* height: 100vh; dont need?*/
   display: flex;
   overflow-y: hidden;
   flex-direction: column;

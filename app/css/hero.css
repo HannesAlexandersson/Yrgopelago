@@ -34,27 +34,12 @@
 .hero-header{
   font-size: 4em;
 }
-
-/* .hero-content {
-  display: flex;
-  position: relative;
-  z-index: -1;
-  text-align: center;
-  padding: 50px;
-  top: 22rem;
-  flex-direction: column;
-  align-items: center;
-} */
 .hero-content {
-  
   z-index: -1;
 }
-
-
 .box {
 	display: flex;
 }
-
 .box .inner {
 	width: 400px;
 	height: 200px;
@@ -65,7 +50,6 @@
 	white-space: nowrap;
 	overflow: hidden;
 }
-
 .box .inner:first-child {
 	background-color: var(--secondary-bg);
 	color: var(--default-font-clr);

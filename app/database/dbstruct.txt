@@ -1,6 +1,6 @@
 Database structure:
 type: SQLITE
-Tables: 
+Tables:
 table rooms:
   room_id / room_name / room_price
 
@@ -46,3 +46,53 @@ $query = "INSERT INTO bookings (user_id, room_id, arrival_date, departure_date, 
 ```
 
 The DB provides the Calender with the booked dates for all of the rooms.
+
+statements used for creating the tables:
+```
+CREATE TABLE rooms (
+    room_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name VARCHAR(255) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL
+);
+
+INSERT INTO rooms (room_id, name, price) VALUES (1, 'The Gaze', 5.00);
+
+INSERT INTO rooms (room_id, name, price) VALUES (2, 'The Tranquility', 10.00);
+
+INSERT INTO rooms (room_id, name, price) VALUES (3, 'The Presidential', 25.00);
+
+
+CREATE TABLE features (
+feature_id INTEGER PRIMARY KEY AUTOINCREMENT,
+name VARCHAR,
+price INT
+);
+
+INSERT INTO features (feature_id, name, price) VALUES (1, 'massage therapy', 5);
+
+INSERT INTO features (feature_id, name, price) VALUES (2, 'bedtime storyteller', 5);
+
+INSERT INTO features (feature_id, name, price) VALUES (3, 'underground hotsprings', 5);
+
+
+CREATE TABLE bookings (
+    booking_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id VARCHAR(36) NOT NULL,
+    room_id INT NOT NULL,
+    arrival_date DATE NOT NULL,
+    departure_date DATE NOT NULL,
+    total_cost DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (room_id) REFERENCES rooms(room_id)
+);
+
+CREATE TABLE booking_features (
+    booking_id INT,
+    feature_id INT,
+    PRIMARY KEY (booking_id, feature_id),
+    FOREIGN KEY (booking_id) REFERENCES bookings(booking_id),
+    FOREIGN KEY (feature_id) REFERENCES features(feature_id)
+);
+
+
+
+```

@@ -16,21 +16,21 @@ function validateTransferCode(string $transferCode, float $totalCost): array
    $bankResponseValidation = json_decode($validateResponse->getBody()->getContents(), true);
     $fileContent = file_get_contents('validation_response.json');
     $data = json_decode($fileContent, true);
-    // If the "guests" key doesn't exist or is not an array, initialize it as an empty array
+    // If the "guests" key doesn't exist or is not an array, initialize it as an empty array. This is from the file "validation_response.json" wich is a place I store all succeful bookings for the admin page
     if (!isset($data['guests']) || !is_array($data['guests'])) {
       $data['guests'] = [];
     }
     $data['guests'][] = $bankResponseValidation;// add the response to the array
     $newContent = json_encode($data, JSON_PRETTY_PRINT);// encode the array as json
     file_put_contents('validation_response.json', $newContent);// save the response as json in a separate file for debugging reasons, and for the adminpage
-    /* file_put_contents('validation_response.json', json_encode($bankResponseValidation), FILE_APPEND); *///save the response as json in a separate file for debugging reasons
-    return $bankResponseValidation;
+
+    return $bankResponseValidation; // return the response to the "handleBooking.php" script
   }
-  catch (\Exception $e) {
+  catch (\Exception $e) { // catch any errors and log them
       return ['error' => $e->getMessage()];
   }
 }
-// Deposit the transfer code into my account
+// Deposit the transfer code into my account, This is done automatic when the booking is made and the validation of the transfercode is OK
 function depositTransferCode(string $transferCode, string $hotelManager ): array
 {
   try{
