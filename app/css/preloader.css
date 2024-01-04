@@ -30,38 +30,38 @@
   transform: rotateX(-90deg);
 }
 
-.letter1 {
+.letterL {
   animation: drop 1.2s ease-in-out infinite;
   animation-delay: 1.2s;
 }
 
-.letter2 {
+.letterO {
   animation: drop 1.2s ease-in-out infinite;
   animation-delay: 1.3s;
 }
 
-.letter3 {
+.letterA {
   animation: drop 1.2s ease-in-out infinite;
   animation-delay: 1.4s;
 }
 
-.letter4 {
+.letterD {
   animation: drop 1.2s ease-in-out infinite;
   animation-delay: 1.5s;
 
 }
 
-.letter5 {
+.letterI {
   animation: drop 1.2s ease-in-out infinite;
   animation-delay: 1.6s;
 }
 
-.letter6 {
+.letterN {
   animation: drop 1.2s ease-in-out infinite;
   animation-delay: 1.7s;
 }
 
-.letter7 {
+.letterG {
   animation: drop 1.2s ease-in-out infinite;
   animation-delay: 1.8s;
 }
