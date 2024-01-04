@@ -10,9 +10,13 @@
     </h1>
   </div>
   <script>
-   document.addEventListener("DOMContentLoaded", function () {
-      // Hide the loading animation when all assets are loaded
+    document.addEventListener("DOMContentLoaded", function () {// When the DOM is loaded
+      // and when the window is loaded all assets(for some reason I need both for the animation to work properly)
+      window.onload = function () {
+        // Hide the loading animation-container when all assets are loaded
       document.querySelector('.preloader-container').style.display = 'none';
-      document.body.style.overflowY = 'auto'; // Enable scrolling after loading is completed
-    });
+      document.body.style.overflowY = 'auto'; // Enable vertical-scrolling after loading is completed
+
+    };
+  });
 </script>
