@@ -1,7 +1,8 @@
 <div class="bg-pre">
   <div class="left-side-pre">
-    <div class="scroll-reveal-container">
-      <span class="scroll-reveal pre-header-wrapper default-font">
+
+
+      <span class="pre-header-wrapper default-font scroll-reveal">
         <h1>
           <span>Embark on a Journey of Elegance</span>
         </h1>
@@ -22,10 +23,8 @@
           <span>Discover Opulence, Define Memories</span>
         </h1>
           <p><span>Hotel Avalon is not just a hotel; it's the beginning of your extraordinary journey. Let the story of your stay unfold in a tapestry of luxury, comfort, and unparalleled hospitality.</span></p>
-
-
       </span>
-    </div>
+
   </div>
 
 

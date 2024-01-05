@@ -3,7 +3,8 @@ main {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  width: 100%;
+  width: 100vw;
+  width: 100dvw; /* Dynamical values for mobile units that might use virtual scrollbars and top menues*/
   height: 100vh;
   height: 100dvh; /* Dynamical values for mobile units that might use virtual scrollbars and top menues*/
   height: 100svh; /* Dynamical values for mobile units that might use virtual scrollbars and top menues*/

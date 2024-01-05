@@ -1,33 +1,14 @@
 .bg-pre {
   background-color: var(--default-bg);
   display: flex;
-  overflow-y: hidden;
   flex-direction: column;
   align-items: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  min-height: 100svh;
 }
 
-/*scroll reveal*/
-.scroll-reveal span {
-  color: hsl(0 0% 100% / 0);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-background-repeat: no-repeat;
-  background-repeat: no-repeat;
-  -webkit-background-size: 0% 100%;
-  background-size: 0% 100%;
-  background-image: linear-gradient(90deg, red, blue);
-  animation: scroll-reveal linear forwards;
-  animation-timeline: view();
-}
 
-.scroll-reveal h1 span {
-  animation-range-start: cover 2vh;
-  animation-range-end: cover 22vh;
-}
-.scroll-reveal p span {
-  animation-range-start: cover 0vh;
-  animation-range-end: cover 8vh;
-}
 
 .left-side-pre {
   text-align: center;
@@ -41,6 +22,35 @@
   font-size: 1rem;
   font-weight: 400;
 }
+
+
+
+/*scroll reveal*/
+.scroll-reveal span {
+  color: hsl(0 0% 100% / 0); /*transparent background color on text before reveal*/
+  -webkit-background-clip: text; /*for accesability for browser without support*/
+  background-clip: text; /*makes the backround image (the colour gradient in my case) apply to the text*/
+  -webkit-background-repeat: no-repeat;
+  background-repeat: no-repeat;
+  -webkit-background-size: 0% 100%;
+  background-size: 0% 100%;
+  background-image: linear-gradient(90deg, red, blue);
+  animation: scroll-reveal linear forwards;
+  animation-timeline: view(); /*makes the animation apply to the viewport I.E when the user scrolls down, since we apply animation-range-start /ends to the elements itselfs*/
+}
+
+.scroll-reveal h1 span { /*the animation range for the texts. NOTE the text elements needed to be inline so therefore I made them span*/
+  animation-range-start: cover 0vh;
+  animation-range-end: cover 83vh;
+}
+.scroll-reveal p span {
+  animation-range-start: contain 53vh;
+  animation-range-end: cover 57vh;
+}
+
+/*SCROLL reveal ends*/
+
+/* images*/
 .right-side-pre {
   align-self: center;
   width: 90%;
@@ -71,6 +81,7 @@
   height: auto;
   display: block;
 }
+/* images ends*/
 
 @media (min-width: 650px) {
   .bg-pre {

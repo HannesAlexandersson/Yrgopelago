@@ -1,8 +1,12 @@
+
 .center-rooms{
   background-image: url(/assets/backgrounds/double-nobg.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  min-height: 100vh;
+  min-height: 100dvh;
+  min-height: 100svh;
 }
 .rooms-text-container {
   text-align: center;
