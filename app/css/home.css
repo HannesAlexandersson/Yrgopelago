@@ -5,9 +5,9 @@ main {
   background-size: cover;
   width: 100vw;
   width: 100dvw; /* Dynamical values for mobile units that might use virtual scrollbars and top menues*/
-  height: 100vh;
-  height: 100dvh; /* Dynamical values for mobile units that might use virtual scrollbars and top menues*/
-  height: 100svh; /* Dynamical values for mobile units that might use virtual scrollbars and top menues*/
+  min-height: 100vh;
+  min-height: 100dvh; /* Dynamical values for mobile units that might use virtual scrollbars and top menues*/
+  min-height: 100svh; /* Dynamical values for mobile units that might use virtual scrollbars and top menues*/
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -40,11 +40,16 @@ main {
 }
 .home-text {
   text-shadow: -7px 2px 15px black;
-  font-size: 1.1rem;
-  font-style: normal;
-  font-weight: 400;
-  text-align: center;
-  line-height: 1rem;
+  text-align: start;
+}
+.home-text h1 span {
+  font-size: 1.5em;
+  line-height: 1.95em;
+  letter-spacing: -0.05em;
+}
+.home-text p span {
+  font-size: 1.1em;
+  line-height: 1.43em;
 }
 .remove{
   display: none;
@@ -54,9 +59,28 @@ main {
   .remove{
     display: block;
   }
-  .home-text {
-    line-height: 1.125rem;
-  }
+  .home-text p span {
+    animation-range-start: cover 48vh;
+    animation-range-end: cover 90vh;
+}
+}
+@media (min-width: 400px) {
+  .right-side-home {
+    width: 70%;
+}
+.home-text p span {
+  animation-range-start: cover 48vh;
+  animation-range-end: cover 90vh;
+}
+}
+@media (min-width: 700px) {
+  .right-side-home {
+    width: 60%;
+}
+.home-text p span {
+  animation-range-start: cover 49vh;
+  animation-range-end: cover 107vh;
+}
 }
 @media (min-width: 800px) {
 .left-side-home {
@@ -65,15 +89,18 @@ main {
 .right-side-home {
   width: 30%;
 }
-.home-text {
-  line-height: 1.2rem;
-  font-size: 1rem;
+.home-text h1 span {
+  line-height: 3.6rem;
+  font-size: 3rem;
 }
-
+.home-text p span {
+  animation-range-start: cover 44vh;
+  animation-range-end: cover 183vh;
+}
 }
 @media (min-width: 1050px) {
-  .home-text {
-    font-size: 1.1em;
-    line-height: 1.5rem;
+  .home-text p span {
+    animation-range-start: cover 44vh;
+    animation-range-end: cover 128vh;
 }
 }

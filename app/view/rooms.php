@@ -1,18 +1,20 @@
 <div class="rooms-bg">
   <div class="left-rooms"></div>
-  <div class="center-rooms rooms-text-container">
-    <div class="rooms-header default-font">
-      <h1>Our rooms</h1>
-    </div>
-    <div class="rooms-header-subtext default-font">
-      <p>
-        Here on hotel Avalon we have 3 amazing rooms,each offers an extravaganza in luxury and comfort.
-        One could of course argue that one is more beautiful than the other, but we leave that up to you to
-        decied since each one offers its own unique flavor.
-      </p>
-      <p>
-        So check out our rooms and see which one suits you best.
-      </p>
+  <div class="center-rooms">
+    <div class="rooms-text-container">
+      <div class="rooms-header default-font">
+        <h1>Our rooms</h1>
+      </div>
+      <div class="rooms-header-subtext default-font">
+        <p>
+          Here on hotel Avalon we have 3 amazing rooms,each offers an extravaganza in luxury and comfort.
+          One could of course argue that one is more beautiful than the other, but we leave that up to you to
+          decied since each one offers its own unique flavor.
+        </p>
+        <p>
+          <strong>So check out our rooms and see which one suits you best.</strong>
+        </p>
+      </div>
     </div>
     <div class="room-container">
     <?php require __DIR__ . '/../database/database-communications.php'; ?>
