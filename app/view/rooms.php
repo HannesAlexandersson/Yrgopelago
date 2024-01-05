@@ -6,7 +6,7 @@
     </div>
     <div class="rooms-header-subtext default-font">
       <p>
-        here on hotel Avalon we have 3 amazing rooms,each offers an extravaganza in luxury and comfort.
+        Here on hotel Avalon we have 3 amazing rooms,each offers an extravaganza in luxury and comfort.
         One could of course argue that one is more beautiful than the other, but we leave that up to you to
         decied since each one offers its own unique flavor.
       </p>
