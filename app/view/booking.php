@@ -39,11 +39,11 @@
         </select>
 
         <label for="arrivalDate">Arrival Date:</label>
-        <input type="date" id="arrivalDate" name="arrivalDate" />
+        <input type="date" required id="arrivalDate" name="arrivalDate" min="2024-01-01" max="2024-01-31" />
         <button class="date-btn btn" type="button" id="lockArrivalDate" onclick="toggleLockArrivalDate()">Lock Arrival Date</button>
 
         <label for="departureDate">Departure Date:</label>
-        <input type="date" id="departureDate" name="departureDate" />
+        <input type="date" required id="departureDate" name="departureDate" min="2024-01-01" max="2024-01-31" />
         <button class="date-btn btn" type="button" id="lockDepartureDate" onclick="toggleLockDepartureDate()">Lock Departure Date</button>
 
         <div class="features-checkbox">
