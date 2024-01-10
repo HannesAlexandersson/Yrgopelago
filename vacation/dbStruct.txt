@@ -1,0 +1,24 @@
+the vacation db is only a small simple db that takes the content from the loggbok and saves it under each and one of the
+sub "titles" from the each booking-response. So for example "total_cost" have an own column, and "island_name" aswell.
+
+The features have an own table. I thought that would be easiest for when to calculate how many distinct features I have booked.
+
+SQLITE querys:
+
+```
+CREATE TABLE loggbok (logg_id INTEGER PRIMARY KEY AUTOINCREMENT,
+island_name VARCHAR,
+hotel_name VARCHAR,
+arrival_date date,
+departure_date date,
+total_cost int,
+stars int
+);
+
+CREATE TABLE features (feat_id INTEGER PRIMARY KEY AUTOINCREMENT,
+feat_name VARCHAR,
+logg_id INT,
+FOREIGN KEY (logg_id) REFERENCES loggbok(logg_id)
+);
+
+```
