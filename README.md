@@ -19,8 +19,12 @@ atm its a 5 star hotel, (I think)
 # Instructions
 No installation needed. The Hotel operates online. You only get your transfercode from the centralbank for the right amount and then use it to book your room. You can see in the calender if an certain room is already booked on a certain date. So dont try and doublebook becouse it is not possbile anyways. 
 The only tricky part is that you have to lock in your arrival-date before you are able to pick an departure-date if you are using the calender to pick dates. Otherwise when you click on a date you'll only altering the arrival-date. But i wrote an FAQ in a pop-up to explain this to the user, so hopefully it will be all-right. 
+
+In the vacations folder I have set up a script that automatic takes the loggbook and insert the content into an DB. Later I fetch the information from that DB and present it visually in a table. The idea is to incorporate this into the admin page perhaps, or mayby let it be freestanding. 
 # Database
 I use a sqlite database. Its simple but gets the job done. For more specific information about the db structure you can check out the database folder where I keep the db config file. It handles the information about the rooms and the features along with the pricing of those. That gives me the oppurtonity to via the admin page change the values in the db. And becouse I fetch the information about the rooms and features from the db in the html code it means that if I change the price from the admin the page the website automatic changes the price on the website and all the calculations also. Because they are all based of the value in the db.
+
+I also have a small indipendent DB for my own vacation loggbok. I use that to visually present my loggbok. 
 # Admin page
 I made an admin page that the hotel manager can log into using my API-key and a password that is stored in the dotenv file. In the Admin page section the manager can alter the price of all the rooms and all the features. This is done via prepared pdo statements wich alter the actual DB values. The website and all calculations gets the pricing also directly from the DB so there is no chance of something going wrong, like for example if I change the room price and the JS that is showing the user the price BEFORE booking wouldnt show the new price. 
 

@@ -1,5 +1,26 @@
 {
   "vacation": [
-   
+    {
+      "island": "Main island",
+      "hotel": "Centralhotellet",
+      "arrival_date": "2024-01-12",
+      "departure_date": "2024-01-17",
+      "total_cost": "12",
+      "stars": "3",
+      "features": [
+        {
+          "name": "sauna",
+          "cost": 2
+        },
+        {
+          "name": "massage",
+          "cost": 2
+        }
+      ],
+      "addtional_info": {
+        "greeting": "Thank you for choosing Centralhotellet",
+        "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e2/Hotel_Boscolo_Exedra_Nice.jpg"
+      }
+    }
   ]
 }

@@ -73,6 +73,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 
 <h1>Welcome to the Admin Page</h1>
 <p>You can update room prices here.</p>
+<p>and here is a link to the loggbok <a href="/../../vacation/vacation.php"></a></p>
 
 
 <form action="admin.php" method="post">

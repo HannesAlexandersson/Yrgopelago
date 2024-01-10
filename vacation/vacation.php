@@ -1,11 +1,12 @@
 <?php
-
 declare(strict_types=1);
-
-header('Content-Type:application/json');
+require __DIR__ . '/connectToVacDB.php';
+if (isset($_POST['btn'])) {
+  require __DIR__ . '/handleForm.php';
+}
 // trying to build some sort of visual representation of the logbook
-$vacation= json_decode(file_get_contents(__DIR__ . '/vacation/logbook.json'), true);// get the data from the json file and decode it, it should contain all my visits to other hotels, IE the booking responses I have gotten
-
+$vacations = getLoggs('../vacation/vacation.db');
+$features = getFeats('../vacation/vacation.db');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +16,15 @@ $vacation= json_decode(file_get_contents(__DIR__ . '/vacation/logbook.json'), tr
   <title>Document</title>
 </head>
 <body>
-  <div class="content-wrapper">
+  <div class="wrapper-insert">
+    <p>Press the button to insert the loggbok file into the db</p>
+    <form action="/vacation/vacation.php" method="post">
+
+    <input type="hidden" name="btn" value="true">
+    <button id="btn" type="submit">Insert to DB</button>
+</form>
+  </div>
+  <div class="content-wrapper loggbok">
     <h1>Logbook</h1>
     <table>
       <thead>
@@ -25,26 +34,27 @@ $vacation= json_decode(file_get_contents(__DIR__ . '/vacation/logbook.json'), tr
           <th>Room</th>
           <th>Check-in</th>
           <th>Check-out</th>
-          <th>Transfer code</th>
-          <th>Features</th>
           <th>Stars</th>
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($vacation as $vacation) : ?>
+        <?php foreach ($vacations as $vacation) : ?>
           <tr>
-            <td><?= $vacation['Island'] ?></td>
-            <td><?= $vacation['Hotel'] ?></td>
-            <td><?= $vacation['room'] ?></td>
-            <td><?= $vacation['check-in'] ?></td>
-            <td><?= $vacation['check-out'] ?></td>
-            <td><?= $vacation['transfer code'] ?></td>
-            <td><?= $vacation['features'] ?></td>
-            <td><?= $vacation['Stars'] ?></td>
+            <td><?= $vacation['island_name'] ?></td>
+            <td><?= $vacation['hotel_name'] ?></td>
+            <td><?= $vacation['arrival_date'] ?></td>
+            <td><?= $vacation['departure_date'] ?></td>
+            <td><?= $vacation['total_cost'] ?></td>
+            <td><?= $vacation['stars'] ?></td>
           </tr>
         <?php endforeach; ?>
       </tbody>
     </table>
+  </div>
+  <div class="content-wrapper features">
+    <?php foreach($features as $feats) : ?>
+        <h6>Feature name: <?=$feats['feat_name'] ?></h6>
+    <?php endforeach;?>
   </div>
 </body>
 </html>
