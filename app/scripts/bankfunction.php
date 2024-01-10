@@ -14,9 +14,9 @@ function validateTransferCode(string $transferCode, float $totalCost): array
         'totalcost' => $totalCost
     ]]);
    $bankResponseValidation = json_decode($validateResponse->getBody()->getContents(), true);
-    $fileContent = file_get_contents('validation_response.json');
+    $fileContent = file_get_contents('validation_response.json');// get the JSON file with my "guests"
     $data = json_decode($fileContent, true);
-    // If the "guests" key doesn't exist or is not an array, initialize it as an empty array. This is from the file "validation_response.json" wich is a place I store all succeful bookings for the admin page
+    // If the "guests" key doesn't exist or is not an array, initialize it as an empty array(IE if the guest is the very first guest). This is from the file "validation_response.json" wich is a place I store all succeful bookings for the admin page
     if (!isset($data['guests']) || !is_array($data['guests'])) {
       $data['guests'] = [];
     }

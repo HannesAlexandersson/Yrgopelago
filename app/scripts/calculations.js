@@ -22,10 +22,10 @@ function calculateCost(room_id, selectedFeatureIDs, numberOfDays) {
   var discountPercentage = 0.1; // 10% discount per day
   var maxDiscountPercentage = 0.5; // Maximum 50% discount
   var discountDaysThreshold = 3; // Apply discount for bookings longer than 3 days
-  var discount = 0;
-
+  var discount = 0; //discount starts at zero
+  // only apply discount to bookings LONGER than the treshold
   if (numberOfDays > discountDaysThreshold) {
-    var eligibleDays = numberOfDays - discountDaysThreshold;
+    var eligibleDays = numberOfDays - discountDaysThreshold; // gets the number of days thats eligible for discounts
     discount = Math.min(eligibleDays * discountPercentage, maxDiscountPercentage);
   }
 

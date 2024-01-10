@@ -1,3 +1,5 @@
+# About
+The project is an school assignment in the Yrgo education for web dev. We are supposed to build a operational website for an fictive hotel in an fictiv archepelago. The hotel gets more "stars" the higher standards the hotel have. The more stars the more the hotel manager can charge for the rooms I guess. In the end all the students gets 100 bucks and for a given time period we are gonna "stay" at the others hotels, while the others stays at mine hotel. In the end we count wich student have the most money on their account ( i.e the hotel that have the mosts guests)
 # Island name
 Lagoon Luster Cove
 # Hotel name
@@ -15,7 +17,7 @@ atm its a 5 star hotel, (I think)
 -we have an adminpage where the manager can change the pricing of the rooms and features. 4 stars
 -we are fetching an random hotel gif from giphy's API and sending that gif with the response on succeful booking, In other words: We are using external data to generate a response on succeful booking. 5 stars
 # Instructions
-No instructions needed. The Hotel operates online. No installation needed. You only get your transfercode from the centralbank for the right amount and then use it to book your room. You can see in the calender if an certain room is already booked on a certain date. So dont try and doublebook becouse it is not possbile anyways. 
+No installation needed. The Hotel operates online. You only get your transfercode from the centralbank for the right amount and then use it to book your room. You can see in the calender if an certain room is already booked on a certain date. So dont try and doublebook becouse it is not possbile anyways. 
 The only tricky part is that you have to lock in your arrival-date before you are able to pick an departure-date if you are using the calender to pick dates. Otherwise when you click on a date you'll only altering the arrival-date. But i wrote an FAQ in a pop-up to explain this to the user, so hopefully it will be all-right. 
 # Database
 I use a sqlite database. Its simple but gets the job done. For more specific information about the db structure you can check out the database folder where I keep the db config file. It handles the information about the rooms and the features along with the pricing of those. That gives me the oppurtonity to via the admin page change the values in the db. And becouse I fetch the information about the rooms and features from the db in the html code it means that if I change the price from the admin the page the website automatic changes the price on the website and all the calculations also. Because they are all based of the value in the db.

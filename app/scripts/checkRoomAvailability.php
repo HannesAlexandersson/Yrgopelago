@@ -12,8 +12,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
   // Validate and sanitize the data
   $room_id = filter_var($postData["room"], FILTER_VALIDATE_INT);
   // Validate and sanitize arrivalDate and departureDate
-  $arrivalDate = filter_var($postData['arrivalDate'], FILTER_SANITIZE_STRING);
-  $departureDate = filter_var($postData['departureDate'], FILTER_SANITIZE_STRING);
+  $arrivalDate = htmlspecialchars($postData['arrivalDate']);
+  $departureDate = htmlspecialchars($postData['departureDate']);
 
   // Check if the conversion and filtering were successful
   if ($room_id === false || $arrivalDate === false || $departureDate === false) {

@@ -16,6 +16,7 @@ if(room_id == 1){
   room = 'The Presidential';
 
 }
+//extract the user-choosen dates from the form
 var arrivalDate = document.getElementById('arrivalDate').value;
 var departureDate = document.getElementById('departureDate').value;
 
@@ -39,23 +40,23 @@ if (user_id && room_id && arrivalDate && departureDate) {
       if (bookingResponse['additional_info']['booking-result']) {
         console.log('Booking successful!');
         console.log(bookingResponse);
-        // Display the booking result to the user
-      alert(bookingResponse['additional_info']['greeting']);
-      }else if(booking-result['error']){
-        alert(booking-result['error']);
+
+      alert(bookingResponse['additional_info']['greeting']);// Display the booking result to the user
+      }else if(booking-result['error']){ // when the php script returns error, could be error with room avability or with the payments logic (wrong amount on transfercode etc)
+        alert(booking-result['error']);// display the error as alert for the user
         clearBookingForm();
       } else {
         alert('Booking failed. Please try again.');
         clearBookingForm();
       }
-    } else {
+    } else { // when the choosen dates is already booked
       alert('This room is already booked for the selected dates. Please choose different dates.');
       clearBookingForm();
     }
   } catch (error) {// after testing I found out that this error is thrown when the user has not enough money on his account or if the amounts didnt match, so I added an alert to tell the user to make sure he has enough money on his account
     console.log('error in validation of transfercode, pls make sure you have enought money on your account');
     alert('An error occurred while processing the booking. Please try again.');
-    clearBookingForm()
+    clearBookingForm();
   }
 } else {
   alert('Please fill in all fields.');
