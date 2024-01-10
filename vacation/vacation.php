@@ -7,10 +7,10 @@ if (isset($_POST['btn'])) {
 if($_POST['btn'] === 'insert'){
   require __DIR__ . '/handleForm.php';
 }
-}
 // trying to build some sort of visual representation of the logbook
 $vacations = getLoggs('../vacation/vacation.db');
 $features = getFeats('../vacation/vacation.db');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
