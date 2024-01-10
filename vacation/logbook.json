@@ -21,6 +21,32 @@
         "greeting": "Thank you for choosing Centralhotellet",
         "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e2/Hotel_Boscolo_Exedra_Nice.jpg"
       }
+    },
+    {
+      "island": "ompalompa",
+      "hotel": "hotellet",
+      "arrival_date": "2024-01-18",
+      "departure_date": "2024-01-22",
+      "total_cost": "20",
+      "stars": "4",
+      "features": [
+        {
+          "name": "sauna",
+          "cost": 2
+        },
+        {
+          "name": "song",
+          "cost": 2
+        },
+        {
+          "name": "icebath",
+          "cost": 2
+        }
+      ],
+      "addtional_info": {
+        "greeting": "Thank you for choosing Centralhotellet",
+        "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e2/Hotel_Boscolo_Exedra_Nice.jpg"
+      }
     }
   ]
 }

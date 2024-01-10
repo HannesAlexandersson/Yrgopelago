@@ -67,7 +67,22 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Page</title>
+    <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
 
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
 </head>
 <body>
 
@@ -119,14 +134,14 @@ function updateContentBox(data) {
   // Get the content-box element
   var contentBox = document.querySelector('.content-box');
 
-  // Clear existing content
+  // Clear the content if there is any already
   contentBox.innerHTML = '';
 
-  // Create a table to display the data
+  // Create a table to display the data in
   var table = document.createElement('table');
   table.border = '1';
 
-  // Create table header
+  // Create table header and so on
   var thead = document.createElement('thead');
   var headerRow = document.createElement('tr');
   var headers = ['Transfer Code', 'From Account', 'Amount'];
@@ -140,14 +155,14 @@ function updateContentBox(data) {
   thead.appendChild(headerRow);
   table.appendChild(thead);
 
-  // Create table body
+  // Create the table body
   var tbody = document.createElement('tbody');
 
-  // Loop through the data and create table rows
+  // Loop through the "guest"-data and create table rows
   data.guests.forEach(guest => {
     var row = document.createElement('tr');
 
-    // Create table cells for each property
+    // Create table column "cells"
     var transferCodeCell = document.createElement('td');
     transferCodeCell.textContent = guest.transferCode;
     row.appendChild(transferCodeCell);

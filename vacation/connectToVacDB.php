@@ -93,3 +93,62 @@ function getFeats(string $dbName): array
   ")->fetchAll();
   return $feats; //returns the features table as an asc array for me to iterate
 }
+
+function getTotalStars(): int
+{
+    $db = connectToVAC('../vacation/vacation.db');
+
+    try {
+        $query = "SELECT SUM(stars) as total_stars FROM loggbok";
+        $stmt = $db->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+        $totalStars = $result['total_stars'];
+
+        return (int)$totalStars;
+    } catch (PDOException $e) {
+        error_log("Error calculating total stars: " . $e->getMessage());
+        return 0;
+    }
+}
+
+function getTotalFeatures(): int
+{
+  $db = connectToVAC('../vacation/vacation.db');
+  try {
+    $query = "SELECT COUNT(DISTINCT feat_name) as total_features FROM features"; // we only count distinct features since we only gets points for those
+    $stmt = $db->prepare($query);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+    $totalFeatures = $result['total_features'];
+
+    return (int)$totalFeatures;
+} catch (PDOException $e) {
+    error_log("Error calculating total features: " . $e->getMessage());
+    return 0;
+}
+}
+
+function getTotalMoneySpent(): int
+{
+    $db = connectToVAC('../vacation/vacation.db');
+
+    try {
+        $query = "SELECT SUM(total_cost) as total_spent FROM loggbok";
+        $stmt = $db->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+        $totalSpent = $result['total_spent'];
+
+        return (int)$totalSpent;
+    } catch (PDOException $e) {
+        error_log("Error calculating total spending: " . $e->getMessage());
+        return 0;
+    }
+}
