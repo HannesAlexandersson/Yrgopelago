@@ -101,6 +101,6 @@ main {
 @media (min-width: 1050px) {
   .home-text p span {
     animation-range-start: cover 44vh;
-    animation-range-end: cover 128vh;
+    animation-range-end: cover 109vh;
 }
 }

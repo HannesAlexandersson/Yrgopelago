@@ -11,7 +11,7 @@
 --extra-font-clr: #fe9460ff;
 
 /*fonts*/
---default-font: 'IBM Plex Sans', sans-serif;
+--default-font: sans-serif, 'IBM Plex Sans';
 --detail-font: 'Grandstander', cursive, sans-serif;
 --secondary-font: 'Bebas Neue', sans-serif;
 }
