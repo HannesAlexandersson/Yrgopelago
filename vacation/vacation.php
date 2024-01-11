@@ -2,6 +2,10 @@
 declare(strict_types=1);
 session_start();
 require __DIR__ . '/connectToVacDB.php';
+//initialize global variable for total points if its not already initialized
+if(!isset($_SESSION['total_points'])){
+$_SESSION['total_points'] = 0;
+}
 if (isset($_POST['btn'])) {
  // if the btn for inserting the data inside the file "loggbok" is pressed
 if($_POST['btn'] === 'insert'){
@@ -76,6 +80,9 @@ $features = getFeats('../vacation/vacation.db');
         <h6>Feature name: <?=$feats['feat_name'] ?></h6>
     <?php endforeach;?>
   </div>
+
+  <hr>
+  <h1>Misc. calculations:</h1>
   <div class="wrapper-insert">
     <p>Press the button to calculate the total number of stars</p>
     <form action="/vacation/vacation.php" method="post">
@@ -88,9 +95,24 @@ $features = getFeats('../vacation/vacation.db');
         <p>Your total sum of stars: <?= getTotalStars() ?></p><?php
       }
     } ?>
-</div>
+  </div>
+  <div class="wrapper-insert">
+    <p>Press the button to calculate the total sum I've spent in others hotels</p>
+    <form action="/vacation/vacation.php" method="post">
+        <input type="hidden" name="btn" value="spending">
+        <button type="submit">Calculate Total Sum</button>
+    </form>
+    <?php
+    if(isset($_POST['btn'])){
+      if($_POST['btn'] === 'spending'){ ?>
+        <p>Your total spending sum: <?= getTotalMoneySpent() ?></p><?php
+      }
+    } ?>
+  </div>
 
-<div class="wrapper-insert">
+  <hr>
+  <h1>Points calculations: (Total Points: <?= $_SESSION['total_points']?>)</h1>
+  <div class="wrapper-insert">
     <p>Press the button to calculate the total number of features</p>
     <form action="/vacation/vacation.php" method="post">
         <input type="hidden" name="btn" value="calculate_features">
@@ -102,20 +124,45 @@ $features = getFeats('../vacation/vacation.db');
         <p>Your total number of features: <?= getTotalFeatures() ?></p><?php
       }
     } ?>
-</div>
-
-<div class="wrapper-insert">
-    <p>Press the button to calculate the total sum I've spent in others hotels</p>
+  </div>
+  <div class="wrapper-insert">
+    <p>Press the button to calculate The total points gathered from staying at hotels ( each hotel gives 2 points)</p>
     <form action="/vacation/vacation.php" method="post">
-        <input type="hidden" name="btn" value="spending">
-        <button type="submit">Calculate Total Features</button>
+        <input type="hidden" name="btn" value="hotel_points">
+        <button type="submit">Calculate Points</button>
     </form>
     <?php
     if(isset($_POST['btn'])){
-      if($_POST['btn'] === 'spending'){ ?>
-        <p>Your total spending sum: <?= getTotalMoneySpent() ?></p><?php
+      if($_POST['btn'] === 'hotel_points'){ ?>
+        <p>Your points from hotels: <?= getPointsFromHotels() ?></p><?php
       }
     } ?>
-</div>
+  </div>
+  <div class="wrapper-insert">
+    <p>Press the button to calculate the total number of days stayed at other hotels. Each day gives 1 point</p>
+    <form action="/vacation/vacation.php" method="post">
+        <input type="hidden" name="btn" value="days">
+        <button type="submit">Calculate Days</button>
+    </form>
+    <?php
+    if(isset($_POST['btn'])){
+      if($_POST['btn'] === 'days'){ ?>
+        <p>Your points from total number of days: <?= getTotalDays() ?></p><?php
+      }
+    } ?>
+  </div>
+  <div class="wrapper-insert">
+    <p>Press the button to calculate The total points from different starcategories. Each star category gives 3 points</p>
+    <form action="/vacation/vacation.php" method="post">
+        <input type="hidden" name="btn" value="star_points">
+        <button type="submit">Calculate Points</button>
+    </form>
+    <?php
+    if(isset($_POST['btn'])){
+      if($_POST['btn'] === 'star_points'){ ?>
+        <p>Your points from star-categories: <?= getStarsPoints() ?></p><?php
+      }
+    } ?>
+  </div>
 </body>
 </html>

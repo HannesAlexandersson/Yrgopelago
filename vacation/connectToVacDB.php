@@ -1,14 +1,13 @@
 <?php
 declare(strict_types=1);
-// get the data from the loggbok
 
-$dbName = '../vacation/vacation.db';
-function connectToVAC(string $dbName): PDO
+
+function connectToVAC(string $dbName): object //PDO
 {
   $dbPath = __DIR__ . '/' . $dbName;
   $db = "sqlite:$dbPath";
 
-  // Open the database file and catch the exception if it fails.
+  // Open the database file
   try {
       $db = new PDO($db);
       $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -94,6 +93,10 @@ function getFeats(string $dbName): array
   return $feats; //returns the features table as an asc array for me to iterate
 }
 
+
+/*---------------CALCULATIONS FUNCTIONS------------*/
+
+/*----Misc. Calcs-----*/
 function getTotalStars(): int
 {
     $db = connectToVAC('../vacation/vacation.db');
@@ -108,29 +111,11 @@ function getTotalStars(): int
         $totalStars = $result['total_stars'];
 
         return (int)$totalStars;
+
     } catch (PDOException $e) {
         error_log("Error calculating total stars: " . $e->getMessage());
         return 0;
     }
-}
-
-function getTotalFeatures(): int
-{
-  $db = connectToVAC('../vacation/vacation.db');
-  try {
-    $query = "SELECT COUNT(DISTINCT feat_name) as total_features FROM features"; // we only count distinct features since we only gets points for those
-    $stmt = $db->prepare($query);
-    $stmt->execute();
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-
-    $totalFeatures = $result['total_features'];
-
-    return (int)$totalFeatures;
-} catch (PDOException $e) {
-    error_log("Error calculating total features: " . $e->getMessage());
-    return 0;
-}
 }
 
 function getTotalMoneySpent(): int
@@ -151,4 +136,70 @@ function getTotalMoneySpent(): int
         error_log("Error calculating total spending: " . $e->getMessage());
         return 0;
     }
+}
+/*----Point calcs----*/
+function getTotalFeatures(): int
+{
+  $db = connectToVAC('../vacation/vacation.db');
+  try {
+    $query = "SELECT COUNT(DISTINCT feat_name) as total_features FROM features"; // we only count distinct features since we only gets points for those
+    $stmt = $db->prepare($query);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    $totalFeatures = $result['total_features'];
+
+    $_SESSION['total_points'] += $totalFeatures;
+    return (int)$totalFeatures;
+  } catch (PDOException $e) {
+      error_log("Error calculating total features: " . $e->getMessage());
+      return 0;
+  }
+}
+
+function getPointsFromHotels(): int
+{
+  $db = connectToVAC('../vacation/vacation.db');
+
+  try {
+    $query = "SELECT COUNT(*) * 2 AS total_points FROM loggbok";
+    $statement = $db->query($query);
+    $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+    $_SESSION['total_points'] += (int)$result['total_points'];
+    return (int)$result['total_points'];
+  } catch (PDOException $e) {
+      error_log("Error calculating points from hotel: " . $e->getMessage());
+
+  }
+}
+
+function getTotalDays(): int
+{
+  $db = connectToVAC('../vacation/vacation.db');
+  try{
+  $query = "SELECT SUM(julianday(departure_date) - julianday(arrival_date)) AS total_days FROM loggbok";
+  $statement = $db->query($query);
+  $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+  $_SESSION['total_points'] += (int)$result['total_days'];
+  return (int)$result['total_days'];
+  } catch (PDOException $e) {
+    error_log("Error calculating total number of days: " . $e->getMessage());
+  }
+}
+
+function getStarsPoints(): int
+{
+  $db = connectToVAC('../vacation/vacation.db');
+  try{
+  $query = "SELECT COUNT(DISTINCT stars) * 3 AS total_star_points FROM loggbok";
+  $statement = $db->query($query);
+  $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+  $_SESSION['total_points'] += (int)$result['total_star_points'];
+  return (int)$result['total_star_points'];
+  } catch (PDOException $e) {
+    error_log("Error calculating total number of points from stars: " . $e->getMessage());
+  }
 }

@@ -47,6 +47,32 @@
         "greeting": "Thank you for choosing Centralhotellet",
         "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e2/Hotel_Boscolo_Exedra_Nice.jpg"
       }
+    },
+    {
+      "island": "bolibompa",
+      "hotel": "barn-hotellet",
+      "arrival_date": "2024-01-24",
+      "departure_date": "2024-01-28",
+      "total_cost": "32",
+      "stars": "1",
+      "features": [
+        {
+          "name": "beach-fire",
+          "cost": 2
+        },
+        {
+          "name": "song-contest",
+          "cost": 2
+        },
+        {
+          "name": "drink-contest",
+          "cost": 2
+        }
+      ],
+      "addtional_info": {
+        "greeting": "Thank you for choosing Centralhotellet",
+        "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e2/Hotel_Boscolo_Exedra_Nice.jpg"
+      }
     }
   ]
 }
