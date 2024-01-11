@@ -11,10 +11,11 @@ if (isset($_POST['btn'])) {
 if($_POST['btn'] === 'insert'){
   require __DIR__ . '/handleForm.php';
 }
-// trying to build some sort of visual representation of the logbook
+//save the tables as arrays to be able to iterate them
 $vacations = getLoggs('../vacation/vacation.db');
 $features = getFeats('../vacation/vacation.db');
 }
+// trying to build some sort of visual representation of the logbook:
 ?>
 <!DOCTYPE html>
 <html lang="en">

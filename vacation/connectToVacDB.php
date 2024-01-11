@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-
+// connection to the vacation DB
 function connectToVAC(string $dbName): object //PDO
 {
   $dbPath = __DIR__ . '/' . $dbName;
@@ -12,7 +12,7 @@ function connectToVAC(string $dbName): object //PDO
       $db = new PDO($db);
       $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-  } catch (PDOException $e) {
+  } catch (PDOException $e) {//error handling
       echo "Failed to connect to the database". $e->getMessage();
       throw $e;
   }
@@ -36,7 +36,7 @@ function insertLoggbok(array $vacations): void
   $statement->bindParam(':stars', $vacation['stars']);
 
   $statement->execute();
-
+    // get the id of the last inserted entry to enter correct "foreign" key in the junction table
   $loggbok_id = $db->lastInsertId();
   if(!empty($vacation['features'])){
     foreach($vacation['features'] as $feature){
@@ -54,20 +54,21 @@ function insertLoggbok(array $vacations): void
 function getLoggs(string $dbName): array
 {
   $dbPath = __DIR__ . '/' .$dbName;
-    $db = "sqlite:$dbPath";
+  $db = "sqlite:$dbPath";
 
-    // Open the database file and catch the exception if it fails.
-    try {
-        $db = new PDO($db);
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-    } catch (PDOException $e) {
-        echo "Failed to connect to the database". $e->getMessage();
-        throw $e;
-    }
-    $vacations = $db->query("
-    SELECT *
-    FROM loggbok
+  // Open a connection to the DB
+  try {
+      $db = new PDO($db);
+      $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+  } catch (PDOException $e) {//error handling
+      echo "Failed to connect to the database". $e->getMessage();
+      throw $e;
+  }
+  // get the data from the DB with the query
+  $vacations = $db->query("
+  SELECT *
+  FROM loggbok
 ")->fetchAll();
 return $vacations; //returns the loggbok table as an asc array for me to iterate
 }
@@ -77,15 +78,16 @@ function getFeats(string $dbName): array
   $dbPath = __DIR__ . '/' .$dbName;
   $db = "sqlite:$dbPath";
 
-  // Open the database file and catch the exception if it fails.
+  // Open a connection to the DB
   try {
       $db = new PDO($db);
       $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-  } catch (PDOException $e) {
+  } catch (PDOException $e) {//error handling
       echo "Failed to connect to the database". $e->getMessage();
       throw $e;
   }
+  // get the data from the DB with the query
   $feats = $db->query("
   SELECT *
   FROM features
@@ -99,43 +101,45 @@ function getFeats(string $dbName): array
 /*----Misc. Calcs-----*/
 function getTotalStars(): int
 {
-    $db = connectToVAC('../vacation/vacation.db');
+  //connect to DB
+  $db = connectToVAC('../vacation/vacation.db');
 
-    try {
-        $query = "SELECT SUM(stars) as total_stars FROM loggbok";
-        $stmt = $db->prepare($query);
-        $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+  try {//query for the calculation (sum up total amount of stars)
+      $query = "SELECT SUM(stars) as total_stars FROM loggbok";
+      $stmt = $db->prepare($query);
+      $stmt->execute();
+      $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
 
-        $totalStars = $result['total_stars'];
-
-        return (int)$totalStars;
-
-    } catch (PDOException $e) {
-        error_log("Error calculating total stars: " . $e->getMessage());
-        return 0;
-    }
+      $totalStars = $result['total_stars'];
+      // returns the total amount of stars
+      return (int)$totalStars;
+    //error handling
+  } catch (PDOException $e) {
+      error_log("Error calculating total stars: " . $e->getMessage());
+      return 0;
+  }
 }
 
 function getTotalMoneySpent(): int
 {
-    $db = connectToVAC('../vacation/vacation.db');
+  // connect to DB
+  $db = connectToVAC('../vacation/vacation.db');
 
-    try {
-        $query = "SELECT SUM(total_cost) as total_spent FROM loggbok";
-        $stmt = $db->prepare($query);
-        $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+  try {
+      $query = "SELECT SUM(total_cost) as total_spent FROM loggbok";// query for the calculation that sums up the total amount of money spent
+      $stmt = $db->prepare($query);
+      $stmt->execute();
+      $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
 
-        $totalSpent = $result['total_spent'];
+      $totalSpent = $result['total_spent'];
 
-        return (int)$totalSpent;
-    } catch (PDOException $e) {
-        error_log("Error calculating total spending: " . $e->getMessage());
-        return 0;
-    }
+      return (int)$totalSpent;
+  } catch (PDOException $e) {//error handling
+      error_log("Error calculating total spending: " . $e->getMessage());
+      return 0;
+  }
 }
 /*----Point calcs----*/
 function getTotalFeatures(): int
@@ -149,9 +153,9 @@ function getTotalFeatures(): int
 
     $totalFeatures = $result['total_features'];
 
-    $_SESSION['total_points'] += $totalFeatures;
+    $_SESSION['total_points'] += $totalFeatures;// add the points to the global variable that holds the total amount of points
     return (int)$totalFeatures;
-  } catch (PDOException $e) {
+  } catch (PDOException $e) {//error handling
       error_log("Error calculating total features: " . $e->getMessage());
       return 0;
   }
@@ -162,13 +166,13 @@ function getPointsFromHotels(): int
   $db = connectToVAC('../vacation/vacation.db');
 
   try {
-    $query = "SELECT COUNT(*) * 2 AS total_points FROM loggbok";
+    $query = "SELECT COUNT(*) * 2 AS total_points FROM loggbok";// count every hotel I have stayed at and give 2 point for each hotel
     $statement = $db->query($query);
     $result = $statement->fetch(PDO::FETCH_ASSOC);
 
-    $_SESSION['total_points'] += (int)$result['total_points'];
+    $_SESSION['total_points'] += (int)$result['total_points'];// add the points to the global variable that holds the total amount of points
     return (int)$result['total_points'];
-  } catch (PDOException $e) {
+  } catch (PDOException $e) {//error handling
       error_log("Error calculating points from hotel: " . $e->getMessage());
 
   }
@@ -178,13 +182,13 @@ function getTotalDays(): int
 {
   $db = connectToVAC('../vacation/vacation.db');
   try{
-  $query = "SELECT SUM(julianday(departure_date) - julianday(arrival_date)) AS total_days FROM loggbok";
+  $query = "SELECT SUM(julianday(departure_date) - julianday(arrival_date)) AS total_days FROM loggbok";//count every day that I have spent in an hotel, each day give 1 point
   $statement = $db->query($query);
   $result = $statement->fetch(PDO::FETCH_ASSOC);
 
-  $_SESSION['total_points'] += (int)$result['total_days'];
+  $_SESSION['total_points'] += (int)$result['total_days'];// add the points to the global variable that holds the total amount of points
   return (int)$result['total_days'];
-  } catch (PDOException $e) {
+  } catch (PDOException $e) {//error handling
     error_log("Error calculating total number of days: " . $e->getMessage());
   }
 }
@@ -193,13 +197,13 @@ function getStarsPoints(): int
 {
   $db = connectToVAC('../vacation/vacation.db');
   try{
-  $query = "SELECT COUNT(DISTINCT stars) * 3 AS total_star_points FROM loggbok";
+  $query = "SELECT COUNT(DISTINCT stars) * 3 AS total_star_points FROM loggbok"; //count every star category I have been at by counting the rows distinct, each star category gives 3 points
   $statement = $db->query($query);
   $result = $statement->fetch(PDO::FETCH_ASSOC);
 
-  $_SESSION['total_points'] += (int)$result['total_star_points'];
+  $_SESSION['total_points'] += (int)$result['total_star_points'];// add the points to the global variable that holds the total amount of points
   return (int)$result['total_star_points'];
-  } catch (PDOException $e) {
+  } catch (PDOException $e) {//error handling
     error_log("Error calculating total number of points from stars: " . $e->getMessage());
   }
 }
