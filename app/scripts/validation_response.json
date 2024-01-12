@@ -1,5 +1,10 @@
 {
     "guests": [
-        
+      {
+        "error": "Not a valid GUID"
+    },
+    {
+        "error": "Not a valid GUID"
+    }
     ]
 }

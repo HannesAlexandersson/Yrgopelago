@@ -1,3 +1,150 @@
 {
-  "vacation": []
+  "vacation": [
+    {
+      "island": "Vertigo",
+      "hotel": "Overview Hotel",
+      "arrival_date": "2024-01-01",
+      "departure_date": "2024-01-10",
+      "total_cost": 52,
+      "stars": "3",
+      "features": [
+      {
+      "name": "Private Cinema Under the Stars",
+      "cost": 1
+      },
+      {
+      "name": "In-Room Telescope",
+      "cost": 1
+      },
+      {
+      "name": "Artisanal Pillow Menu",
+      "cost": 1
+      },
+      {
+      "name": "Virtual Reality Adventure",
+      "cost": 2
+      },
+      {
+      "name": "In-Room Mixologist Bar Cart",
+      "cost": 2
+      },
+      {
+      "name": "Underwater Soundscapes",
+      "cost": 2
+      },
+      {
+      "name": "Smart Mirror Fitness Classes",
+      "cost": 3
+      },
+      {
+      "name": "Culinary Scavenger Hunt",
+      "cost": 3
+      },
+      {
+      "name": "Private Hot Air Balloon Ride",
+      "cost": 3
+      },
+      {
+      "name": "AI-guided Nature Walks",
+      "cost": 4
+      }
+      ],
+      "additional_info": {
+      "greeting": "Thank you for choosing Overview Hotel!",
+      "imageUrl": "https://adamwelin.se/overview/images/success.png"
+      }
+      },
+      {
+        "island": "Jurassic Island",
+        "name": "Jurassic Hotel",
+        "arrival_date": "13-01-2024",
+        "departure_date": "15-01-2024",
+        "room_type": "Standard",
+        "total_cost": 14.4000000000000003552713678800500929355621337890625,
+        "booking_id": 2,
+        "stars": "4",
+        "features": [
+            {
+                "name": "Swim with dinosaurs",
+                "price": 1
+            },
+            {
+                "name": "Visit the incubation room",
+                "price": 2
+            },
+            {
+                "name": "Fly amongst dinosaurs",
+                "price": 3
+            }
+        ],
+        "additional_info": [
+            {
+                "greeting": "Thank you for choosing Jurassic Hotel",
+                "dino": "Titanoceratops",
+                "dinoURL": "https://en.wikipedia.org/wiki/Titanoceratops"
+            }
+        ]
+    },
+    {
+      "island": "Rainbow Reef",
+      "hotel": "Rainbow Reef Retreat",
+      "arrival_date": "2024-01-15",
+      "departure_date": "2024-01-17",
+      "total_cost": 21,
+      "stars": 2,
+      "features": [
+      {
+      "name": "Wildlife Watching",
+      "cost": 2
+      },
+      {
+      "name": "Lotus Spa",
+      "cost": 3
+      },
+      {
+      "name": "Jet Ski Adventures",
+      "cost": 4
+      }
+      ],
+      "additional_info": {
+      "greeting": "Thank you for choosing Rainbow Reef Retreat! We hope you will enjoy your stay, gain a tan and leave well rested."
+      }
+      },
+      {
+        "Island":"Porcelain Paradise",
+        "Hotel":"Tea-riffic Hotel",
+        "arrival_date":"2024-01-18",
+        "departure_date":"2024-01-21",
+        "Total_cost":8,
+        "Stars":1,
+        "additional_info":"Thank you for booking with Tea-riffic Hotel, have a Tea-riffic stay!"
+      },
+      {
+        "island": "Isle of Cats",
+        "hotel": "The Cat's Cradle",
+        "arrival_date": "2024-01-10",
+        "departure_date": "2024-01-12",
+        "total_cost": 18,
+        "stars": 5,
+        "features": [
+        {
+        "name": "Cornish Rex",
+        "cost": 3
+        },
+        {
+        "name": "Devon Rex",
+        "cost": 3
+        },
+        {
+        "name": "Egyptian Mau",
+        "cost": 3
+        }
+        ],
+        "additional_info": {
+        "greeting": "Thank you, Hannes, for staying with us for 3 days!",
+        "cat_fact": "Cats hate the water because their fur does not insulate well when it’s wet. The Turkish Van, however, is one cat that likes swimming. Bred in central Asia, its coat has a unique texture that makes it water resistant."
+        }
+        }
+
+  ]
 }

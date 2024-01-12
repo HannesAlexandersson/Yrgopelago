@@ -135,6 +135,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($bookingResult) {
       // Check the result of the booking and send the response as json
       checkBooking($room, $bookingResult, $arrivalDate, $departureDate, $numberOfDays, $totalCost, $selectedFeaturesNames, $gifs);
+      file_put_contents('guest_response.json', $response);//save the guests response in a json file
     } else {
       // If booking fails send error message and exit the script
       echo json_encode(["error" => "Booking failed. Please try again."]);
@@ -212,6 +213,7 @@ function checkBooking(string $room, bool $bookingResult, string $arrivalDate, st
         // If booking fails send error message and exit the script
         echo json_encode(["error" => "Booking failed. Please try again."]);
     }
+
 }
 
 

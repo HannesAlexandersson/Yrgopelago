@@ -40,8 +40,8 @@ if (user_id && room_id && arrivalDate && departureDate) {
       if (bookingResponse['additional_info']['booking-result']) {
         console.log('Booking successful!');
         console.log(bookingResponse);
-
-      alert(bookingResponse['additional_info']['greeting']);// Display the booking result to the user
+      // Display the response in an alert
+      alert(bookingResponse);
       }else if(booking-result['error']){ // when the php script returns error, could be error with room avability or with the payments logic (wrong amount on transfercode etc)
         alert(booking-result['error']);// display the error as alert for the user
         clearBookingForm();
